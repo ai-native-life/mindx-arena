@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindX — Creative Engineering Studio</title>
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<div id="err" hidden></div>
+<div id="loader"><div class="pct" id="lpct">000</div><div class="bar"><i id="lbar"></i></div><div>ENTERING THE FIELD — MindX</div></div>
+<canvas id="gl"></canvas>
+<div class="cur" id="cdot"></div><div class="cur" id="cring"></div>
+
+<nav>
+<div class="logo">Mind<em>X</em></div>
+<a class="nl on" href="#home" data-s="home">Home</a>
+<a class="nl" href="#services" data-s="services">事業内容</a>
+<a class="nl" href="#cases" data-s="cases">導入事例</a>
+<a class="nl" href="#about" data-s="about">私たちについて</a>
+<a class="nl" href="#contact" data-s="contact">Contact</a>
+<a class="cta mag" href="mailto:info@mindx.co.jp">お問い合わせ</a>
+</nav>
+
+<div id="rail"><span id="rsec">01</span><div class="track"><div class="fill" id="rfill"></div></div><span>FLIGHT</span></div>
+
+<section id="home" data-ph="0">
+<div class="eyebrow rv">A CREATIVE ENGINEERING STUDIO — TOKYO · PLUGGED INTO THE FUTURE</div>
+<h1 class="hero serif" id="heroH"><span class="hline">新しい世界と</span><span class="hline">逢いましょう！</span></h1>
+<div class="heroSub rv">無限の可能性をAIの力で — Global IT Solutions Creating the Future with AI</div>
+<p class="lede rv">AIを活用することで、現状の課題だけでなく、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供します。</p>
+<div class="scrollcue rv">SCROLL TO FLY ↓</div>
+</section>
+
+<div class="mq" aria-hidden="true"><span id="mqin"></span></div>
+
+<section id="services" data-ph="1">
+<div class="eyebrow rv">01 — 事業内容 / WHAT WE BUILD</div>
+<h2 class="st serif skew rv">Playful, Powerful,<br>and <span class="hl">Alive</span>.</h2>
+<div class="rows rv">
+<a class="row" href="#cases"><span class="rno">/ 01</span><span class="rti serif">自社開発</span><span class="ren">Proprietary AI R&amp;D</span><span class="rde">独自の技術力を基盤に、産業と社会に新たな価値を創出する革新的なAI Agent・システムの研究開発を推進します。</span></a>
+<a class="row" href="#cases"><span class="rno">/ 02</span><span class="rti serif">コンサルティング</span><span class="ren">Consulting &amp; Engineering</span><span class="rde">コンピュータソフトウェア及びハードウェアの企画、研究、開発、販売、保守、リリース及びコンサルティングを行います。</span></a>
+<a class="row" href="#cases"><span class="rno">/ 03</span><span class="rti serif">ロボット事業</span><span class="ren">Robotics &amp; Automation</span><span class="rde">各種ロボットおよび関連機器の企画、開発、設計、販売、導入支援ならびに輸出入業務を通じて、お客様の業務効率化および社会課題の解決に貢献します。</span></a>
+</div>
+</section>
+
+<section id="metrics" data-ph="2">
+<div class="eyebrow rv">02 — TRACK RECORD / 数字で見るMindX</div>
+<div class="mrow">
+<div class="m rv"><div class="v serif"><span class="cu" data-n="12">0</span>件</div><div class="l">成功プロジェクト · Successful Projects</div></div>
+<div class="m rv"><div class="v serif"><span class="cu" data-n="2">0</span>回</div><div class="l">分析レポート · Analysis Reports</div></div>
+<div class="m rv"><div class="v serif"><span class="cu" data-n="5">0</span>回</div><div class="l">受賞 · Awards &amp; Recognitions</div></div>
+<div class="m rv"><div class="v serif"><span class="cu" data-n="90">0</span>%</div><div class="l">満足顧客度 · Client Satisfaction</div></div>
+</div>
+</section>
+
+<section id="cases" data-ph="3">
+<div class="eyebrow rv">03 — SELECTED WORK / 公開事例</div>
+<h2 class="st serif skew rv">Selected <span class="hl">Work</span>.</h2>
+<div class="stage rv">
+<div class="ghost serif" id="ghost">01</div>
+<div class="idx" id="cidx">01 / 04 — VIEW PROJECT</div>
+<h3 class="serif" id="ct">インドアゴルフシステム</h3>
+<div class="csub" id="cs">IoT &amp; AI VISION</div>
+<p class="desc" id="cd">多言語予約機能、自動解錠システム、決済機能、AIスイング改善を実装したインドアゴルフ予約システムを開発しました。</p>
+<div class="carctl">
+<button id="cprev" aria-label="previous project">← Prev</button>
+<button id="cnext" aria-label="next project">Next →</button>
+<div class="dots" id="cdots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+</div>
+</section>
+
+<section id="about" data-ph="4">
+<div class="eyebrow rv">04 — ABOUT US / ご挨拶</div>
+<h2 class="st serif skew rv">Serious about business,<br>playful about <span class="hl">technology</span>.</h2>
+<div class="cols2">
+<p class="rv">MindX株式会社は、日本を拠点にグローバルな視点を持つITソリューション企業です。私たちは最先端のIT技術を駆使し、未来志向の課題解決と未来創造するグローバルITソリューションを追求しています。2025年1月には日本でMindX株式会社を設立しました。この強固なグローバルネットワークを活かし、お客様のビジネス変革を加速するAIを中核とした製品開発と情報サービスを提供しています。</p>
+<p class="rv">私たちの強みは、膨大なデータを分析し、新たな価値を創造するデータ駆動型イノベーションにあります。AIによる高度な分析能力で、現状の課題はもちろんのこと、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供。これにより、お客様の業務の最適化と効率化の極致を実現します。</p>
+</div>
+<p class="rv wide">MindXは、AIが人間の仕事を奪うのではなく、人間がより創造的で戦略的な業務に集中できるようサポートする人間とAIの協調を重視しています。私たちは、AIと人間が共に働くことで、ビジネスの可能性を最大限に引き出し、お客様の持続的な成長に貢献してまいります。</p>
+<div class="philo rv">
+<div class="eyebrow">経営理念 / PHILOSOPHY</div>
+<p>MindX株式会社は、最先端のAI技術を駆使し、単なるビジネス効率化を超えて、社会とビジネスの課題解決に貢献します。私たちは、お客様と共に成長するパートナーとして、AI技術の力を通じて新たな価値を創造し、より良い未来を築くことを目指します。AIの根幹であるデータ分析能力とそこから生まれる「知恵」を最大限に活用する「データ駆動型イノベーション」により、人々の可能性を引き出し、より豊かな社会を実現します。私たちはデータと知恵の力で世界を変革し、人間とAIの協調により、社会とビジネスの可能性を最大化してまいります。</p>
+</div>
+</section>
+
+<section id="domains" data-ph="5">
+<div class="eyebrow rv">05 — FIELDS / 業務領域</div>
+<h2 class="st serif skew rv">Every screen,<br>every <span class="hl">industry</span>.</h2>
+<div class="dom4 rv">
+<div class="dom"><div class="en">HEALTHCARE</div><h4 class="serif">医療</h4><p>患者ポータル、予約スケジュール、電子医療記録 (EMR) 用のアプリケーションを使用して医療プロセスを合理化します。</p></div>
+<div class="dom"><div class="en">EDUCATION</div><h4 class="serif">教育</h4><p>教育テクノロジーのアプリケーションを通じて魅力的でインタラクティブな学習体験を生み出すことに情熱を持っています。</p></div>
+<div class="dom"><div class="en">RETAIL</div><h4 class="serif">小売</h4><p>専門知識を活用して、支払ゲートウェイ、製品管理システム、ショッピング機能などの機能を備えたシームレスなオンラインストアを構築します。</p></div>
+<div class="dom"><div class="en">FINTECH</div><h4 class="serif">金融</h4><p>AI技術を駆使してクオンツ投資リサーチを支援するアプリを開発し、データ処理から始まり、投資アイデアを探求し、利用可能な戦略に転換するのをサポートします。</p></div>
+</div>
+</section>
+
+<section id="contact" data-ph="6">
+<div class="eyebrow rv">06 — CONTACT / お問い合わせ</div>
+<h2 class="big serif skew rv">Let's interface.<br>Call us <span class="hl">today</span>.</h2>
+<div class="cgrid rv">
+<div><div class="tag">所在地 / VISIT</div><p>〒103-0014<br>東京都中央区日本橋蛎殻町１丁目３６−3 東洋ビル６Ｆ</p></div>
+<div><div class="tag">連絡先 / REACH OUT</div><p>Email · <a href="mailto:info@mindx.co.jp">info@mindx.co.jp</a><br>Phone · <a href="tel:+81368216158">+81-3-6821-6158</a></p></div>
+</div>
+<div class="facts rv">MindX株式会社（MindX Inc.） · 設立: 2025年1月（2025.01 MindX株式会社を設立） · 資本金: 2,000万円 · 代表取締役: 越智 伸司 · 取引銀行: 三井住友銀行</div>
+</section>
+
+<footer><span>© 2025 MindX, All Rights Reserved</span><span>after shader.se · Three.js flight build</span></footer>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

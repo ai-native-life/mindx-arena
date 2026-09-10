@@ -1,0 +1,6 @@
+node_modules/
+dist/
+routes/*/node_modules/
+routes/*/dist/
+*.log
+.DS_Store
