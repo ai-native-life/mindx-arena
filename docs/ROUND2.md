@@ -18,7 +18,13 @@
 - 3D Logo（shader-flight）：vector SVG 挤出成立体，材质锁死品牌黑 `#000000`＋X 红 `#fa1c18`，能见度只靠 studio 灯光（主光＋酸绿轮廓光＋clearcoat 高光）；借鉴 `web-lab/mindx-logo-interactive-202609/06` 展厅： procedural PMREM 环境反射＋鼠标跟随聚光灯（光标即影棚灯）；三站 footer 统一加 logo 落款。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
+## R2 Batch 2（2026-09-11）
+
+- 上游 agy PR #5/#6：Route 04 product-suite（含 Fuji/05 实验）已由上游撤回，本仓合流接受删除（对应 tagline 修正一并失效，如路线回归可从 git 历史取回）。
+- 已验证：未知路径统一回门面（root index 回退），死入口自动回大厅，无需逐个 404 处理。
+
 ## Backlog
 
 - owner 下一批选路 → 按“加一路”公约接入。
 - 每路 mobile + website-qa.md 验收后才标 STABLE。
+- 收敛到唯一正式站后，落选路线归档回 web-lab，arena 只留正选 + 门面退役。
