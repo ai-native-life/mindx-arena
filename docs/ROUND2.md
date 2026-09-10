@@ -18,20 +18,7 @@
 - 3D Logo（shader-flight）：vector SVG 挤出成立体，材质锁死品牌黑 `#000000`＋X 红 `#fa1c18`，能见度只靠 studio 灯光（主光＋酸绿轮廓光＋clearcoat 高光）；三站 footer 统一加 logo 落款。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
-## R2 Batch 2（2026-09-11，实机产品对战路线）
-
-- 入选：`r/product-suite/`（Route 04：Product Interactive Suite — 実機プロダクト対話型，Vite 现代化工程架构）。
-- 定位：彻底打破“纯视觉背景/空洞滚动文字”局限，将 MindX 4大公开事例做成全画幅高精度可把玩的实机控制台（Cockpit）：
-  1. ゴルフスタジオ無人運営：3D 运动学骨骼分析仪（自由视角旋转/时间轴/慢放/运动链与足压重心）+ IoT 门店无人化门锁与环境联动。
-  2. 中学受験 AI コンシェルジュ：东京都真实地理交通等时线（Isochrone Map）水波辐射沙盘 + AI 4科配点雷达与合格概率动态推演。
-  3. 教育機関向け240万問AI問題バンク：力导向知识星系トポロジー探索 + IRT 項目応答理論自適応出題・新規類題生成・誤答誘因分析。
-  4. 宿泊業向けマルチモーダルAI接客：日式奢华酒店 AI 礼宾终端（实时声波可视化）+ OS 级 Agent 思考链与 PMS 中枢调度管线。
-- 内容：mindx.co.jp 2026-09-10 核对原文，代表取締役ご挨拶全文、3大事業、4大業務領域、会社概要 0 删减，100% 完整保留。
-- 门面：`portal/index.html` 注册 ROUTE 04 卡片，生成 1262x568 实机预览缩略图，顺延 ROUTE 05+。
-- 验收：`npm run build` 全仓构建通过，Playwright 截图实机验证完成。
-
 ## Backlog
 
 - owner 下一批选路 → 按“加一路”公约接入。
 - 每路 mobile + website-qa.md 验收后才标 STABLE。
-
