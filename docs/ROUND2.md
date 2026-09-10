@@ -19,6 +19,8 @@
 - 店招文案定稿：独立站表述统一为ロボット事業の直営店「Mobility & Robotics」（日文页内零中文混用；ROUND2 文档本身是中文，保留“独立站”说法）。
 - Logo 用量原则：3D Logo 只做两处——玩耍室（logo-lab）＋旗舰 Hero 背景（已收敛缩小东移）；三站联系区末统一加白底品牌带大 Logo 落款，nav 徽章只做功能性存在。
 - r-logo-lab：源自 web-lab logo 展厅 06，three r128 等 4 个 CDN 库已 vendor 本地化，零外部依赖；定位 PLAYGROUND（非官方面）。
+- r-quantum-particles / r-liquid-chrome：同展厅 07/08，同 vendor 方案入库，同 PLAYGROUND。
+- 玩耍页参数面板：3 页统一加 idle 自动隐藏（2.8s 无操作淡出，动鼠标/触摸即回，左下 ◌ 常驻唤出＋首次提示），看效果时屏幕干净。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
 ## R2 Batch 2（2026-09-11）

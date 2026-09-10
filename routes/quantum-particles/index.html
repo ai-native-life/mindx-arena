@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MindX | Pure 3D Interactive Logo Studio (Centered & Fully Scaled)</title>
+  <title>MindX | Quantum Particle Gravity Matrix 3D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background: #040507;
+      background: #020306;
       font-family: 'Space Grotesk', sans-serif;
       color: #e2e8f0;
     }
@@ -30,10 +30,7 @@
       width: 100%;
       height: 100%;
       z-index: 1;
-      cursor: grab;
-    }
-    #webgl-container:active {
-      cursor: grabbing;
+      cursor: crosshair;
     }
 
     .bg-vignette {
@@ -44,10 +41,10 @@
       height: 100%;
       z-index: 2;
       pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, rgba(18, 22, 32, 0) 35%, rgba(4, 5, 7, 0.8) 85%, #040507 100%);
+      background: radial-gradient(circle at 50% 50%, rgba(10, 16, 28, 0) 30%, rgba(2, 3, 6, 0.85) 80%, #020306 100%);
     }
 
-    /* Top Navigation HUD */
+    /* Top HUD */
     .top-hud {
       position: absolute;
       top: 20px;
@@ -70,7 +67,12 @@
       height: 10px;
       background: #fa1c18;
       border-radius: 50%;
-      box-shadow: 0 0 12px #fa1c18;
+      box-shadow: 0 0 14px #fa1c18;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 22px #fa1c18; }
     }
     .brand-title {
       font-size: 16px;
@@ -95,7 +97,7 @@
       pointer-events: auto;
     }
     .hud-btn {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(12, 18, 30, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(16px);
       color: #e2e8f0;
@@ -122,44 +124,7 @@
       box-shadow: 0 0 16px rgba(250, 28, 24, 0.4);
     }
 
-    /* Preset Viewports Bar (Top Center) */
-    .view-presets-bar {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      gap: 6px;
-      background: rgba(12, 16, 25, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(16px);
-      padding: 4px;
-      border-radius: 10px;
-      pointer-events: auto;
-    }
-    .view-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: #94a3b8;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .view-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.08);
-    }
-    .view-btn.active {
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Bottom Material Switcher */
+    /* Bottom Force & Color Controller */
     .bottom-hud {
       position: absolute;
       bottom: 24px;
@@ -172,18 +137,18 @@
       gap: 10px;
       pointer-events: none;
     }
-    .material-bar {
+    .control-bar {
       pointer-events: auto;
-      background: rgba(12, 16, 25, 0.85);
+      background: rgba(10, 15, 26, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(20px);
       padding: 6px;
       border-radius: 14px;
       display: flex;
       gap: 6px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
     }
-    .mat-btn {
+    .ctrl-btn {
       background: transparent;
       border: 1px solid transparent;
       color: #94a3b8;
@@ -192,29 +157,24 @@
       font-size: 12px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .mat-btn:hover {
+    .ctrl-btn:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.08);
     }
-    .mat-btn.active {
+    .ctrl-btn.active {
       background: rgba(255, 255, 255, 0.14);
       border-color: rgba(255, 255, 255, 0.25);
       color: #ffffff;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
-    .mat-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
 
-    /* Floating Tool Controls (Right side) */
-    .tool-dock {
+    /* Right Action Dock */
+    .action-dock {
       position: absolute;
       right: 28px;
       top: 50%;
@@ -225,10 +185,10 @@
       gap: 10px;
       pointer-events: auto;
     }
-    .tool-btn {
+    .dock-btn {
       width: 44px;
       height: 44px;
-      background: rgba(12, 16, 25, 0.8);
+      background: rgba(10, 15, 26, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(16px);
       border-radius: 10px;
@@ -241,21 +201,21 @@
       font-size: 16px;
       position: relative;
     }
-    .tool-btn:hover {
+    .dock-btn:hover {
       background: rgba(255, 255, 255, 0.12);
       border-color: rgba(255, 255, 255, 0.3);
       color: #ffffff;
     }
-    .tool-btn.active {
+    .dock-btn.active {
       background: #fa1c18;
       border-color: #fa1c18;
       color: #ffffff;
       box-shadow: 0 0 16px rgba(250, 28, 24, 0.4);
     }
-    .tool-tooltip {
+    .dock-tooltip {
       position: absolute;
       right: 52px;
-      background: rgba(8, 10, 14, 0.95);
+      background: rgba(6, 8, 12, 0.95);
       border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 4px 8px;
       border-radius: 6px;
@@ -268,12 +228,12 @@
       transition: all 0.2s ease;
       color: #e2e8f0;
     }
-    .tool-btn:hover .tool-tooltip {
+    .dock-btn:hover .dock-tooltip {
       opacity: 1;
       transform: translateX(0);
     }
 
-    /* Left Stats / Geometry Info */
+    /* Left Stats Overlay */
     .info-overlay {
       position: absolute;
       left: 28px;
@@ -295,7 +255,7 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
-      background: rgba(12, 16, 25, 0.65);
+      background: rgba(10, 15, 26, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(12px);
       padding: 5px 14px;
@@ -310,7 +270,6 @@
 </head>
 <body>
 
-  <!-- 3D Canvas -->
   <div id="webgl-container"></div>
   <div class="bg-vignette"></div>
 
@@ -318,20 +277,15 @@
   <div class="top-hud">
     <div class="brand-block">
       <div class="brand-badge"></div>
-      <div class="brand-title">MindX 3D Studio</div>
-      <div class="brand-subtitle">CENTERED VOLUMETRIC MESH // FULL-BOUNDS FIT</div>
-    </div>
-
-    <!-- View Preset Switchers -->
-    <div class="view-presets-bar">
-      <button class="view-btn active" data-view="front">正面全貌 (Front)</button>
-      <button class="view-btn" data-view="iso">3D 黄金角 (Isometric)</button>
-      <button class="view-btn" data-view="macro">微距特写 (Macro X)</button>
-      <button class="view-btn" data-view="top">俯视平面 (Top)</button>
+      <div class="brand-title">MindX Quantum Gravity</div>
+      <div class="brand-subtitle">30,000+ DYNAMIC PARTICLES // SPRING KINETICS</div>
     </div>
 
     <div class="top-actions">
-      <button class="hud-btn" id="btn-snapshot" title="4K透明PNG快照">
+      <button class="hud-btn" id="btn-blast" title="超新星爆发">
+        💥 SUPERNOVA BLAST (B)
+      </button>
+      <button class="hud-btn" id="btn-snapshot" title="导出4K快照">
         📸 SNAPSHOT
       </button>
       <button class="hud-btn" id="btn-reset" title="重置视角">
@@ -341,65 +295,56 @@
   </div>
 
   <div class="instruction-toast">
-    DRAG: ROTATE 360° // WHEEL: ZOOM // RIGHT-CLICK: PAN // HOVER: LIGHT REFLECTION
+    MOVE MOUSE TO DEFLECT PARTICLES // DRAG TO ROTATE 360° // WHEEL TO ZOOM
   </div>
 
-  <!-- Right Floating Tool Dock -->
-  <div class="tool-dock">
-    <button class="tool-btn" id="btn-rotate" title="自转巡航">
+  <!-- Right Actions -->
+  <div class="action-dock">
+    <button class="dock-btn" id="btn-rotate" title="自转巡航">
       ⟳
-      <span class="tool-tooltip">Auto Rotate (Space)</span>
+      <span class="dock-tooltip">Auto Rotate (Space)</span>
     </button>
-    <button class="tool-btn" id="btn-explode" title="零件拆解/装配">
-      ⇲
-      <span class="tool-tooltip">Explode Layers (E)</span>
+    <button class="dock-btn" id="btn-blackhole" title="黑洞奇点坍缩">
+      ◎
+      <span class="dock-tooltip">Singularity Blackhole (H)</span>
     </button>
-    <button class="tool-btn" id="btn-wireframe" title="线框工程模式">
-      ⌗
-      <span class="tool-tooltip">Wireframe (W)</span>
-    </button>
-    <button class="tool-btn" id="btn-hover" title="浮动悬停">
-      ∿
-      <span class="tool-tooltip">Floating Motion</span>
+    <button class="dock-btn" id="btn-noise" title="布朗湍流">
+      ≋
+      <span class="dock-tooltip">Curl Turbulence (T)</span>
     </button>
   </div>
 
-  <!-- Bottom Material Switcher -->
+  <!-- Bottom Mode Switcher -->
   <div class="bottom-hud">
-    <div class="material-bar">
-      <button class="mat-btn active" data-preset="chrome">
-        <span class="mat-dot" style="background: linear-gradient(135deg, #fff, #94a3b8);"></span>
-        Liquid Chrome
+    <div class="control-bar">
+      <button class="ctrl-btn active" data-theme="cyber">
+        <span style="width:8px;height:8px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span>
+        Cyber Cobalt & Laser Red
       </button>
-      <button class="mat-btn" data-preset="glass">
-        <span class="mat-dot" style="background: radial-gradient(circle, #e0f2fe, #38bdf8);"></span>
-        Prism Crystal Glass
+      <button class="ctrl-btn" data-theme="gold">
+        <span style="width:8px;height:8px;border-radius:50%;background:#fbbf24;box-shadow:0 0 8px #fbbf24;"></span>
+        Cosmic Gold & Ruby
       </button>
-      <button class="mat-btn" data-preset="obsidian">
-        <span class="mat-dot" style="background: linear-gradient(135deg, #1e293b, #090d16); border: 1px solid #fa1c18;"></span>
-        Cyber Obsidian & Neon
+      <button class="ctrl-btn" data-theme="mono">
+        <span style="width:8px;height:8px;border-radius:50%;background:#f8fafc;box-shadow:0 0 8px #f8fafc;"></span>
+        Pure Platinum Minimal
       </button>
-      <button class="mat-btn" data-preset="gold">
-        <span class="mat-dot" style="background: linear-gradient(135deg, #fbbf24, #b45309);"></span>
-        24K Gold & Ruby
-      </button>
-      <button class="mat-btn" data-preset="wireframe">
-        <span class="mat-dot" style="background: #38bdf8;"></span>
-        Quantum Blueprint
+      <button class="ctrl-btn" data-theme="matrix">
+        <span style="width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;"></span>
+        Bio Matrix Emerald
       </button>
     </div>
   </div>
 
   <!-- Left Stats Info -->
   <div class="info-overlay">
-    <div>BOUNDS: <span>[-8.00, +8.00] x [-4.37, +4.37]</span></div>
-    <div>CENTER: <span>(0.00, 0.00, 0.00) MATHEMATICAL PIVOT</span></div>
-    <div>ACTIVE SHADER: <span id="shader-label">Liquid Chrome PBR</span></div>
-    <div>STATUS: <span id="status-label">FRONTAL OVERVIEW READY</span></div>
+    <div>PARTICLES: <span id="p-count-label">28,450</span> ACTIVE NODES</div>
+    <div>INTERACTION: <span>Spring Damping & Kinetic Repulsion</span></div>
+    <div>FPS: <span id="fps-counter">60</span> // STATUS: <span id="status-label">GRAVITY FIELD ACTIVE</span></div>
   </div>
 
-  <!-- Raw SVG Data injected -->
-  <div id="raw-svg" style="display:none;"><?xml version="1.0" encoding="UTF-8"?>
+  <!-- Hidden SVG for Rasterization -->
+  <div id="svg-store" style="display:none;"><?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="452" viewBox="0 0 860 452" version="1.1">
   <title>MindX logo - vector recreation from official PNG</title>
   <g fill-rule="evenodd" stroke="none">
@@ -409,9 +354,8 @@
 </svg>
 </div>
 
-  <!-- Three.js & Libraries -->
+  <!-- Three.js Libraries -->
   <script src="./vendor/three.min.js"></script>
-  <script src="./vendor/SVGLoader.js"></script>
   <script src="./vendor/OrbitControls.js"></script>
   <script src="./vendor/tween.umd.js"></script>
 
@@ -419,446 +363,295 @@
     // --- 1. Scene, Camera, Renderer ---
     const container = document.getElementById('webgl-container');
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x040507);
+    scene.background = new THREE.Color(0x020306);
 
-    // Camera setup: standard 35 degree FOV for architectural perfection
     const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
-    // Standard initial front view distance (width=16, fit at z=24)
-    const DEFAULT_CAM_POS = new THREE.Vector3(0, 0.5, 24);
+    const DEFAULT_CAM_POS = new THREE.Vector3(0, 0, 22);
     camera.position.copy(DEFAULT_CAM_POS);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMappingExposure = 1.4;
     container.appendChild(renderer.domElement);
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.06;
-    controls.target.set(0, 0, 0); // Mathematical exact center
-    controls.minDistance = 5;
-    controls.maxDistance = 65;
-    controls.autoRotate = false; // Start static for clear overview
-    controls.autoRotateSpeed = 1.2;
+    controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
+    controls.minDistance = 4;
+    controls.maxDistance = 55;
+    controls.autoRotate = false;
+    controls.autoRotateSpeed = 1.0;
 
-    // --- 2. Procedural Studio Environment Map (Softboxes) ---
-    function generateStudioEnvironment() {
-      const pmremGenerator = new THREE.PMREMGenerator(renderer);
-      pmremGenerator.compileEquirectangularShader();
+    // --- 2. High-Density Particle Sampling from SVG ---
+    function samplePointsFromSvg(callback) {
+      const svgStr = document.getElementById('svg-store').innerHTML;
+      const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
 
-      const canvas = document.createElement('canvas');
-      canvas.width = 1024;
-      canvas.height = 512;
-      const ctx = canvas.getContext('2d');
+      img.onload = () => {
+        const offCanvas = document.createElement('canvas');
+        const W = 860;
+        const H = 452;
+        offCanvas.width = W;
+        offCanvas.height = H;
+        const ctx = offCanvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, W, H);
+        URL.revokeObjectURL(url);
 
-      const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      bgGrad.addColorStop(0, '#0a0e17');
-      bgGrad.addColorStop(0.5, '#040609');
-      bgGrad.addColorStop(1, '#010204');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const imgData = ctx.getImageData(0, 0, W, H).data;
+        const pts = [];
 
-      // Top Softbox
-      const topGrad = ctx.createRadialGradient(512, 100, 10, 512, 100, 220);
-      topGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      topGrad.addColorStop(0.4, 'rgba(240, 245, 255, 0.8)');
-      topGrad.addColorStop(1, 'rgba(200, 220, 255, 0)');
-      ctx.fillStyle = topGrad;
-      ctx.fillRect(0, 0, canvas.width, 320);
+        // Grid sampling step: step 3 = ~28,000 particles
+        const step = 3;
+        const targetWidth = 16.0;
+        const scale = targetWidth / 804;
+        const cx = 407;
+        const cy = 219.5;
 
-      // Left Soft Strip Light
-      const leftGrad = ctx.createLinearGradient(120, 150, 240, 350);
-      leftGrad.addColorStop(0, 'rgba(180, 220, 255, 0.85)');
-      leftGrad.addColorStop(1, 'rgba(100, 150, 255, 0)');
-      ctx.fillStyle = leftGrad;
-      ctx.fillRect(80, 100, 200, 300);
+        for (let y = 0; y < H; y += step) {
+          for (let x = 0; x < W; x += step) {
+            const idx = (y * W + x) * 4;
+            const r = imgData[idx];
+            const g = imgData[idx + 1];
+            const b = imgData[idx + 2];
+            const a = imgData[idx + 3];
 
-      // Right Rim Light with Crimson Touch
-      const rightGrad = ctx.createLinearGradient(880, 150, 760, 350);
-      rightGrad.addColorStop(0, 'rgba(255, 80, 90, 0.9)');
-      rightGrad.addColorStop(0.5, 'rgba(255, 180, 190, 0.3)');
-      rightGrad.addColorStop(1, 'rgba(255, 100, 120, 0)');
-      ctx.fillStyle = rightGrad;
-      ctx.fillRect(720, 100, 240, 300);
+            if (a > 60) {
+              const isRed = (r > 160 && g < 70 && b < 70);
+              
+              // Map to normalized 3D coordinates
+              const px = (x - cx) * scale + (Math.random() - 0.5) * 0.04;
+              const py = -(y - cy) * scale + (Math.random() - 0.5) * 0.04;
+              // Add slight volumetric depth jitter in Z
+              const pz = (Math.random() - 0.5) * 0.9;
 
-      const texture = new THREE.CanvasTexture(canvas);
-      const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-      pmremGenerator.dispose();
-      return envMap;
-    }
-
-    const studioEnvMap = generateStudioEnvironment();
-    scene.environment = studioEnvMap;
-
-    // --- 3. Studio Lights ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    const mouseSpot = new THREE.SpotLight(0xffffff, 3.2, 50, Math.PI / 3, 0.4, 1.2);
-    mouseSpot.position.set(0, 8, 20);
-    scene.add(mouseSpot);
-
-    const rimBlue = new THREE.DirectionalLight(0x38bdf8, 2.2);
-    rimBlue.position.set(-12, 10, -10);
-    scene.add(rimBlue);
-
-    const rimRed = new THREE.DirectionalLight(0xfa1c18, 2.8);
-    rimRed.position.set(14, -6, -8);
-    scene.add(rimRed);
-
-    // Subtle Ground Grid
-    const gridHelper = new THREE.GridHelper(50, 30, 0x1e293b, 0x090d16);
-    gridHelper.position.y = -5.8;
-    scene.add(gridHelper);
-
-    // Ground Plane
-    const groundGeo = new THREE.PlaneGeometry(100, 100);
-    const groundMat = new THREE.MeshStandardMaterial({
-      color: 0x040507,
-      roughness: 0.3,
-      metalness: 0.8,
-      envMap: studioEnvMap,
-      envMapIntensity: 0.5
-    });
-    const groundMesh = new THREE.Mesh(groundGeo, groundMat);
-    groundMesh.rotation.x = -Math.PI / 2;
-    groundMesh.position.y = -5.85;
-    scene.add(groundMesh);
-
-    // Floating Dust System
-    const pGeo = new THREE.BufferGeometry();
-    const pCount = 200;
-    const pPos = new Float32Array(pCount * 3);
-    for (let i = 0; i < pCount * 3; i += 3) {
-      pPos[i] = (Math.random() - 0.5) * 40;
-      pPos[i + 1] = (Math.random() - 0.5) * 20;
-      pPos[i + 2] = (Math.random() - 0.5) * 25;
-    }
-    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const pMat = new THREE.PointsMaterial({
-      color: 0x94a3b8,
-      size: 0.08,
-      transparent: true,
-      opacity: 0.4
-    });
-    const dustParticles = new THREE.Points(pGeo, pMat);
-    scene.add(dustParticles);
-
-    // --- 4. Materials Bank ---
-    const materialPresets = {
-      chrome: {
-        name: 'Liquid Chrome PBR',
-        body: new THREE.MeshStandardMaterial({
-          color: 0xebf2fa,
-          metalness: 0.98,
-          roughness: 0.04,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.5
-        }),
-        accent: new THREE.MeshStandardMaterial({
-          color: 0xff1420,
-          metalness: 0.94,
-          roughness: 0.05,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.8
-        })
-      },
-      glass: {
-        name: 'Prism Crystal Glass',
-        body: new THREE.MeshPhysicalMaterial({
-          color: 0xffffff,
-          transmission: 0.96,
-          opacity: 1,
-          transparent: true,
-          roughness: 0.05,
-          ior: 1.54,
-          reflectivity: 0.6,
-          clearcoat: 1.0,
-          clearcoatRoughness: 0.04,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.2
-        }),
-        accent: new THREE.MeshPhysicalMaterial({
-          color: 0xff1e38,
-          transmission: 0.88,
-          opacity: 1,
-          transparent: true,
-          roughness: 0.06,
-          ior: 1.77,
-          clearcoat: 1.0,
-          envMap: studioEnvMap,
-          envMapIntensity: 3.0
-        })
-      },
-      obsidian: {
-        name: 'Cyber Obsidian & Laser',
-        body: new THREE.MeshStandardMaterial({
-          color: 0x090b10,
-          metalness: 0.85,
-          roughness: 0.12,
-          envMap: studioEnvMap,
-          envMapIntensity: 1.8
-        }),
-        accent: new THREE.MeshStandardMaterial({
-          color: 0xff002b,
-          emissive: 0xff002b,
-          emissiveIntensity: 0.75,
-          metalness: 0.4,
-          roughness: 0.08,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.0
-        })
-      },
-      gold: {
-        name: '24K Gold & Blood Ruby',
-        body: new THREE.MeshStandardMaterial({
-          color: 0xf5bf26,
-          metalness: 0.96,
-          roughness: 0.10,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.4
-        }),
-        accent: new THREE.MeshPhysicalMaterial({
-          color: 0xa80518,
-          transmission: 0.75,
-          roughness: 0.08,
-          ior: 1.85,
-          clearcoat: 1.0,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.8
-        })
-      },
-      wireframe: {
-        name: 'Quantum Blueprint',
-        body: new THREE.MeshStandardMaterial({
-          color: 0x38bdf8,
-          wireframe: true,
-          metalness: 0.5,
-          roughness: 0.2
-        }),
-        accent: new THREE.MeshStandardMaterial({
-          color: 0xfa1c18,
-          wireframe: true,
-          metalness: 0.5,
-          roughness: 0.2
-        })
-      }
-    };
-
-    let currentPresetKey = 'chrome';
-    let isWireframeActive = false;
-    let isExploded = false;
-    let floatingEnabled = false;
-
-    // --- 5. Mathematical Normalization & Geometry Transformation ---
-    const logoPivot = new THREE.Group(); // Mathematical pivot at (0,0,0)
-    scene.add(logoPivot);
-
-    const groupIcon = new THREE.Group();
-    const groupText = new THREE.Group();
-    const groupAccent = new THREE.Group();
-    logoPivot.add(groupIcon);
-    logoPivot.add(groupText);
-    logoPivot.add(groupAccent);
-
-    // Parsing SVG
-    const rawSvgStr = document.getElementById('raw-svg').innerHTML;
-    const svgLoader = new THREE.SVGLoader();
-    const svgData = svgLoader.parse(rawSvgStr);
-
-    // Exact Bounding Box of original SVG: x in [5, 809], y in [0, 439]
-    const origMinX = 5, origMaxX = 809;
-    const origMinY = 0, origMaxY = 439;
-    const origWidth = origMaxX - origMinX; // 804
-    const origHeight = origMaxY - origMinY; // 439
-    const cx = (origMinX + origMaxX) / 2; // 407
-    const cy = (origMinY + origMaxY) / 2; // 219.5
-
-    // Normalize to target 3D width of 16.0 units
-    const targetWidth = 16.0;
-    const normScale = targetWidth / origWidth; // ~0.0199
-    const origDepth = 75; // Depth in original space -> becomes 75 * 0.0199 = 1.49 units in 3D
-
-    // Matrix to transform raw vertices:
-    // 1. Shift center to (0, 0, 0): translate(-cx, -cy, -origDepth / 2)
-    // 2. Scale & Flip Y: scale(normScale, -normScale, normScale)
-    const normMatrix = new THREE.Matrix4();
-    normMatrix.makeScale(normScale, -normScale, normScale);
-    normMatrix.multiply(new THREE.Matrix4().makeTranslation(-cx, -cy, -origDepth / 2));
-
-    const extrudeSettings = {
-      depth: origDepth,
-      bevelEnabled: true,
-      bevelSegments: 6,
-      bevelSize: 11,        // ~0.22 units in 3D
-      bevelThickness: 14,   // ~0.28 units in 3D
-      curveSegments: 28
-    };
-
-    const meshesBody = [];
-    const meshesAccent = [];
-
-    svgData.paths.forEach((path) => {
-      const fillColor = path.userData.style.fill;
-      const isRedAccent = (fillColor === '#fa1c18' || fillColor === 'rgb(250, 28, 24)');
-      const shapes = THREE.SVGLoader.createShapes(path);
-
-      shapes.forEach((shape) => {
-        const geom = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-        
-        // Apply mathematical normalization matrix directly to vertex buffer!
-        geom.applyMatrix4(normMatrix);
-        geom.computeVertexNormals();
-        geom.computeBoundingBox();
-
-        // Determine icon vs text by checking X position after transformation
-        const meshMinX = geom.boundingBox.min.x;
-
-        let mat;
-        let targetMesh;
-        if (isRedAccent) {
-          mat = materialPresets[currentPresetKey].accent;
-          targetMesh = new THREE.Mesh(geom, mat);
-          meshesAccent.push(targetMesh);
-          groupAccent.add(targetMesh);
-        } else {
-          mat = materialPresets[currentPresetKey].body;
-          targetMesh = new THREE.Mesh(geom, mat);
-          meshesBody.push(targetMesh);
-          if (meshMinX < -1.0) {
-            groupIcon.add(targetMesh);
-          } else {
-            groupText.add(targetMesh);
+              pts.push({
+                x: px,
+                y: py,
+                z: pz,
+                isAccent: isRed
+              });
+            }
           }
         }
-        targetMesh.castShadow = true;
-        targetMesh.receiveShadow = true;
-      });
-    });
+        callback(pts);
+      };
 
-    // --- 6. Viewport Presets Switching ---
-    const viewPositions = {
-      front: { pos: new THREE.Vector3(0, 0.5, 24), target: new THREE.Vector3(0, 0, 0) },
-      iso: { pos: new THREE.Vector3(14, 9, 18), target: new THREE.Vector3(0, 0, 0) },
-      macro: { pos: new THREE.Vector3(5.5, -0.8, 8), target: new THREE.Vector3(5.5, -1.0, 0) }, // Focus directly on red X!
-      top: { pos: new THREE.Vector3(0, 24, 0.1), target: new THREE.Vector3(0, 0, 0) }
+      img.src = url;
+    }
+
+    // --- 3. Build Particle System ---
+    let particleGeometry;
+    let particleSystem;
+    let originalPositions;
+    let currentPositions;
+    let velocities;
+    let isAccentFlags;
+    let colorsArray;
+    let particleCount = 0;
+
+    // Color themes
+    const themes = {
+      cyber: {
+        body: new THREE.Color(0x38bdf8),
+        accent: new THREE.Color(0xff1420),
+        bgGlow: 0x0284c7
+      },
+      gold: {
+        body: new THREE.Color(0xfbbf24),
+        accent: new THREE.Color(0xe11d48),
+        bgGlow: 0xd97706
+      },
+      mono: {
+        body: new THREE.Color(0xffffff),
+        accent: new THREE.Color(0xff1420),
+        bgGlow: 0x64748b
+      },
+      matrix: {
+        body: new THREE.Color(0x10b981),
+        accent: new THREE.Color(0xec4899),
+        bgGlow: 0x059669
+      }
     };
+    let currentThemeKey = 'cyber';
 
-    function setViewPreset(viewKey) {
-      const targetView = viewPositions[viewKey];
-      if (!targetView) return;
+    samplePointsFromSvg((points) => {
+      particleCount = points.length;
+      document.getElementById('p-count-label').innerText = particleCount.toLocaleString();
 
-      document.querySelectorAll('.view-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.view === viewKey);
+      originalPositions = new Float32Array(particleCount * 3);
+      currentPositions = new Float32Array(particleCount * 3);
+      velocities = new Float32Array(particleCount * 3);
+      isAccentFlags = new Uint8Array(particleCount);
+      colorsArray = new Float32Array(particleCount * 3);
+
+      const theme = themes[currentThemeKey];
+
+      for (let i = 0; i < particleCount; i++) {
+        const p = points[i];
+        const i3 = i * 3;
+
+        originalPositions[i3] = p.x;
+        originalPositions[i3 + 1] = p.y;
+        originalPositions[i3 + 2] = p.z;
+
+        currentPositions[i3] = p.x;
+        currentPositions[i3 + 1] = p.y;
+        currentPositions[i3 + 2] = p.z;
+
+        velocities[i3] = 0;
+        velocities[i3 + 1] = 0;
+        velocities[i3 + 2] = 0;
+
+        isAccentFlags[i] = p.isAccent ? 1 : 0;
+
+        const c = p.isAccent ? theme.accent : theme.body;
+        // Subtle brightness variance
+        const variance = 0.85 + Math.random() * 0.3;
+        colorsArray[i3] = c.r * variance;
+        colorsArray[i3 + 1] = c.g * variance;
+        colorsArray[i3 + 2] = c.b * variance;
+      }
+
+      particleGeometry = new THREE.BufferGeometry();
+      particleGeometry.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
+      particleGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
+
+      // Circular glowing particle texture
+      const pCanvas = document.createElement('canvas');
+      pCanvas.width = 64;
+      pCanvas.height = 64;
+      const pCtx = pCanvas.getContext('2d');
+      const grad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      grad.addColorStop(0.3, 'rgba(255, 255, 255, 0.85)');
+      grad.addColorStop(0.7, 'rgba(255, 255, 255, 0.2)');
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      pCtx.fillStyle = grad;
+      pCtx.fillRect(0, 0, 64, 64);
+      const pTexture = new THREE.CanvasTexture(pCanvas);
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.14,
+        map: pTexture,
+        transparent: true,
+        vertexColors: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
       });
 
-      new TWEEN.Tween(camera.position)
-        .to(targetView.pos, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(controls.target)
-        .to(targetView.target, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-    }
-
-    document.querySelectorAll('.view-btn').forEach(btn => {
-      btn.addEventListener('click', () => setViewPreset(btn.dataset.view));
+      particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particleSystem);
     });
 
-    // --- 7. Materials & Tool Logic ---
-    function applyMaterialPreset(key) {
-      currentPresetKey = key;
-      const preset = materialPresets[key];
-      document.getElementById('shader-label').innerText = preset.name;
+    // --- 4. Interactive Physics: Mouse Gravity & Shockwaves ---
+    const raycaster = new THREE.Raycaster();
+    const planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const mouseWorldPos = new THREE.Vector3(9999, 9999, 0);
+    const mouseCoord = new THREE.Vector2(9999, 9999);
+    let isMouseDown = false;
 
-      meshesBody.forEach(m => {
-        m.material = preset.body;
-        m.material.wireframe = isWireframeActive || (key === 'wireframe');
-        m.material.needsUpdate = true;
-      });
-      meshesAccent.forEach(m => {
-        m.material = preset.accent;
-        m.material.wireframe = isWireframeActive || (key === 'wireframe');
-        m.material.needsUpdate = true;
-      });
+    window.addEventListener('pointermove', (e) => {
+      mouseCoord.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseCoord.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-      document.querySelectorAll('.mat-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.preset === key);
+      raycaster.setFromCamera(mouseCoord, camera);
+      raycaster.ray.intersectPlane(planeZ, mouseWorldPos);
+    });
+
+    window.addEventListener('pointerleave', () => {
+      mouseWorldPos.set(9999, 9999, 0);
+    });
+
+    // Theme switching
+    function applyTheme(key) {
+      currentThemeKey = key;
+      const theme = themes[key];
+      if (!colorsArray) return;
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+        const isAccent = isAccentFlags[i] === 1;
+        const c = isAccent ? theme.accent : theme.body;
+        const variance = 0.85 + Math.random() * 0.3;
+        colorsArray[i3] = c.r * variance;
+        colorsArray[i3 + 1] = c.g * variance;
+        colorsArray[i3 + 2] = c.b * variance;
+      }
+      particleGeometry.attributes.color.needsUpdate = true;
+
+      document.querySelectorAll('.ctrl-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === key);
       });
     }
 
-    document.querySelectorAll('.mat-btn').forEach(btn => {
-      btn.addEventListener('click', () => applyMaterialPreset(btn.dataset.preset));
+    document.querySelectorAll('.ctrl-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
     });
 
-    // Toggle Auto Rotate
+    // Blast Supernova Explosion
+    function triggerSupernova() {
+      if (!velocities) return;
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+        const ox = originalPositions[i3];
+        const oy = originalPositions[i3 + 1];
+        const oz = originalPositions[i3 + 2];
+
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.4 + Math.random() * 1.8;
+        velocities[i3] += Math.cos(angle) * speed * (ox > 0 ? 1 : -1) + (Math.random() - 0.5) * 0.8;
+        velocities[i3 + 1] += Math.sin(angle) * speed + (Math.random() - 0.5) * 0.8;
+        velocities[i3 + 2] += (Math.random() - 0.5) * 2.2;
+      }
+    }
+
+    document.getElementById('btn-blast').addEventListener('click', triggerSupernova);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'b' || e.key === 'B') triggerSupernova();
+      if (e.code === 'Space') {
+        controls.autoRotate = !controls.autoRotate;
+        document.getElementById('btn-rotate').classList.toggle('active', controls.autoRotate);
+      }
+    });
+
+    // Auto Rotate
     const btnRotate = document.getElementById('btn-rotate');
     btnRotate.addEventListener('click', () => {
       controls.autoRotate = !controls.autoRotate;
       btnRotate.classList.toggle('active', controls.autoRotate);
     });
 
-    // Toggle Wireframe
-    const btnWireframe = document.getElementById('btn-wireframe');
-    btnWireframe.addEventListener('click', () => {
-      isWireframeActive = !isWireframeActive;
-      btnWireframe.classList.toggle('active', isWireframeActive);
-      meshesBody.forEach(m => m.material.wireframe = isWireframeActive);
-      meshesAccent.forEach(m => m.material.wireframe = isWireframeActive);
+    // Black hole mode
+    let blackholeActive = false;
+    const btnBlackhole = document.getElementById('btn-blackhole');
+    btnBlackhole.addEventListener('click', () => {
+      blackholeActive = !blackholeActive;
+      btnBlackhole.classList.toggle('active', blackholeActive);
     });
 
-    // Toggle Floating
-    const btnHover = document.getElementById('btn-hover');
-    btnHover.addEventListener('click', () => {
-      floatingEnabled = !floatingEnabled;
-      btnHover.classList.toggle('active', floatingEnabled);
+    // Turbulence mode
+    let turbulenceActive = false;
+    const btnNoise = document.getElementById('btn-noise');
+    btnNoise.addEventListener('click', () => {
+      turbulenceActive = !turbulenceActive;
+      btnNoise.classList.toggle('active', turbulenceActive);
     });
-
-    // Explode Layers Animation (TWEEN)
-    const btnExplode = document.getElementById('btn-explode');
-    btnExplode.addEventListener('click', toggleExplode);
-
-    function toggleExplode() {
-      isExploded = !isExploded;
-      btnExplode.classList.toggle('active', isExploded);
-
-      const targetZ_Icon = isExploded ? 2.8 : 0;
-      const targetX_Icon = isExploded ? -1.5 : 0;
-      const targetZ_Text = isExploded ? -1.5 : 0;
-      const targetZ_Accent = isExploded ? 4.2 : 0;
-      const targetX_Accent = isExploded ? 1.4 : 0;
-      const targetRotY_Accent = isExploded ? 0.35 : 0;
-
-      new TWEEN.Tween(groupIcon.position)
-        .to({ z: targetZ_Icon, x: targetX_Icon }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(groupText.position)
-        .to({ z: targetZ_Text }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(groupAccent.position)
-        .to({ z: targetZ_Accent, x: targetX_Accent }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(groupAccent.rotation)
-        .to({ y: targetRotY_Accent }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-    }
 
     // Reset View
     document.getElementById('btn-reset').addEventListener('click', () => {
-      setViewPreset('front');
+      new TWEEN.Tween(camera.position)
+        .to(DEFAULT_CAM_POS, 800)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
+      new TWEEN.Tween(controls.target)
+        .to({ x: 0, y: 0, z: 0 }, 800)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
     });
 
     // 4K Snapshot
@@ -872,7 +665,7 @@
       renderer.render(scene, camera);
 
       const link = document.createElement('a');
-      link.download = 'MindX_3D_Logo_4K.png';
+      link.download = 'MindX_Quantum_Particles_4K.png';
       link.href = renderer.domElement.toDataURL('image/png');
       link.click();
 
@@ -881,42 +674,21 @@
       camera.updateProjectionMatrix();
     });
 
-    // Mouse Light Follower
-    window.addEventListener('pointermove', (e) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
-      mouseSpot.position.x = x * 15;
-      mouseSpot.position.y = 8 + y * 8;
-    });
-
-    // Keyboard Shortcuts
-    window.addEventListener('keydown', (e) => {
-      if (e.key === '1') applyMaterialPreset('chrome');
-      if (e.key === '2') applyMaterialPreset('glass');
-      if (e.key === '3') applyMaterialPreset('obsidian');
-      if (e.key === '4') applyMaterialPreset('gold');
-      if (e.key === '5') applyMaterialPreset('wireframe');
-      if (e.code === 'Space') {
-        controls.autoRotate = !controls.autoRotate;
-        btnRotate.classList.toggle('active', controls.autoRotate);
-      }
-      if (e.key === 'e' || e.key === 'E') toggleExplode();
-      if (e.key === 'w' || e.key === 'W') {
-        isWireframeActive = !isWireframeActive;
-        btnWireframe.classList.toggle('active', isWireframeActive);
-        meshesBody.forEach(m => m.material.wireframe = isWireframeActive);
-        meshesAccent.forEach(m => m.material.wireframe = isWireframeActive);
-      }
-    });
-
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // --- 8. Render Loop ---
+    // --- 5. Real-Time Particle Physics Simulation Loop ---
+    const springK = 0.045; // Spring force pulling back to original point
+    const damping = 0.88;  // Friction/damping factor
+    const repulseRadius = 2.2;
+    const repulseStrength = 0.16;
+
     let clock = new THREE.Clock();
+    let frameCount = 0;
+    let lastTime = performance.now();
 
     function animate() {
       requestAnimationFrame(animate);
@@ -924,17 +696,87 @@
       TWEEN.update();
       controls.update();
 
+      const delta = clock.getDelta();
       const elapsed = clock.getElapsedTime();
 
-      // Floating Motion
-      if (floatingEnabled) {
-        logoPivot.position.y = Math.sin(elapsed * 1.5) * 0.4;
-        logoPivot.rotation.z = Math.sin(elapsed * 1.0) * 0.015;
+      if (particleGeometry && currentPositions && originalPositions) {
+        const mx = mouseWorldPos.x;
+        const my = mouseWorldPos.y;
+
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          let px = currentPositions[i3];
+          let py = currentPositions[i3 + 1];
+          let pz = currentPositions[i3 + 2];
+
+          const ox = originalPositions[i3];
+          const oy = originalPositions[i3 + 1];
+          const oz = originalPositions[i3 + 2];
+
+          let vx = velocities[i3];
+          let vy = velocities[i3 + 1];
+          let vz = velocities[i3 + 2];
+
+          // 1. Mouse Repulsion Force
+          const dx = px - mx;
+          const dy = py - my;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq < repulseRadius * repulseRadius) {
+            const dist = Math.sqrt(distSq) + 0.001;
+            const force = (1.0 - dist / repulseRadius) * repulseStrength;
+            vx += (dx / dist) * force;
+            vy += (dy / dist) * force;
+            vz += (Math.random() - 0.5) * force * 1.5;
+          }
+
+          // 2. Black Hole Singular Collapse
+          if (blackholeActive) {
+            const bhDist = Math.sqrt(px * px + py * py) + 0.1;
+            vx -= (px / bhDist) * 0.08;
+            vy -= (py / bhDist) * 0.08;
+            // Swirling angular velocity
+            vx += (-py / bhDist) * 0.05;
+            vy += (px / bhDist) * 0.05;
+          }
+
+          // 3. Turbulence Noise
+          if (turbulenceActive) {
+            vx += Math.sin(py * 3.0 + elapsed * 4.0) * 0.015;
+            vy += Math.cos(px * 3.0 + elapsed * 4.0) * 0.015;
+          }
+
+          // 4. Spring Restoring Force towards Original Point
+          const fx = (ox - px) * springK;
+          const fy = (oy - py) * springK;
+          const fz = (oz - pz) * springK;
+
+          vx = (vx + fx) * damping;
+          vy = (vy + fy) * damping;
+          vz = (vz + fz) * damping;
+
+          currentPositions[i3] = px + vx;
+          currentPositions[i3 + 1] = py + vy;
+          currentPositions[i3 + 2] = pz + vz;
+
+          velocities[i3] = vx;
+          velocities[i3 + 1] = vy;
+          velocities[i3 + 2] = vz;
+        }
+
+        particleGeometry.attributes.position.needsUpdate = true;
       }
 
-      dustParticles.rotation.y = elapsed * 0.015;
-
       renderer.render(scene, camera);
+
+      // FPS
+      frameCount++;
+      if (performance.now() - lastTime >= 1000) {
+        document.getElementById('fps-counter').innerText = frameCount;
+        frameCount = 0;
+        lastTime = performance.now();
+      }
     }
 
     animate();

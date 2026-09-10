@@ -39,19 +39,19 @@ nav .cta:hover{background:var(--acc);color:#000}
 #rail .track{width:2px;height:120px;background:#2b2b26;position:relative}
 #rail .fill{position:absolute;top:0;left:0;width:100%;background:var(--acc);height:0%}
 section{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;padding:120px 7vw 90px}
+  justify-content:center;padding:96px 7vw 64px}
 .eyebrow{color:var(--acc);font-size:12px;letter-spacing:.32em;margin-bottom:20px;
   text-shadow:0 2px 18px #000}
-h1.hero{font-size:clamp(40px,7vw,96px);line-height:1.25;font-weight:600;word-break:keep-all;
+h1.hero{font-size:clamp(36px,6.4vw,88px);line-height:1.25;font-weight:600;word-break:keep-all;
   text-shadow:0 4px 40px rgba(0,0,0,.8)}
 h1.hero .ch{display:inline-block;transform:translateY(112%);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 h1.hero .hline{display:block;overflow:hidden;padding-bottom:.08em}
 h1.hero .mask{display:inline-block;vertical-align:bottom}
 body.ready h1.hero .ch{transform:none}
-.heroSub{margin-top:26px;font-size:clamp(15px,2vw,22px);text-shadow:0 2px 16px #000}
+.heroSub{margin-top:18px;font-size:clamp(15px,2vw,22px);text-shadow:0 2px 16px #000}
 .lede{max-width:62ch;color:#d9d3c2;margin-top:18px;line-height:2.1;font-size:15px;
   text-shadow:0 2px 14px #000}
-.scrollcue{margin-top:54px;color:var(--acc);font-size:12px;letter-spacing:.3em;
+.scrollcue{margin-top:30px;color:var(--acc);font-size:12px;letter-spacing:.3em;
   animation:bob 2s ease-in-out infinite;text-shadow:0 2px 12px #000}
 @keyframes bob{50%{transform:translateY(8px)}}
 .mq{position:relative;z-index:2;overflow:hidden;white-space:nowrap;
@@ -135,6 +135,8 @@ footer{position:relative;z-index:2;padding:26px 7vw 40px;color:var(--mut);font-s
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
 .rv.in{opacity:1;transform:none}
 .skew{will-change:transform}
+@media(max-height:780px){section{padding:80px 7vw 44px}h1.hero{font-size:clamp(32px,5.4vw,68px)}
+.heroSub{margin-top:12px}.lede{margin-top:12px}.scrollcue{margin-top:20px}}
 @media(max-width:900px){
   .row{grid-template-columns:1fr;gap:8px}
   .cols2,.cgrid{grid-template-columns:1fr}

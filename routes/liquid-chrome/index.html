@@ -3,402 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MindX | Pure 3D Interactive Logo Studio (Centered & Fully Scaled)</title>
+  <title>MindX | Liquid Chrome Fluid Ripple 3D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-      user-select: none;
-    }
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #040507;
-      font-family: 'Space Grotesk', sans-serif;
-      color: #e2e8f0;
-    }
-    #webgl-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      cursor: grab;
-    }
-    #webgl-container:active {
-      cursor: grabbing;
-    }
-
-    .bg-vignette {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, rgba(18, 22, 32, 0) 35%, rgba(4, 5, 7, 0.8) 85%, #040507 100%);
-    }
-
-    /* Top Navigation HUD */
-    .top-hud {
-      position: absolute;
-      top: 20px;
-      left: 28px;
-      right: 28px;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      pointer-events: none;
-    }
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      pointer-events: auto;
-    }
-    .brand-badge {
-      width: 10px;
-      height: 10px;
-      background: #fa1c18;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #fa1c18;
-    }
-    .brand-title {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #ffffff;
-    }
-    .brand-subtitle {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #64748b;
-      letter-spacing: 0.05em;
-      border-left: 1px solid #1e293b;
-      padding-left: 12px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      pointer-events: auto;
-    }
-    .hud-btn {
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(16px);
-      color: #e2e8f0;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .hud-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.3);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-    .hud-btn.active {
-      background: #fa1c18;
-      border-color: #fa1c18;
-      color: #ffffff;
-      box-shadow: 0 0 16px rgba(250, 28, 24, 0.4);
-    }
-
-    /* Preset Viewports Bar (Top Center) */
-    .view-presets-bar {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      gap: 6px;
-      background: rgba(12, 16, 25, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(16px);
-      padding: 4px;
-      border-radius: 10px;
-      pointer-events: auto;
-    }
-    .view-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: #94a3b8;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .view-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.08);
-    }
-    .view-btn.active {
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Bottom Material Switcher */
-    .bottom-hud {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      pointer-events: none;
-    }
-    .material-bar {
-      pointer-events: auto;
-      background: rgba(12, 16, 25, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(20px);
-      padding: 6px;
-      border-radius: 14px;
-      display: flex;
-      gap: 6px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    }
-    .mat-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: #94a3b8;
-      padding: 9px 16px;
-      border-radius: 10px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .mat-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.06);
-    }
-    .mat-btn.active {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-    .mat-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    /* Floating Tool Controls (Right side) */
-    .tool-dock {
-      position: absolute;
-      right: 28px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      pointer-events: auto;
-    }
-    .tool-btn {
-      width: 44px;
-      height: 44px;
-      background: rgba(12, 16, 25, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(16px);
-      border-radius: 10px;
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 16px;
-      position: relative;
-    }
-    .tool-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.3);
-      color: #ffffff;
-    }
-    .tool-btn.active {
-      background: #fa1c18;
-      border-color: #fa1c18;
-      color: #ffffff;
-      box-shadow: 0 0 16px rgba(250, 28, 24, 0.4);
-    }
-    .tool-tooltip {
-      position: absolute;
-      right: 52px;
-      background: rgba(8, 10, 14, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(6px);
-      transition: all 0.2s ease;
-      color: #e2e8f0;
-    }
-    .tool-btn:hover .tool-tooltip {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* Left Stats / Geometry Info */
-    .info-overlay {
-      position: absolute;
-      left: 28px;
-      bottom: 24px;
-      z-index: 10;
-      pointer-events: none;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #475569;
-      line-height: 1.7;
-    }
-    .info-overlay span {
-      color: #94a3b8;
-    }
-
-    .instruction-toast {
-      position: absolute;
-      top: 68px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      background: rgba(12, 16, 25, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: #94a3b8;
-      pointer-events: none;
-      letter-spacing: 0.05em;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; user-select: none; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: #030407; font-family: 'Space Grotesk', sans-serif; color: #e2e8f0; }
+    #webgl-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; cursor: pointer; }
+    .bg-vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(15, 20, 32, 0) 35%, rgba(3, 4, 7, 0.85) 85%, #030407 100%); }
+    .top-hud { position: absolute; top: 20px; left: 28px; right: 28px; z-index: 10; display: flex; justify-content: space-between; align-items: center; pointer-events: none; }
+    .brand-block { display: flex; align-items: center; gap: 14px; pointer-events: auto; }
+    .brand-badge { width: 10px; height: 10px; background: #fa1c18; border-radius: 50%; box-shadow: 0 0 14px #fa1c18; }
+    .brand-title { font-size: 16px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #ffffff; }
+    .brand-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #64748b; letter-spacing: 0.05em; border-left: 1px solid #1e293b; padding-left: 12px; }
+    .top-actions { display: flex; align-items: center; gap: 10px; pointer-events: auto; }
+    .hud-btn { background: rgba(12, 18, 30, 0.75); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(16px); color: #e2e8f0; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-family: 'JetBrains Mono', monospace; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 6px; }
+    .hud-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: #ffffff; transform: translateY(-1px); }
+    .hud-btn.active { background: #fa1c18; border-color: #fa1c18; color: #ffffff; box-shadow: 0 0 16px rgba(250, 28, 24, 0.4); }
+    .bottom-hud { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 10px; pointer-events: none; }
+    .control-bar { pointer-events: auto; background: rgba(10, 15, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(20px); padding: 6px; border-radius: 14px; display: flex; gap: 6px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); }
+    .ctrl-btn { background: transparent; border: 1px solid transparent; color: #94a3b8; padding: 9px 16px; border-radius: 10px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; }
+    .ctrl-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
+    .ctrl-btn.active { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.25); color: #ffffff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); }
+    .action-dock { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; gap: 10px; pointer-events: auto; }
+    .dock-btn { width: 44px; height: 44px; background: rgba(10, 15, 26, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(16px); border-radius: 10px; color: #94a3b8; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; font-size: 16px; position: relative; }
+    .dock-btn:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: #ffffff; }
+    .dock-btn.active { background: #fa1c18; border-color: #fa1c18; color: #ffffff; box-shadow: 0 0 16px rgba(250, 28, 24, 0.4); }
+    .dock-tooltip { position: absolute; right: 52px; background: rgba(6, 8, 12, 0.95); border: 1px solid rgba(255, 255, 255, 0.15); padding: 4px 8px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; white-space: nowrap; pointer-events: none; opacity: 0; transform: translateX(6px); transition: all 0.2s ease; color: #e2e8f0; }
+    .dock-btn:hover .dock-tooltip { opacity: 1; transform: translateX(0); }
+    .info-overlay { position: absolute; left: 28px; bottom: 24px; z-index: 10; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #475569; line-height: 1.7; }
+    .info-overlay span { color: #94a3b8; }
+    .instruction-toast { position: absolute; top: 68px; left: 50%; transform: translateX(-50%); z-index: 10; background: rgba(10, 15, 26, 0.65); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); padding: 5px 14px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94a3b8; pointer-events: none; letter-spacing: 0.05em; }
   </style>
 </head>
 <body>
-
-  <!-- 3D Canvas -->
   <div id="webgl-container"></div>
   <div class="bg-vignette"></div>
-
-  <!-- Top HUD -->
   <div class="top-hud">
     <div class="brand-block">
       <div class="brand-badge"></div>
-      <div class="brand-title">MindX 3D Studio</div>
-      <div class="brand-subtitle">CENTERED VOLUMETRIC MESH // FULL-BOUNDS FIT</div>
+      <div class="brand-title">MindX Liquid Fluid Ripple</div>
+      <div class="brand-subtitle">T-1000 LIQUID CHROME // SURFACE WAVE SHADERS</div>
     </div>
-
-    <!-- View Preset Switchers -->
-    <div class="view-presets-bar">
-      <button class="view-btn active" data-view="front">正面全貌 (Front)</button>
-      <button class="view-btn" data-view="iso">3D 黄金角 (Isometric)</button>
-      <button class="view-btn" data-view="macro">微距特写 (Macro X)</button>
-      <button class="view-btn" data-view="top">俯视平面 (Top)</button>
-    </div>
-
     <div class="top-actions">
-      <button class="hud-btn" id="btn-snapshot" title="4K透明PNG快照">
-        📸 SNAPSHOT
-      </button>
-      <button class="hud-btn" id="btn-reset" title="重置视角">
-        ↺ RESET
-      </button>
+      <button class="hud-btn" id="btn-melt" title="液态融化 / 凝固">💧 MELT / SOLIDIFY (M)</button>
+      <button class="hud-btn" id="btn-snapshot" title="导出4K快照">📸 SNAPSHOT</button>
+      <button class="hud-btn" id="btn-reset" title="重置视角">↺ RESET</button>
     </div>
   </div>
-
   <div class="instruction-toast">
-    DRAG: ROTATE 360° // WHEEL: ZOOM // RIGHT-CLICK: PAN // HOVER: LIGHT REFLECTION
+    CLICK OR HOVER LOGO TO CAST MERCURY RIPPLES // DRAG TO ROTATE 360°
   </div>
-
-  <!-- Right Floating Tool Dock -->
-  <div class="tool-dock">
-    <button class="tool-btn" id="btn-rotate" title="自转巡航">
-      ⟳
-      <span class="tool-tooltip">Auto Rotate (Space)</span>
-    </button>
-    <button class="tool-btn" id="btn-explode" title="零件拆解/装配">
-      ⇲
-      <span class="tool-tooltip">Explode Layers (E)</span>
-    </button>
-    <button class="tool-btn" id="btn-wireframe" title="线框工程模式">
-      ⌗
-      <span class="tool-tooltip">Wireframe (W)</span>
-    </button>
-    <button class="tool-btn" id="btn-hover" title="浮动悬停">
-      ∿
-      <span class="tool-tooltip">Floating Motion</span>
-    </button>
+  <div class="action-dock">
+    <button class="dock-btn" id="btn-rotate" title="自转巡航">⟳<span class="dock-tooltip">Auto Rotate (Space)</span></button>
+    <button class="dock-btn" id="btn-highwave" title="狂暴冲击波">🌊<span class="dock-tooltip">High Waves (W)</span></button>
+    <button class="dock-btn" id="btn-organic" title="呼吸有机律动">∿<span class="dock-tooltip">Organic Breath</span></button>
   </div>
-
-  <!-- Bottom Material Switcher -->
   <div class="bottom-hud">
-    <div class="material-bar">
-      <button class="mat-btn active" data-preset="chrome">
-        <span class="mat-dot" style="background: linear-gradient(135deg, #fff, #94a3b8);"></span>
-        Liquid Chrome
+    <div class="control-bar">
+      <button class="ctrl-btn active" data-style="mercury">
+        <span style="width:8px;height:8px;border-radius:50%;background:#ffffff;box-shadow:0 0 8px #ffffff;"></span>
+        Pure Mercury Chrome
       </button>
-      <button class="mat-btn" data-preset="glass">
-        <span class="mat-dot" style="background: radial-gradient(circle, #e0f2fe, #38bdf8);"></span>
-        Prism Crystal Glass
+      <button class="ctrl-btn" data-style="crimson">
+        <span style="width:8px;height:8px;border-radius:50%;background:#fa1c18;box-shadow:0 0 8px #fa1c18;"></span>
+        Laser Blood Ruby
       </button>
-      <button class="mat-btn" data-preset="obsidian">
-        <span class="mat-dot" style="background: linear-gradient(135deg, #1e293b, #090d16); border: 1px solid #fa1c18;"></span>
-        Cyber Obsidian & Neon
+      <button class="ctrl-btn" data-style="gold">
+        <span style="width:8px;height:8px;border-radius:50%;background:#fbbf24;box-shadow:0 0 8px #fbbf24;"></span>
+        Molten 24K Gold
       </button>
-      <button class="mat-btn" data-preset="gold">
-        <span class="mat-dot" style="background: linear-gradient(135deg, #fbbf24, #b45309);"></span>
-        24K Gold & Ruby
-      </button>
-      <button class="mat-btn" data-preset="wireframe">
-        <span class="mat-dot" style="background: #38bdf8;"></span>
-        Quantum Blueprint
+      <button class="ctrl-btn" data-style="cyber">
+        <span style="width:8px;height:8px;border-radius:50%;background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span>
+        Bioluminescent Gel
       </button>
     </div>
   </div>
-
-  <!-- Left Stats Info -->
   <div class="info-overlay">
-    <div>BOUNDS: <span>[-8.00, +8.00] x [-4.37, +4.37]</span></div>
-    <div>CENTER: <span>(0.00, 0.00, 0.00) MATHEMATICAL PIVOT</span></div>
-    <div>ACTIVE SHADER: <span id="shader-label">Liquid Chrome PBR</span></div>
-    <div>STATUS: <span id="status-label">FRONTAL OVERVIEW READY</span></div>
+    <div>SURFACE: <span>T-1000 Dynamic Viscous Mercury</span></div>
+    <div>WAVE FORMULA: <span>sin(dist*5 - time*8) * exp(-dist)</span></div>
+    <div>STATE: <span id="liquid-state">ORGANIC EQUILIBRIUM</span></div>
   </div>
-
-  <!-- Raw SVG Data injected -->
   <div id="raw-svg" style="display:none;"><?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="452" viewBox="0 0 860 452" version="1.1">
   <title>MindX logo - vector recreation from official PNG</title>
@@ -408,44 +94,35 @@
   </g>
 </svg>
 </div>
-
-  <!-- Three.js & Libraries -->
   <script src="./vendor/three.min.js"></script>
   <script src="./vendor/SVGLoader.js"></script>
   <script src="./vendor/OrbitControls.js"></script>
   <script src="./vendor/tween.umd.js"></script>
-
   <script>
-    // --- 1. Scene, Camera, Renderer ---
     const container = document.getElementById('webgl-container');
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x040507);
+    scene.background = new THREE.Color(0x030407);
 
-    // Camera setup: standard 35 degree FOV for architectural perfection
     const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
-    // Standard initial front view distance (width=16, fit at z=24)
-    const DEFAULT_CAM_POS = new THREE.Vector3(0, 0.5, 24);
+    const DEFAULT_CAM_POS = new THREE.Vector3(0, 0.5, 23);
     camera.position.copy(DEFAULT_CAM_POS);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMappingExposure = 1.35;
     container.appendChild(renderer.domElement);
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.06;
-    controls.target.set(0, 0, 0); // Mathematical exact center
+    controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
     controls.minDistance = 5;
-    controls.maxDistance = 65;
-    controls.autoRotate = false; // Start static for clear overview
+    controls.maxDistance = 60;
+    controls.autoRotate = false;
     controls.autoRotateSpeed = 1.2;
 
-    // --- 2. Procedural Studio Environment Map (Softboxes) ---
     function generateStudioEnvironment() {
       const pmremGenerator = new THREE.PMREMGenerator(renderer);
       pmremGenerator.compileEquirectangularShader();
@@ -457,27 +134,24 @@
 
       const bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
       bgGrad.addColorStop(0, '#0a0e17');
-      bgGrad.addColorStop(0.5, '#040609');
+      bgGrad.addColorStop(0.5, '#030508');
       bgGrad.addColorStop(1, '#010204');
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Top Softbox
       const topGrad = ctx.createRadialGradient(512, 100, 10, 512, 100, 220);
       topGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      topGrad.addColorStop(0.4, 'rgba(240, 245, 255, 0.8)');
+      topGrad.addColorStop(0.4, 'rgba(240, 245, 255, 0.85)');
       topGrad.addColorStop(1, 'rgba(200, 220, 255, 0)');
       ctx.fillStyle = topGrad;
       ctx.fillRect(0, 0, canvas.width, 320);
 
-      // Left Soft Strip Light
       const leftGrad = ctx.createLinearGradient(120, 150, 240, 350);
       leftGrad.addColorStop(0, 'rgba(180, 220, 255, 0.85)');
       leftGrad.addColorStop(1, 'rgba(100, 150, 255, 0)');
       ctx.fillStyle = leftGrad;
       ctx.fillRect(80, 100, 200, 300);
 
-      // Right Rim Light with Crimson Touch
       const rightGrad = ctx.createLinearGradient(880, 150, 760, 350);
       rightGrad.addColorStop(0, 'rgba(255, 80, 90, 0.9)');
       rightGrad.addColorStop(0.5, 'rgba(255, 180, 190, 0.3)');
@@ -494,198 +168,110 @@
     const studioEnvMap = generateStudioEnvironment();
     scene.environment = studioEnvMap;
 
-    // --- 3. Studio Lights ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
     scene.add(ambientLight);
 
-    const mouseSpot = new THREE.SpotLight(0xffffff, 3.2, 50, Math.PI / 3, 0.4, 1.2);
+    const mouseSpot = new THREE.SpotLight(0xffffff, 3.5, 50, Math.PI / 3, 0.4, 1.2);
     mouseSpot.position.set(0, 8, 20);
     scene.add(mouseSpot);
 
-    const rimBlue = new THREE.DirectionalLight(0x38bdf8, 2.2);
-    rimBlue.position.set(-12, 10, -10);
+    const rimBlue = new THREE.DirectionalLight(0x38bdf8, 2.5);
+    rimBlue.position.set(-14, 10, -10);
     scene.add(rimBlue);
 
-    const rimRed = new THREE.DirectionalLight(0xfa1c18, 2.8);
+    const rimRed = new THREE.DirectionalLight(0xfa1c18, 3.0);
     rimRed.position.set(14, -6, -8);
     scene.add(rimRed);
 
-    // Subtle Ground Grid
     const gridHelper = new THREE.GridHelper(50, 30, 0x1e293b, 0x090d16);
     gridHelper.position.y = -5.8;
     scene.add(gridHelper);
 
-    // Ground Plane
-    const groundGeo = new THREE.PlaneGeometry(100, 100);
-    const groundMat = new THREE.MeshStandardMaterial({
-      color: 0x040507,
-      roughness: 0.3,
-      metalness: 0.8,
-      envMap: studioEnvMap,
-      envMapIntensity: 0.5
-    });
-    const groundMesh = new THREE.Mesh(groundGeo, groundMat);
-    groundMesh.rotation.x = -Math.PI / 2;
-    groundMesh.position.y = -5.85;
-    scene.add(groundMesh);
-
-    // Floating Dust System
-    const pGeo = new THREE.BufferGeometry();
-    const pCount = 200;
-    const pPos = new Float32Array(pCount * 3);
-    for (let i = 0; i < pCount * 3; i += 3) {
-      pPos[i] = (Math.random() - 0.5) * 40;
-      pPos[i + 1] = (Math.random() - 0.5) * 20;
-      pPos[i + 2] = (Math.random() - 0.5) * 25;
-    }
-    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const pMat = new THREE.PointsMaterial({
-      color: 0x94a3b8,
-      size: 0.08,
-      transparent: true,
-      opacity: 0.4
-    });
-    const dustParticles = new THREE.Points(pGeo, pMat);
-    scene.add(dustParticles);
-
-    // --- 4. Materials Bank ---
-    const materialPresets = {
-      chrome: {
-        name: 'Liquid Chrome PBR',
-        body: new THREE.MeshStandardMaterial({
-          color: 0xebf2fa,
-          metalness: 0.98,
-          roughness: 0.04,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.5
-        }),
-        accent: new THREE.MeshStandardMaterial({
-          color: 0xff1420,
-          metalness: 0.94,
-          roughness: 0.05,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.8
-        })
-      },
-      glass: {
-        name: 'Prism Crystal Glass',
-        body: new THREE.MeshPhysicalMaterial({
-          color: 0xffffff,
-          transmission: 0.96,
-          opacity: 1,
-          transparent: true,
-          roughness: 0.05,
-          ior: 1.54,
-          reflectivity: 0.6,
-          clearcoat: 1.0,
-          clearcoatRoughness: 0.04,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.2
-        }),
-        accent: new THREE.MeshPhysicalMaterial({
-          color: 0xff1e38,
-          transmission: 0.88,
-          opacity: 1,
-          transparent: true,
-          roughness: 0.06,
-          ior: 1.77,
-          clearcoat: 1.0,
-          envMap: studioEnvMap,
-          envMapIntensity: 3.0
-        })
-      },
-      obsidian: {
-        name: 'Cyber Obsidian & Laser',
-        body: new THREE.MeshStandardMaterial({
-          color: 0x090b10,
-          metalness: 0.85,
-          roughness: 0.12,
-          envMap: studioEnvMap,
-          envMapIntensity: 1.8
-        }),
-        accent: new THREE.MeshStandardMaterial({
-          color: 0xff002b,
-          emissive: 0xff002b,
-          emissiveIntensity: 0.75,
-          metalness: 0.4,
-          roughness: 0.08,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.0
-        })
-      },
-      gold: {
-        name: '24K Gold & Blood Ruby',
-        body: new THREE.MeshStandardMaterial({
-          color: 0xf5bf26,
-          metalness: 0.96,
-          roughness: 0.10,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.4
-        }),
-        accent: new THREE.MeshPhysicalMaterial({
-          color: 0xa80518,
-          transmission: 0.75,
-          roughness: 0.08,
-          ior: 1.85,
-          clearcoat: 1.0,
-          envMap: studioEnvMap,
-          envMapIntensity: 2.8
-        })
-      },
-      wireframe: {
-        name: 'Quantum Blueprint',
-        body: new THREE.MeshStandardMaterial({
-          color: 0x38bdf8,
-          wireframe: true,
-          metalness: 0.5,
-          roughness: 0.2
-        }),
-        accent: new THREE.MeshStandardMaterial({
-          color: 0xfa1c18,
-          wireframe: true,
-          metalness: 0.5,
-          roughness: 0.2
-        })
-      }
+    const customUniforms = {
+      uTime: { value: 0 },
+      uMousePos: { value: new THREE.Vector2(9999, 9999) },
+      uRippleIntensity: { value: 0.35 },
+      uMeltFactor: { value: 0.0 }
     };
 
-    let currentPresetKey = 'chrome';
-    let isWireframeActive = false;
-    let isExploded = false;
-    let floatingEnabled = false;
+    function createLiquidMaterial(colorHex, metalness, roughness) {
+      const mat = new THREE.MeshStandardMaterial({
+        color: colorHex,
+        metalness: metalness || 0.98,
+        roughness: roughness || 0.04,
+        envMap: studioEnvMap,
+        envMapIntensity: 2.5
+      });
 
-    // --- 5. Mathematical Normalization & Geometry Transformation ---
-    const logoPivot = new THREE.Group(); // Mathematical pivot at (0,0,0)
-    scene.add(logoPivot);
+      mat.onBeforeCompile = function(shader) {
+        shader.uniforms.uTime = customUniforms.uTime;
+        shader.uniforms.uMousePos = customUniforms.uMousePos;
+        shader.uniforms.uRippleIntensity = customUniforms.uRippleIntensity;
+        shader.uniforms.uMeltFactor = customUniforms.uMeltFactor;
 
-    const groupIcon = new THREE.Group();
-    const groupText = new THREE.Group();
-    const groupAccent = new THREE.Group();
-    logoPivot.add(groupIcon);
-    logoPivot.add(groupText);
-    logoPivot.add(groupAccent);
+        shader.vertexShader = [
+          'uniform float uTime;',
+          'uniform vec2 uMousePos;',
+          'uniform float uRippleIntensity;',
+          'uniform float uMeltFactor;',
+          shader.vertexShader
+        ].join('\n');
 
-    // Parsing SVG
+        shader.vertexShader = shader.vertexShader.replace(
+          '#include <begin_vertex>',
+          [
+            '#include <begin_vertex>',
+            'float d = distance(transformed.xy, uMousePos);',
+            'float ripple = sin(d * 4.5 - uTime * 9.0) * exp(-d * 0.45) * uRippleIntensity;',
+            'float idle = sin(transformed.x * 0.8 + uTime * 2.0) * cos(transformed.y * 0.8 + uTime * 1.5) * 0.08;',
+            'float melt = sin(transformed.x * 2.0 + uTime * 3.0) * uMeltFactor * 0.8;',
+            'transformed.z += ripple + idle;',
+            'transformed.y -= uMeltFactor * (transformed.y + 4.37) * 0.35;',
+            'transformed.x += melt * 0.2;'
+          ].join('\n')
+        );
+      };
+
+      return mat;
+    }
+
+    const materialStyles = {
+      mercury: {
+        body: createLiquidMaterial(0xebf2fa, 0.98, 0.03),
+        accent: createLiquidMaterial(0xff1420, 0.95, 0.04)
+      },
+      crimson: {
+        body: createLiquidMaterial(0x990011, 0.92, 0.06),
+        accent: createLiquidMaterial(0xff3355, 0.98, 0.02)
+      },
+      gold: {
+        body: createLiquidMaterial(0xf5bf26, 0.96, 0.08),
+        accent: createLiquidMaterial(0xa80518, 0.92, 0.05)
+      },
+      cyber: {
+        body: createLiquidMaterial(0x0f172a, 0.85, 0.12),
+        accent: createLiquidMaterial(0x38bdf8, 0.95, 0.02)
+      }
+    };
+    let currentStyleKey = 'mercury';
+
+    const logoGroup = new THREE.Group();
+    scene.add(logoGroup);
+
     const rawSvgStr = document.getElementById('raw-svg').innerHTML;
     const svgLoader = new THREE.SVGLoader();
     const svgData = svgLoader.parse(rawSvgStr);
 
-    // Exact Bounding Box of original SVG: x in [5, 809], y in [0, 439]
     const origMinX = 5, origMaxX = 809;
     const origMinY = 0, origMaxY = 439;
-    const origWidth = origMaxX - origMinX; // 804
-    const origHeight = origMaxY - origMinY; // 439
-    const cx = (origMinX + origMaxX) / 2; // 407
-    const cy = (origMinY + origMaxY) / 2; // 219.5
+    const origWidth = origMaxX - origMinX;
+    const cx = (origMinX + origMaxX) / 2;
+    const cy = (origMinY + origMaxY) / 2;
 
-    // Normalize to target 3D width of 16.0 units
     const targetWidth = 16.0;
-    const normScale = targetWidth / origWidth; // ~0.0199
-    const origDepth = 75; // Depth in original space -> becomes 75 * 0.0199 = 1.49 units in 3D
+    const normScale = targetWidth / origWidth;
+    const origDepth = 75;
 
-    // Matrix to transform raw vertices:
-    // 1. Shift center to (0, 0, 0): translate(-cx, -cy, -origDepth / 2)
-    // 2. Scale & Flip Y: scale(normScale, -normScale, normScale)
     const normMatrix = new THREE.Matrix4();
     normMatrix.makeScale(normScale, -normScale, normScale);
     normMatrix.multiply(new THREE.Matrix4().makeTranslation(-cx, -cy, -origDepth / 2));
@@ -693,10 +279,10 @@
     const extrudeSettings = {
       depth: origDepth,
       bevelEnabled: true,
-      bevelSegments: 6,
-      bevelSize: 11,        // ~0.22 units in 3D
-      bevelThickness: 14,   // ~0.28 units in 3D
-      curveSegments: 28
+      bevelSegments: 8,
+      bevelSize: 11,
+      bevelThickness: 14,
+      curveSegments: 32
     };
 
     const meshesBody = [];
@@ -709,159 +295,119 @@
 
       shapes.forEach((shape) => {
         const geom = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-        
-        // Apply mathematical normalization matrix directly to vertex buffer!
         geom.applyMatrix4(normMatrix);
         geom.computeVertexNormals();
-        geom.computeBoundingBox();
 
-        // Determine icon vs text by checking X position after transformation
-        const meshMinX = geom.boundingBox.min.x;
-
-        let mat;
-        let targetMesh;
+        let mat = isRedAccent ? materialStyles[currentStyleKey].accent : materialStyles[currentStyleKey].body;
+        const mesh = new THREE.Mesh(geom, mat);
         if (isRedAccent) {
-          mat = materialPresets[currentPresetKey].accent;
-          targetMesh = new THREE.Mesh(geom, mat);
-          meshesAccent.push(targetMesh);
-          groupAccent.add(targetMesh);
+          meshesAccent.push(mesh);
         } else {
-          mat = materialPresets[currentPresetKey].body;
-          targetMesh = new THREE.Mesh(geom, mat);
-          meshesBody.push(targetMesh);
-          if (meshMinX < -1.0) {
-            groupIcon.add(targetMesh);
-          } else {
-            groupText.add(targetMesh);
-          }
+          meshesBody.push(mesh);
         }
-        targetMesh.castShadow = true;
-        targetMesh.receiveShadow = true;
+        mesh.castShadow = true;
+        logoGroup.add(mesh);
       });
     });
 
-    // --- 6. Viewport Presets Switching ---
-    const viewPositions = {
-      front: { pos: new THREE.Vector3(0, 0.5, 24), target: new THREE.Vector3(0, 0, 0) },
-      iso: { pos: new THREE.Vector3(14, 9, 18), target: new THREE.Vector3(0, 0, 0) },
-      macro: { pos: new THREE.Vector3(5.5, -0.8, 8), target: new THREE.Vector3(5.5, -1.0, 0) }, // Focus directly on red X!
-      top: { pos: new THREE.Vector3(0, 24, 0.1), target: new THREE.Vector3(0, 0, 0) }
-    };
+    const raycaster = new THREE.Raycaster();
+    const planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+    const mousePlanePos = new THREE.Vector3();
+    const mouseCoord = new THREE.Vector2();
 
-    function setViewPreset(viewKey) {
-      const targetView = viewPositions[viewKey];
-      if (!targetView) return;
+    window.addEventListener('pointermove', (e) => {
+      mouseCoord.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseCoord.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-      document.querySelectorAll('.view-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.view === viewKey);
-      });
+      raycaster.setFromCamera(mouseCoord, camera);
+      raycaster.ray.intersectPlane(planeZ, mousePlanePos);
 
-      new TWEEN.Tween(camera.position)
-        .to(targetView.pos, 900)
+      customUniforms.uMousePos.value.set(mousePlanePos.x, mousePlanePos.y);
+      mouseSpot.position.x = mouseCoord.x * 15;
+      mouseSpot.position.y = 8 + mouseCoord.y * 8;
+    });
+
+    window.addEventListener('pointerdown', () => {
+      new TWEEN.Tween(customUniforms.uRippleIntensity)
+        .to({ value: 0.85 }, 200)
         .easing(TWEEN.Easing.Cubic.Out)
+        .chain(
+          new TWEEN.Tween(customUniforms.uRippleIntensity)
+            .to({ value: 0.35 }, 600)
+            .easing(TWEEN.Easing.Cubic.In)
+        )
         .start();
+    });
 
-      new TWEEN.Tween(controls.target)
-        .to(targetView.target, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
+    let isMelted = false;
+    const btnMelt = document.getElementById('btn-melt');
+    btnMelt.addEventListener('click', toggleMelt);
+
+    function toggleMelt() {
+      isMelted = !isMelted;
+      btnMelt.classList.toggle('active', isMelted);
+      document.getElementById('liquid-state').innerText = isMelted ? 'MOLTEN T-1000 STATE' : 'SOLID TITANIUM ALLOY';
+
+      new TWEEN.Tween(customUniforms.uMeltFactor)
+        .to({ value: isMelted ? 1.0 : 0.0 }, 1000)
+        .easing(TWEEN.Easing.Cubic.InOut)
         .start();
     }
 
-    document.querySelectorAll('.view-btn').forEach(btn => {
-      btn.addEventListener('click', () => setViewPreset(btn.dataset.view));
-    });
-
-    // --- 7. Materials & Tool Logic ---
-    function applyMaterialPreset(key) {
-      currentPresetKey = key;
-      const preset = materialPresets[key];
-      document.getElementById('shader-label').innerText = preset.name;
+    function applyStyle(key) {
+      currentStyleKey = key;
+      const s = materialStyles[key];
 
       meshesBody.forEach(m => {
-        m.material = preset.body;
-        m.material.wireframe = isWireframeActive || (key === 'wireframe');
+        m.material = s.body;
         m.material.needsUpdate = true;
       });
       meshesAccent.forEach(m => {
-        m.material = preset.accent;
-        m.material.wireframe = isWireframeActive || (key === 'wireframe');
+        m.material = s.accent;
         m.material.needsUpdate = true;
       });
 
-      document.querySelectorAll('.mat-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.preset === key);
+      document.querySelectorAll('.ctrl-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.style === key);
       });
     }
 
-    document.querySelectorAll('.mat-btn').forEach(btn => {
-      btn.addEventListener('click', () => applyMaterialPreset(btn.dataset.preset));
+    document.querySelectorAll('.ctrl-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyStyle(btn.dataset.style));
     });
 
-    // Toggle Auto Rotate
     const btnRotate = document.getElementById('btn-rotate');
     btnRotate.addEventListener('click', () => {
       controls.autoRotate = !controls.autoRotate;
       btnRotate.classList.toggle('active', controls.autoRotate);
     });
 
-    // Toggle Wireframe
-    const btnWireframe = document.getElementById('btn-wireframe');
-    btnWireframe.addEventListener('click', () => {
-      isWireframeActive = !isWireframeActive;
-      btnWireframe.classList.toggle('active', isWireframeActive);
-      meshesBody.forEach(m => m.material.wireframe = isWireframeActive);
-      meshesAccent.forEach(m => m.material.wireframe = isWireframeActive);
+    let highWaveActive = false;
+    const btnHighwave = document.getElementById('btn-highwave');
+    btnHighwave.addEventListener('click', () => {
+      highWaveActive = !highWaveActive;
+      btnHighwave.classList.toggle('active', highWaveActive);
+      customUniforms.uRippleIntensity.value = highWaveActive ? 0.75 : 0.35;
     });
 
-    // Toggle Floating
-    const btnHover = document.getElementById('btn-hover');
-    btnHover.addEventListener('click', () => {
-      floatingEnabled = !floatingEnabled;
-      btnHover.classList.toggle('active', floatingEnabled);
+    let organicBreath = false;
+    const btnOrganic = document.getElementById('btn-organic');
+    btnOrganic.addEventListener('click', () => {
+      organicBreath = !organicBreath;
+      btnOrganic.classList.toggle('active', organicBreath);
     });
 
-    // Explode Layers Animation (TWEEN)
-    const btnExplode = document.getElementById('btn-explode');
-    btnExplode.addEventListener('click', toggleExplode);
-
-    function toggleExplode() {
-      isExploded = !isExploded;
-      btnExplode.classList.toggle('active', isExploded);
-
-      const targetZ_Icon = isExploded ? 2.8 : 0;
-      const targetX_Icon = isExploded ? -1.5 : 0;
-      const targetZ_Text = isExploded ? -1.5 : 0;
-      const targetZ_Accent = isExploded ? 4.2 : 0;
-      const targetX_Accent = isExploded ? 1.4 : 0;
-      const targetRotY_Accent = isExploded ? 0.35 : 0;
-
-      new TWEEN.Tween(groupIcon.position)
-        .to({ z: targetZ_Icon, x: targetX_Icon }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(groupText.position)
-        .to({ z: targetZ_Text }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(groupAccent.position)
-        .to({ z: targetZ_Accent, x: targetX_Accent }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-
-      new TWEEN.Tween(groupAccent.rotation)
-        .to({ y: targetRotY_Accent }, 900)
-        .easing(TWEEN.Easing.Cubic.Out)
-        .start();
-    }
-
-    // Reset View
     document.getElementById('btn-reset').addEventListener('click', () => {
-      setViewPreset('front');
+      new TWEEN.Tween(camera.position)
+        .to(DEFAULT_CAM_POS, 800)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
+      new TWEEN.Tween(controls.target)
+        .to({ x: 0, y: 0, z: 0 }, 800)
+        .easing(TWEEN.Easing.Cubic.Out)
+        .start();
     });
 
-    // 4K Snapshot
     document.getElementById('btn-snapshot').addEventListener('click', () => {
       const origSize = new THREE.Vector2();
       renderer.getSize(origSize);
@@ -872,7 +418,7 @@
       renderer.render(scene, camera);
 
       const link = document.createElement('a');
-      link.download = 'MindX_3D_Logo_4K.png';
+      link.download = 'MindX_Liquid_Chrome_4K.png';
       link.href = renderer.domElement.toDataURL('image/png');
       link.click();
 
@@ -881,31 +427,11 @@
       camera.updateProjectionMatrix();
     });
 
-    // Mouse Light Follower
-    window.addEventListener('pointermove', (e) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
-      mouseSpot.position.x = x * 15;
-      mouseSpot.position.y = 8 + y * 8;
-    });
-
-    // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
-      if (e.key === '1') applyMaterialPreset('chrome');
-      if (e.key === '2') applyMaterialPreset('glass');
-      if (e.key === '3') applyMaterialPreset('obsidian');
-      if (e.key === '4') applyMaterialPreset('gold');
-      if (e.key === '5') applyMaterialPreset('wireframe');
+      if (e.key === 'm' || e.key === 'M') toggleMelt();
       if (e.code === 'Space') {
         controls.autoRotate = !controls.autoRotate;
         btnRotate.classList.toggle('active', controls.autoRotate);
-      }
-      if (e.key === 'e' || e.key === 'E') toggleExplode();
-      if (e.key === 'w' || e.key === 'W') {
-        isWireframeActive = !isWireframeActive;
-        btnWireframe.classList.toggle('active', isWireframeActive);
-        meshesBody.forEach(m => m.material.wireframe = isWireframeActive);
-        meshesAccent.forEach(m => m.material.wireframe = isWireframeActive);
       }
     });
 
@@ -915,7 +441,6 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // --- 8. Render Loop ---
     let clock = new THREE.Clock();
 
     function animate() {
@@ -925,14 +450,12 @@
       controls.update();
 
       const elapsed = clock.getElapsedTime();
+      customUniforms.uTime.value = elapsed;
 
-      // Floating Motion
-      if (floatingEnabled) {
-        logoPivot.position.y = Math.sin(elapsed * 1.5) * 0.4;
-        logoPivot.rotation.z = Math.sin(elapsed * 1.0) * 0.015;
+      if (organicBreath) {
+        logoGroup.position.y = Math.sin(elapsed * 1.4) * 0.35;
+        logoGroup.rotation.z = Math.sin(elapsed * 0.9) * 0.02;
       }
-
-      dustParticles.rotation.y = elapsed * 0.015;
 
       renderer.render(scene, camera);
     }
