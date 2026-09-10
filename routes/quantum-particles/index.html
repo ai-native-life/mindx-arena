@@ -366,6 +366,8 @@
     scene.background = new THREE.Color(0x020306);
 
     const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+    function fitNarrow(){ if (window.innerWidth / window.innerHeight < 0.8) { camera.fov = 58; } else { camera.fov = 35; } camera.updateProjectionMatrix(); }
+    fitNarrow();
     const DEFAULT_CAM_POS = new THREE.Vector3(0, 0, 22);
     camera.position.copy(DEFAULT_CAM_POS);
 
@@ -676,6 +678,7 @@
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
+      fitNarrow();
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
@@ -785,5 +788,5 @@
 /* arena idle-hide: studio chrome fades when you just want to watch */
 (function(){var S='.top-hud,.bottom-hud,.tool-dock,.action-dock';var st=document.createElement('style');st.textContent='.ui-chrome{transition:opacity .5s ease}body.ui-idle .ui-chrome{opacity:0!important;pointer-events:none!important}#ui-peek{position:fixed;left:14px;bottom:14px;z-index:90;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.5);color:#fff;font-size:15px;line-height:1;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .5s}body.ui-idle #ui-peek{opacity:.85;pointer-events:auto}#ui-first{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:90;background:rgba(0,0,0,.65);color:#fff;font-size:12px;letter-spacing:.12em;padding:9px 18px;border-radius:999px;transition:opacity .8s;pointer-events:none;white-space:nowrap}';document.head.appendChild(st);function tag(){document.querySelectorAll(S).forEach(function(e){e.classList.add('ui-chrome')})}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',tag)}else{tag()}var p=document.createElement('button');p.id='ui-peek';p.setAttribute('aria-label','操作パネル表示');p.textContent='◌';document.body.appendChild(p);var f=document.createElement('div');f.id='ui-first';f.textContent='動かすと操作パネルが出ます';document.body.appendChild(f);setTimeout(function(){f.style.opacity='0';setTimeout(function(){f.remove()},900)},4500);var t=null;function wake(){document.body.classList.remove('ui-idle');clearTimeout(t);t=setTimeout(function(){document.body.classList.add('ui-idle')},2800)}['pointermove','pointerdown','keydown','touchstart','wheel'].forEach(function(e){window.addEventListener(e,wake,{passive:true})});p.addEventListener('click',wake);wake()})();
 </script>
-</body>
+<style>@media(max-width:640px){.top-hud,.bottom-hud,.tool-dock,.action-dock,.control-bar,.view-presets-bar,.material-bar{flex-wrap:wrap;gap:8px}.top-hud{padding:10px 12px}.bottom-hud{padding:10px 12px}}</style></body>
 </html>

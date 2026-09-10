@@ -21,6 +21,10 @@
 - r-logo-lab：源自 web-lab logo 展厅 06，three r128 等 4 个 CDN 库已 vendor 本地化，零外部依赖；定位 PLAYGROUND（非官方面）。
 - r-quantum-particles / r-liquid-chrome：同展厅 07/08，同 vendor 方案入库，同 PLAYGROUND。
 - 玩耍页参数面板：3 页统一加 idle 自动隐藏（2.8s 无操作淡出，动鼠标/触摸即回，左下 ◌ 常驻唤出＋首次提示），看效果时屏幕干净。
+- 目录页改按博尔赫斯式重写：后台词（LIVE/ROUTE 编号/tags/COMING）下掉，换成本編三話＋余白；玩耍三页收进 r-logo Hub 单入口，切换器隐藏子项。
+- 文案事实：全站删掉美式 (MindX Inc.)；店招统一为ロボット事業直営店「Mobility & Robotics」（日文零中文混用）。
+- R2 标题断行：其逐字动画 JS 会吃掉 br，改成分行保留写法；GPU 标题行距 .82→1.04 治重叠；GPU 导航改黑；三站页脚后台话全清。
+- 移动端基线：目录/hub 卡片防溢出、旗舰 900px 断点收紧、三玩耍页窄屏 fov 自适应；390px 三屏截图确认。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
 ## R2 Batch 2（2026-09-11）

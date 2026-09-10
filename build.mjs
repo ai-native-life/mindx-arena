@@ -36,7 +36,8 @@ routes.sort((a, b) => (a.no < b.no ? -1 : 1));
 
 cpSync(path.join(root, 'directory'), path.join(dist, 'directory'), { recursive: true });
 cpSync(path.join(root, 'switcher'), path.join(dist, '_arena'), { recursive: true });
-writeFileSync(path.join(dist, 'routes.json'), JSON.stringify({ default: arena.defaultRoute, routes }, null, 2));
+const visible = routes.filter((r) => !r.hidden);
+writeFileSync(path.join(dist, 'routes.json'), JSON.stringify({ default: arena.defaultRoute, routes: visible }, null, 2));
 
 const lure = `/r/${arena.defaultRoute}/`;
 writeFileSync(path.join(dist, '_redirects'), `/ ${lure} 200\n`);

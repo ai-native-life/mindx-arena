@@ -2,5 +2,6 @@
   "no": "05",
   "name": "Quantum Particles",
   "sub": "粒子重力",
-  "playground": true
+  "playground": true,
+  "hidden": true
 }

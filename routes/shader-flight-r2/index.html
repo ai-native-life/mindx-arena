@@ -216,7 +216,7 @@ footer{position:relative;z-index:2;padding:26px 7vw 40px;color:var(--mut);font-s
 <div><div class="tag">所在地 / VISIT</div><p>〒103-0014<br>東京都中央区日本橋蛎殻町１丁目３６−3 東洋ビル６Ｆ</p></div>
 <div><div class="tag">連絡先 / REACH OUT</div><p>Email · <a href="mailto:info@mindx.co.jp">info@mindx.co.jp</a><br>Phone · <a href="tel:+81368216158">+81-3-6821-6158</a></p></div>
 </div>
-<div class="facts rv">MindX株式会社（MindX Inc.） · 設立: 2025年1月（2025.01 MindX株式会社を設立） · 資本金: 2,000万円 · 代表取締役: 越智 伸司 · 取引銀行: 三井住友銀行</div>
+<div class="facts rv">MindX株式会社 · 設立: 2025年1月（2025.01 MindX株式会社を設立） · 資本金: 2,000万円 · 代表取締役: 越智 伸司 · 取引銀行: 三井住友銀行</div>
 
 </section>
 
@@ -235,8 +235,8 @@ if(lp>=100){clearInterval(ltick);document.getElementById('loader').classList.add
 var mqt='AI AGENT <b>—</b> 自社開発 <b>—</b> ROBOTICS <b>—</b> コンサルティング <b>—</b> 医療 <b>—</b> 教育 <b>—</b> 小売 <b>—</b> 金融 <b>—</b> ';
 document.getElementById('mqin').innerHTML=(mqt+mqt+mqt+mqt);
 /* ---------- hero char split ---------- */
-var hh=document.getElementById('heroH'),txt=hh.textContent;hh.textContent='';
-Array.prototype.forEach.call(txt,function(c,i){var s=document.createElement('span');s.className='ch';s.innerHTML=c===' '?'&nbsp;':c;s.style.transitionDelay=(i*28)+'ms';hh.appendChild(s);});
+var hh=document.getElementById('heroH'),nodes=Array.prototype.slice.call(hh.childNodes);hh.textContent='';
+var ci2=0;nodes.forEach(function(nd){if(nd.nodeName==='BR'){hh.appendChild(document.createElement('br'));}else{Array.prototype.forEach.call(nd.textContent,function(c){var s=document.createElement('span');s.className='ch';s.innerHTML=c===' '?'&nbsp;':c;s.style.transitionDelay=(ci2*28)+'ms';hh.appendChild(s);ci2++;});}});
 /* ---------- WebGL shader ---------- */
 var cv=document.getElementById('gl'),gl=null;
 try{gl=cv.getContext('webgl',{antialias:false,alpha:false})||cv.getContext('experimental-webgl');}catch(e){gl=null;}

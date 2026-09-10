@@ -2,5 +2,6 @@
   "no": "04",
   "name": "Logo Lab",
   "sub": "3Dで遊ぶ",
-  "playground": true
+  "playground": true,
+  "hidden": true
 }
