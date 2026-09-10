@@ -9,8 +9,10 @@
 ## R2 Batch 1（2026-09-11，首批发布）
 
 - 入选：`r-shader-flight`（源自 opencode lane Route 11，Three.js + UnrealBloom + 滚动运镜重写版）。
+- 入选（owner 追加）：`r-shader-flight-r2`（源自 `web-lab/R2/11-shader-scroll3d.html`，星云 shader 版）、`r-shader-gpu`（源自 `web-lab/R2/11-shader.html`，复古 CRT 终端版）。两路入库前均截图确认正常渲染。
 - 内容：mindx.co.jp 2026-09-10 核对原文，0 删减。
 - 验收：桌面端 hero / services / cases / cases-轮播变色 / contact 五张截图已看，修过曝/断词/列塌 3 bug，控制台零报错。
+- 发布：`https://mindx.distributor.co.jp/` LIVE（Cloudflare Pages 项目 `mindx-arena`，本批为 wrangler direct-upload；Git 自动发布待装 Cloudflare GitHub App 后切换）。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
 ## Backlog
