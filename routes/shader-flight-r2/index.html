@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindX — Shader Flight (after shader.se)</title>
+<style>
+:root{--bg:#030304;--ink:#f2ede1;--mut:#a49d8c;--acc:#c8ff3d;--line:rgba(242,237,225,.16)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,"Noto Sans JP",sans-serif;overflow-x:hidden}
+body.nogl{background:radial-gradient(120% 90% at 50% 10%,#14210a 0%,#030304 55%,#000 100%)}
+.serif{font-family:"STIX Two Text","Hiragino Mincho ProN","Yu Mincho",YuMincho,Georgia,serif}
+#gl{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+/* loader */
+#loader{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;transition:opacity .7s ease;font-size:12px;letter-spacing:.35em;color:var(--mut)}
+#loader.done{opacity:0;pointer-events:none}
+#loader .pct{font-size:56px;color:var(--ink);letter-spacing:.05em}
+#loader .bar{width:210px;height:2px;background:#222}
+#loader .bar i{display:block;height:100%;width:0;background:var(--acc)}
+/* cursor */
+.cur{position:fixed;z-index:99;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%)}
+#cdot{width:6px;height:6px;background:var(--acc)}
+#cring{width:34px;height:34px;border:1px solid rgba(200,255,61,.7);transition:width .25s,height .25s,border-color .25s}
+#cring.big{width:64px;height:64px;border-color:var(--acc)}
+@media(hover:none){.cur{display:none}}
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:26px;padding:16px 30px;font-size:13px;background:linear-gradient(rgba(0,0,0,.7),transparent)}
+nav .logo{font-weight:700;letter-spacing:.14em;font-size:15px}
+nav .logo em{color:var(--acc);font-style:normal}
+nav a.nl{color:var(--mut);text-decoration:none;letter-spacing:.06em}
+nav a.nl.on,nav a.nl:hover{color:var(--ink)}
+nav .cta{margin-left:auto;border:1px solid var(--acc);color:var(--acc);border-radius:999px;padding:8px 20px;text-decoration:none;font-size:13px;display:inline-block}
+nav .cta:hover{background:var(--acc);color:#000}
+/* rail */
+#rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.2em;color:var(--mut)}
+#rail .track{width:2px;height:120px;background:#2b2b26;position:relative}
+#rail .fill{position:absolute;top:0;left:0;width:100%;background:var(--acc);height:0%}
+section{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 7vw 90px}
+.eyebrow{color:var(--acc);font-size:12px;letter-spacing:.32em;margin-bottom:20px;text-shadow:0 2px 18px #000}
+h1.hero{font-size:clamp(46px,8.6vw,128px);line-height:1.08;font-weight:600;text-shadow:0 4px 40px rgba(0,0,0,.8)}
+h1.hero .line{display:block;overflow:hidden}
+h1.hero .ch{display:inline-block;transform:translateY(112%);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+body.ready h1.hero .ch{transform:none}
+.heroEcho{position:absolute;top:50%;left:7vw;transform:translateY(-52%);font-size:clamp(80px,15vw,230px);white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(242,237,225,.13);z-index:-1;pointer-events:none}
+.heroSub{margin-top:26px;font-size:clamp(15px,2vw,22px);color:var(--ink);text-shadow:0 2px 16px #000}
+.lede{max-width:62ch;color:#d9d3c2;margin-top:18px;line-height:2.1;font-size:15px;text-shadow:0 2px 14px #000}
+.scrollcue{margin-top:54px;color:var(--acc);font-size:12px;letter-spacing:.3em;animation:bob 2s ease-in-out infinite;text-shadow:0 2px 12px #000}
+@keyframes bob{50%{transform:translateY(8px)}}
+/* marquee */
+.mq{position:relative;z-index:2;overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;background:rgba(0,0,0,.45)}
+.mq span{display:inline-block;font-size:15px;letter-spacing:.35em;color:var(--mut);padding-right:60px;animation:mq 26s linear infinite}
+.mq span b{color:var(--acc);font-weight:400}
+@keyframes mq{to{transform:translateX(-50%)}}
+h2.st{font-size:clamp(32px,5vw,70px);line-height:1.15;font-weight:600;text-shadow:0 4px 30px rgba(0,0,0,.85)}
+h2.st .n{color:var(--acc);font-size:.45em;vertical-align:super;letter-spacing:.1em}
+/* service rows */
+.rows{margin-top:40px;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:110px 1fr 1.2fr auto;gap:26px;align-items:baseline;padding:30px 6px;border-top:1px solid var(--line);position:relative;overflow:hidden;text-decoration:none;color:var(--ink)}
+.row::after{content:"";position:absolute;inset:0;background:var(--acc);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.2,.7,.2,1);z-index:0}
+.row:hover::after{transform:scaleY(1)}
+.row>*{position:relative;z-index:1}
+.row:hover .rde,.row:hover .ren,.row:hover .rti{color:#000}
+.row:hover .rno{color:#000}
+.rno{font-size:14px;letter-spacing:.25em;color:var(--acc)}
+.rti{font-size:clamp(22px,3vw,38px)}
+.ren{font-size:12px;letter-spacing:.2em;color:var(--mut)}
+.rde{color:#cfc9b8;line-height:2;font-size:14px}
+/* metrics */
+.mrow{display:flex;gap:7vw;margin-top:34px;flex-wrap:wrap}
+.m .v{font-size:clamp(44px,5.6vw,80px);color:var(--acc);text-shadow:0 0 34px rgba(200,255,61,.35)}
+.m .l{color:#d9d3c2;font-size:13px;margin-top:6px;letter-spacing:.08em;text-shadow:0 2px 10px #000}
+/* cases stage */
+.stage{margin-top:30px;position:relative;border:1px solid var(--line);border-radius:22px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:46px;overflow:hidden;min-height:380px}
+.ghost{position:absolute;right:10px;bottom:-46px;font-size:clamp(140px,22vw,300px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(242,237,225,.16);pointer-events:none}
+.stage .idx{font-size:13px;letter-spacing:.3em;color:var(--acc)}
+.stage h3{font-size:clamp(30px,4.4vw,58px);margin:12px 0 6px;text-shadow:0 3px 24px #000}
+.stage .csub{color:var(--mut);font-size:13px;letter-spacing:.2em}
+.stage p.desc{color:#ddd6c4;line-height:2.1;margin-top:16px;max-width:62ch}
+.carctl{display:flex;gap:12px;margin-top:28px;align-items:center}
+.carctl button{background:transparent;border:1px solid rgba(242,237,225,.35);color:var(--ink);border-radius:999px;padding:11px 26px;cursor:pointer;font-size:14px}
+.carctl button:hover{border-color:var(--acc);color:var(--acc)}
+.dots{display:flex;gap:8px;margin-left:8px}
+.dots i{width:26px;height:3px;background:#3a382e;border-radius:2px;cursor:pointer}
+.dots i.on{background:var(--acc)}
+/* about */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:28px}
+.cols2 p,.philo p{color:#d5cfbe;line-height:2.3;font-size:15px;margin-bottom:1.2em;text-shadow:0 2px 12px #000}
+.philo{margin-top:24px;border-left:3px solid var(--acc);padding-left:26px}
+/* domains */
+.dom4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:34px;border:1px solid var(--line);background:rgba(0,0,0,.45)}
+.dom{padding:26px 22px;border-right:1px solid var(--line);transition:background .3s}
+.dom:last-child{border-right:0}
+.dom:hover{background:rgba(200,255,61,.08)}
+.dom .en{font-size:11px;letter-spacing:.22em;color:var(--acc)}
+.dom h4{font-size:21px;margin:10px 0 12px}
+.dom p{font-size:13px;color:#c6c0ad;line-height:1.95}
+/* contact */
+#contact .big{font-size:clamp(38px,6.4vw,92px);line-height:1.12;text-shadow:0 4px 30px rgba(0,0,0,.85)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:34px;border:1px solid var(--line);background:rgba(0,0,0,.5)}
+.cgrid>div{padding:28px}
+.cgrid>div+div{border-left:1px solid var(--line)}
+.cgrid .tag{font-size:11px;letter-spacing:.25em;color:var(--acc)}
+.cgrid p{margin-top:12px;color:#ddd6c4;line-height:2.1}
+.cgrid a{color:var(--acc)}
+.facts{margin-top:26px;color:#c6c0ad;font-size:13.5px;line-height:2.2;text-shadow:0 2px 10px #000}
+footer{position:relative;z-index:2;padding:26px 7vw 40px;color:var(--mut);font-size:12px;display:flex;justify-content:space-between;border-top:1px solid #1c1c18;background:rgba(0,0,0,.6)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+.skew{will-change:transform}
+@media(max-width:900px){.row{grid-template-columns:1fr;gap:8px}.cols2,.cgrid{grid-template-columns:1fr}.cgrid>div+div{border-left:0;border-top:1px solid var(--line)}.dom4{grid-template-columns:1fr 1fr}.dom:nth-child(2){border-right:0}nav a.nl{display:none}#rail{display:none}}
+@media (prefers-reduced-motion:reduce){.scrollcue,.mq span{animation:none}.rv{opacity:1;transform:none}h1.hero .ch{transform:none}}
+</style>
+</head>
+<body>
+<div id="loader"><div class="pct" id="lpct">000</div><div class="bar"><i id="lbar"></i></div><div>COMPILING SHADERS — MindX</div></div>
+<canvas id="gl"></canvas>
+<div class="cur" id="cdot"></div><div class="cur" id="cring"></div>
+
+<nav>
+<div class="logo">Mind<em>X</em></div>
+<a class="nl on" href="#home" data-s="home">Home</a>
+<a class="nl" href="#services" data-s="services">事業内容</a>
+<a class="nl" href="#cases" data-s="cases">導入事例</a>
+<a class="nl" href="#about" data-s="about">私たちについて</a>
+<a class="nl" href="#contact" data-s="contact">Contact</a>
+<a class="cta mag" href="mailto:info@mindx.co.jp">お問い合わせ</a>
+</nav>
+
+<div id="rail"><span id="rsec">01</span><div class="track"><div class="fill" id="rfill"></div></div><span>FLIGHT</span></div>
+
+<section id="home" data-ph="0">
+<div class="heroEcho serif" id="echo">MINDX — MINDX</div>
+<div class="eyebrow rv">A CREATIVE ENGINEERING STUDIO — TOKYO · PLUGGED INTO THE FUTURE</div>
+<h1 class="hero serif" id="heroH">新しい世界と逢いましょう！</h1>
+<div class="heroSub rv">無限の可能性をAIの力で — Global IT Solutions Creating the Future with AI</div>
+<p class="lede rv">AIを活用することで、現状の課題だけでなく、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供します。</p>
+<div class="scrollcue rv">SCROLL TO FLY ↓</div>
+</section>
+
+<div class="mq" aria-hidden="true"><span id="mqin"></span></div>
+
+<section id="services" data-ph="1">
+<div class="eyebrow rv">01 — 事業内容 / WHAT WE BUILD</div>
+<h2 class="st serif skew rv">Playful, Powerful,<br>and <span style="color:var(--acc)">Alive</span>.</h2>
+<div class="rows rv">
+<a class="row" href="#cases"><span class="rno">/ 01</span><span class="rti serif">自社開発</span><span class="ren">Proprietary AI R&amp;D</span><span class="rde">独自の技術力を基盤に、産業と社会に新たな価値を創出する革新的なAI Agent・システムの研究開発を推進します。</span></a>
+<a class="row" href="#cases"><span class="rno">/ 02</span><span class="rti serif">コンサルティング</span><span class="ren">Consulting &amp; Engineering</span><span class="rde">コンピュータソフトウェア及びハードウェアの企画、研究、開発、販売、保守、リリース及びコンサルティングを行います。</span></a>
+<a class="row" href="#cases"><span class="rno">/ 03</span><span class="rti serif">ロボット事業</span><span class="ren">Robotics &amp; Automation</span><span class="rde">各種ロボットおよび関連機器の企画、開発、設計、販売、導入支援ならびに輸出入業務を通じて、お客様の業務効率化および社会課題の解決に貢献します。</span></a>
+</div>
+</section>
+
+<section id="metrics" data-ph="2">
+<div class="eyebrow rv">02 — TRACK RECORD / 数字で見るMindX</div>
+<div class="mrow">
+<div class="m rv"><div class="v serif"><span class="cu" data-n="12">0</span>件</div><div class="l">成功プロジェクト · Successful Projects</div></div>
+<div class="m rv"><div class="v serif"><span class="cu" data-n="2">0</span>回</div><div class="l">分析レポート · Analysis Reports</div></div>
+<div class="m rv"><div class="v serif"><span class="cu" data-n="5">0</span>回</div><div class="l">受賞 · Awards &amp; Recognitions</div></div>
+<div class="m rv"><div class="v serif"><span class="cu" data-n="90">0</span>%</div><div class="l">満足顧客度 · Client Satisfaction</div></div>
+</div>
+</section>
+
+<section id="cases" data-ph="3">
+<div class="eyebrow rv">03 — SELECTED WORK / 公開事例</div>
+<h2 class="st serif skew rv">Selected <span style="color:var(--acc)">Work</span>.</h2>
+<div class="stage rv">
+<div class="ghost serif" id="ghost">01</div>
+<div class="idx" id="cidx">01 / 04 — VIEW PROJECT</div>
+<h3 class="serif" id="ct">インドアゴルフシステム</h3>
+<div class="csub" id="cs">IoT &amp; AI VISION</div>
+<p class="desc" id="cd">多言語予約機能、自動解錠システム、決済機能、AIスイング改善を実装したインドアゴルフ予約システムを開発しました。</p>
+<div class="carctl">
+<button id="cprev" aria-label="previous project">← Prev</button>
+<button id="cnext" aria-label="next project">Next →</button>
+<div class="dots" id="cdots"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+</div>
+</section>
+
+<section id="about" data-ph="4">
+<div class="eyebrow rv">04 — ABOUT US / ご挨拶</div>
+<h2 class="st serif skew rv">Serious about business,<br>playful about <span style="color:var(--acc)">technology</span>.</h2>
+<div class="cols2">
+<p class="rv">MindX株式会社は、日本を拠点にグローバルな視点を持つITソリューション企業です。私たちは最先端のIT技術を駆使し、未来志向の課題解決と未来創造するグローバルITソリューションを追求しています。2025年1月には日本でMindX株式会社を設立しました。この強固なグローバルネットワークを活かし、お客様のビジネス変革を加速するAIを中核とした製品開発と情報サービスを提供しています。</p>
+<p class="rv">私たちの強みは、膨大なデータを分析し、新たな価値を創造するデータ駆動型イノベーションにあります。AIによる高度な分析能力で、現状の課題はもちろんのこと、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供。これにより、お客様の業務の最適化と効率化の極致を実現します。</p>
+</div>
+<p class="rv" style="color:#d5cfbe;line-height:2.3;font-size:15px;text-shadow:0 2px 12px #000">MindXは、AIが人間の仕事を奪うのではなく、人間がより創造的で戦略的な業務に集中できるようサポートする人間とAIの協調を重視しています。私たちは、AIと人間が共に働くことで、ビジネスの可能性を最大限に引き出し、お客様の持続的な成長に貢献してまいります。</p>
+<div class="philo rv">
+<div class="eyebrow" style="margin-bottom:12px">経営理念 / PHILOSOPHY</div>
+<p>MindX株式会社は、最先端のAI技術を駆使し、単なるビジネス効率化を超えて、社会とビジネスの課題解決に貢献します。私たちは、お客様と共に成長するパートナーとして、AI技術の力を通じて新たな価値を創造し、より良い未来を築くことを目指します。AIの根幹であるデータ分析能力とそこから生まれる「知恵」を最大限に活用する「データ駆動型イノベーション」により、人々の可能性を引き出し、より豊かな社会を実現します。私たちはデータと知恵の力で世界を変革し、人間とAIの協調により、社会とビジネスの可能性を最大化してまいります。</p>
+</div>
+</section>
+
+<section id="domains" data-ph="5">
+<div class="eyebrow rv">05 — FIELDS / 業務領域</div>
+<h2 class="st serif skew rv">Every screen,<br>every <span style="color:var(--acc)">industry</span>.</h2>
+<div class="dom4 rv">
+<div class="dom"><div class="en">HEALTHCARE</div><h4 class="serif">医療</h4><p>患者ポータル、予約スケジュール、電子医療記録 (EMR) 用のアプリケーションを使用して医療プロセスを合理化します。</p></div>
+<div class="dom"><div class="en">EDUCATION</div><h4 class="serif">教育</h4><p>教育テクノロジーのアプリケーションを通じて魅力的でインタラクティブな学習体験を生み出すことに情熱を持っています。</p></div>
+<div class="dom"><div class="en">RETAIL</div><h4 class="serif">小売</h4><p>専門知識を活用して、支払ゲートウェイ、製品管理システム、ショッピング機能などの機能を備えたシームレスなオンラインストアを構築します。</p></div>
+<div class="dom"><div class="en">FINTECH</div><h4 class="serif">金融</h4><p>AI技術を駆使してクオンツ投資リサーチを支援するアプリを開発し、データ処理から始まり、投資アイデアを探求し、利用可能な戦略に転換するのをサポートします。</p></div>
+</div>
+</section>
+
+<section id="contact" data-ph="6">
+<div class="eyebrow rv">06 — CONTACT / お問い合わせ</div>
+<h2 class="big serif skew rv">Let's interface.<br>Call us <span style="color:var(--acc)">today</span>.</h2>
+<div class="cgrid rv">
+<div><div class="tag">所在地 / VISIT</div><p>〒103-0014<br>東京都中央区日本橋蛎殻町１丁目３６−3 東洋ビル６Ｆ</p></div>
+<div><div class="tag">連絡先 / REACH OUT</div><p>Email · <a href="mailto:info@mindx.co.jp">info@mindx.co.jp</a><br>Phone · <a href="tel:+81368216158">+81-3-6821-6158</a></p></div>
+</div>
+<div class="facts rv">MindX株式会社（MindX Inc.） · 設立: 2025年1月（2025.01 MindX株式会社を設立） · 資本金: 2,000万円 · 代表取締役: 越智 伸司 · 取引銀行: 三井住友銀行</div>
+</section>
+
+<footer><span>© 2025 MindX, All Rights Reserved</span><span>ROUTE 11 · after shader.se · 非生产视觉实验</span></footer>
+
+<script>
+(function(){
+"use strict";
+var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- loader ---------- */
+var lpct=document.getElementById('lpct'),lbar=document.getElementById('lbar'),lp=0;
+var ltick=setInterval(function(){lp=Math.min(lp+Math.random()*22,100);
+lpct.textContent=('00'+Math.floor(lp)).slice(-3);lbar.style.width=lp+'%';
+if(lp>=100){clearInterval(ltick);document.getElementById('loader').classList.add('done');document.body.classList.add('ready');}},120);
+/* ---------- marquee ---------- */
+var mqt='AI AGENT <b>—</b> 自社開発 <b>—</b> ROBOTICS <b>—</b> コンサルティング <b>—</b> 医療 <b>—</b> 教育 <b>—</b> 小売 <b>—</b> 金融 <b>—</b> ';
+document.getElementById('mqin').innerHTML=(mqt+mqt+mqt+mqt);
+/* ---------- hero char split ---------- */
+var hh=document.getElementById('heroH'),txt=hh.textContent;hh.textContent='';
+Array.prototype.forEach.call(txt,function(c,i){var s=document.createElement('span');s.className='ch';s.innerHTML=c===' '?'&nbsp;':c;s.style.transitionDelay=(i*28)+'ms';hh.appendChild(s);});
+/* ---------- WebGL shader ---------- */
+var cv=document.getElementById('gl'),gl=null;
+try{gl=cv.getContext('webgl',{antialias:false,alpha:false})||cv.getContext('experimental-webgl');}catch(e){gl=null;}
+var PAL=[[.78,1,.24,.93,.87,.70],[.35,.95,.78,.78,1,.24],[.78,1,.24,1,.48,.10],[.78,1,.24,.27,.85,1],[.27,.85,1,1,.30,.82],[1,.30,.82,1,.69,.13],[.91,.89,.82,.78,1,.24],[.48,.63,1,.78,1,.24],[.78,1,.24,.93,.87,.70]];
+var curA=[PAL[0][0],PAL[0][1],PAL[0][2]],curB=[PAL[0][3],PAL[0][4],PAL[0][5]];
+var tgtA=curA.slice(),tgtB=curB.slice(),flight=0,tFlight=0,energy=0,lastY=scrollY;
+var uT,uR,uM,uF,uCA,uCB,uE;
+function setPal(i){tgtA=[PAL[i][0],PAL[i][1],PAL[i][2]];tgtB=[PAL[i][3],PAL[i][4],PAL[i][5]];}
+if(gl){
+var VS='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+var FS='precision highp float;\nuniform vec2 uRes;uniform float uTime;uniform vec2 uMouse;\nuniform float uFlight;uniform vec3 uColA;uniform vec3 uColB;uniform float uEnergy;\nfloat hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\nfloat noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);\nreturn mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}\nfloat fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}\nvoid main(){\nvec2 uv=(gl_FragCoord.xy-.5*uRes)/uRes.y;\nuv+=(uMouse-.5)*.18;\nfloat zoom=1.+uFlight*1.7;\nvec2 p=uv*zoom+vec2(uFlight*2.2,uTime*.02);\nfloat w1=fbm(p*1.4+uTime*.06);\nfloat w2=fbm(p*1.4+vec2(w1*2.2,-uTime*.04)+5.2);\nfloat vein=smoothstep(.34,.78,fbm(p*2.+vec2(w2*2.7,w1*2.2)-uTime*.03));\nfloat glow=pow(max(0.,1.-length(uv*.85)),2.4);\nvec3 col=vec3(.008,.008,.013);\ncol+=uColA*vein*(.5+.85*glow)+uColB*w2*.17+uColA*uEnergy*.4*vein;\ncol+=vec3(1.)*pow(glow,3.)*.07;\nfloat g=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453);\ncol+=(g-.5)*.055;\ncol*=1.-dot(uv,uv)*.95;\ngl_FragColor=vec4(col,1.);}';
+function sh(t,s){var h=gl.createShader(t);gl.shaderSource(h,s);gl.compileShader(h);
+if(!gl.getShaderParameter(h,gl.COMPILE_STATUS)){gl=null;return null;}return h;}
+var vh=sh(gl.VERTEX_SHADER,VS);
+if(vh){var fh=sh(gl.FRAGMENT_SHADER,FS);
+if(fh){var pr=gl.createProgram();gl.attachShader(pr,vh);gl.attachShader(pr,fh);gl.linkProgram(pr);
+if(gl.getProgramParameter(pr,gl.LINK_STATUS)){gl.useProgram(pr);
+var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+var loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+uT=gl.getUniformLocation(pr,'uTime');uR=gl.getUniformLocation(pr,'uRes');uM=gl.getUniformLocation(pr,'uMouse');
+uF=gl.getUniformLocation(pr,'uFlight');uCA=gl.getUniformLocation(pr,'uColA');uCB=gl.getUniformLocation(pr,'uColB');uE=gl.getUniformLocation(pr,'uEnergy');
+}else gl=null;}else gl=null;}
+if(!gl){document.body.classList.add('nogl');cv.style.display='none';}
+}
+var mx=.5,my=.5,smx=.5,smy=.5,t0=performance.now();
+addEventListener('pointermove',function(e){mx=e.clientX/innerWidth;my=1-e.clientY/innerHeight;},{passive:true});
+function size(){if(!gl)return;var d=Math.min(devicePixelRatio||1,1.5);cv.width=innerWidth*d;cv.height=innerHeight*d;gl.viewport(0,0,cv.width,cv.height);}
+size();addEventListener('resize',size);
+function draw(){
+var now=(performance.now()-t0)/1000;
+smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
+for(var i=0;i<3;i++){curA[i]+=(tgtA[i]-curA[i])*.04;curB[i]+=(tgtB[i]-curB[i])*.04;}
+flight+=(tFlight-flight)*.06;energy*=.93;
+if(gl){gl.uniform2f(uR,cv.width,cv.height);gl.uniform1f(uT,now);gl.uniform2f(uM,smx,smy);
+gl.uniform1f(uF,reduced?0:flight);gl.uniform3f(uCA,curA[0],curA[1],curA[2]);gl.uniform3f(uCB,curB[0],curB[1],curB[2]);
+gl.uniform1f(uE,reduced?0:energy);gl.drawArrays(gl.TRIANGLES,0,3);}
+if(!reduced)requestAnimationFrame(draw);
+}
+draw();
+/* ---------- scroll: flight + phase + skew ---------- */
+var secs=Array.prototype.slice.call(document.querySelectorAll('section[data-ph]'));
+var links=Array.prototype.slice.call(document.querySelectorAll('nav a.nl'));
+var order=['home','services','services','cases','about','about','contact'];
+var CASEPAL=[3,4,5,6];
+var cur=-1,ci=0,caseMode=false;
+var skewEls=Array.prototype.slice.call(document.querySelectorAll('.skew'));
+var echo=document.getElementById('echo');
+function onScroll(){
+var y=scrollY,H=innerHeight,max=document.body.scrollHeight-H;
+tFlight=max>0?y/max:0;
+var v=y-lastY;lastY=y;energy=Math.min(Math.abs(v)/60,1);
+document.getElementById('rfill').style.height=(tFlight*100)+'%';
+var mid=y+H*.45,ph=0;
+for(var i=0;i<secs.length;i++){if(secs[i].offsetTop<=mid)ph=+secs[i].dataset.ph;}
+caseMode=(ph===3);
+if(ph!==cur){cur=ph;setPal(ph===3?CASEPAL[ci]:ph);
+document.getElementById('rsec').textContent=('0'+(ph+1));
+var id=order[ph];links.forEach(function(a){a.classList.toggle('on',a.dataset.s===id);});}
+var sk=Math.max(-6,Math.min(6,-v*.03));
+skewEls.forEach(function(el){el.style.transform='skewY('+sk+'deg)';});
+if(echo)echo.style.transform='translateY(-52%) translateX('+(smx-.5)*-40+'px)';
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+/* ---------- cursor + magnetic ---------- */
+var dot=document.getElementById('cdot'),ring=document.getElementById('cring'),rx=0,ry=0,tx=0,ty=0;
+addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;
+dot.style.left=tx+'px';dot.style.top=ty+'px';},{passive:true});
+(function cl(){rx+=(tx-rx)*.16;ry+=(ty-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(cl);})();
+document.querySelectorAll('a,button,.dots i').forEach(function(el){
+el.addEventListener('pointerenter',function(){ring.classList.add('big');});
+el.addEventListener('pointerleave',function(){ring.classList.remove('big');});});
+document.querySelectorAll('.mag').forEach(function(el){
+el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();
+el.style.transform='translate('+((e.clientX-r.left-r.width/2)*.25)+'px,'+((e.clientY-r.top-r.height/2)*.35)+'px)';});
+el.addEventListener('pointerleave',function(){el.style.transform='';});});
+/* ---------- reveal ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+/* ---------- count up ---------- */
+var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;cio.unobserve(e.target);
+var el=e.target,end=+el.dataset.n,t1=null;function step(ts){if(!t1)t1=ts;var p=Math.min((ts-t1)/1300,1);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);});},{threshold:.5});
+document.querySelectorAll('.cu').forEach(function(el){cio.observe(el);});
+/* ---------- carousel ---------- */
+var cases=[
+['インドアゴルフシステム','IoT & AI VISION','多言語予約機能、自動解錠システム、決済機能、AIスイング改善を実装したインドアゴルフ予約システムを開発しました。'],
+['240種類の過去問題練習サイト','EdTech & Adaptive Learning','AI学習支援機能を備えた、240種類の資格試験の過去問題集サイトを開発しました。学習状況をAIが分析し、最適な学習計画を提案します。'],
+['中学受験AIコンシェルジュ','GeoAI & Matching','家を中心にある学校を地図で可視化し、AIが学校の偏差値・特徴、試験傾向、お子様との相性診断、学校イベントの情報を提供することで、最適な学校選びをサポートするツールです。'],
+['AIコンシェルジュサービス','24/7 Hospitality Agent','ゲストにより快適で安心な滞在を提供するための 24時間AIサポート製品を開発しました。滞在中のゲストのあらゆる疑問や困りごとにリアルタイムで対応します。']];
+var ct=document.getElementById('ct'),cs=document.getElementById('cs'),cd=document.getElementById('cd'),
+cidx=document.getElementById('cidx'),ghost=document.getElementById('ghost'),dots=document.getElementById('cdots').children;
+function show(n){ci=(n+cases.length)%cases.length;ct.textContent=cases[ci][0];cs.textContent=cases[ci][1];cd.textContent=cases[ci][2];
+cidx.textContent=('0'+(ci+1))+' / 04 — VIEW PROJECT';ghost.textContent=('0'+(ci+1));
+for(var i=0;i<dots.length;i++)dots[i].classList.toggle('on',i===ci);
+setPal(CASEPAL[ci]);}
+document.getElementById('cprev').onclick=function(){show(ci-1);};
+document.getElementById('cnext').onclick=function(){show(ci+1);};
+for(var d=0;d<dots.length;d++)(function(k){dots[k].onclick=function(){show(k);};})(d);
+addEventListener('keydown',function(e){var r=document.getElementById('cases').getBoundingClientRect();
+if(r.top<innerHeight*.6&&r.bottom>0){if(e.key==='ArrowRight')show(ci+1);if(e.key==='ArrowLeft')show(ci-1);}});
+})();
+</script>
+</body>
+</html>
