@@ -3,535 +3,879 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MindX — Global IT Solutions &amp; AI Innovation</title>
-  <meta name="description" content="MindX株式会社はAI技術を駆使し、ビジネスと教育の未来を創造する東京・日本橋のITソリューションカンパニーです。4大公開事例の実機アルゴリズムをブラウザ上で直接検証いただけます。">
+  <title>MindX株式会社 — 次世代プロダクト対話型コーポレートサイト</title>
+  <meta name="description" content="MindX株式会社はAI技術を駆使し、ビジネスと教育の課題を解決するITソリューションカンパニーです。4大公開事例（ゴルフ無人化・中学受験・240万問問題バンク・宿泊マルチモーダルAI）の実機対話デモを公開中。">
   <link rel="icon" href="./logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
-  <!-- Global Navigation -->
-  <nav class="site-nav">
-    <div class="nav-inner">
-      <a href="./" class="nav-brand" aria-label="MindX トップ">
-        <div class="brand-chip">
-          <img src="./logo.svg" alt="MindX" class="brand-logo-img">
+  <!-- Global App Header -->
+  <header class="site-header" id="top">
+    <div class="header-container">
+      <a href="./" class="brand-link" aria-label="MindX トップページ">
+        <div class="logo-chip">
+          <img src="./logo.svg" alt="MindX" class="brand-logo">
         </div>
-        <span class="brand-title mono">MindX Inc.</span>
+        <div class="brand-meta">
+          <span class="brand-name">MindX</span>
+          <span class="brand-sub">株式会社</span>
+        </div>
       </a>
 
-      <div class="nav-links">
-        <a href="#specimens" class="nav-link specimen-link">対話型実機事例</a>
-        <a href="#services" class="nav-link">事業内容</a>
-        <a href="#philosophy" class="nav-link">経営理念・ご挨拶</a>
-        <a href="#domains" class="nav-link">業務領域</a>
-        <a href="#corporate" class="nav-link">会社概要</a>
+      <nav class="main-nav" aria-label="主要ナビゲーション">
+        <a href="#services" class="nav-item">事業内容</a>
+        <a href="#interactive-cases" class="nav-item nav-highlight">
+          <span class="pulse-dot"></span>対話型プロダクト
+        </a>
+        <a href="#philosophy" class="nav-item">経営理念・ご挨拶</a>
+        <a href="#fields" class="nav-item">業務領域</a>
+        <a href="#company" class="nav-item">会社概要</a>
+        <a href="#contact" class="nav-item">お問い合わせ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="../../" class="btn-arena" title="MindX Arena 路線一覧に戻る">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Arena 路線一覧
+        </a>
+        <a href="#interactive-cases" class="btn-primary">
+          <span>デモを操作する</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
 
-      <div class="nav-actions">
-        <a href="../../" class="nav-btn-arena">← ARENA 路線一覧</a>
-        <a href="mailto:info@mindx.co.jp" class="nav-btn-cta">お問い合わせ</a>
-      </div>
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="メニュー開閉">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#services" class="drawer-link">事業内容</a>
+    <a href="#interactive-cases" class="drawer-link">対話型プロダクト（4大実機デモ）</a>
+    <a href="#philosophy" class="drawer-link">代表挨拶・理念</a>
+    <a href="#fields" class="drawer-link">業務領域</a>
+    <a href="#company" class="drawer-link">会社概要</a>
+    <a href="#contact" class="drawer-link">お問い合わせ</a>
+    <div class="drawer-foot">
+      <a href="../../" class="btn-arena">Arena 路線一覧へ</a>
+      <a href="#contact" class="btn-primary" style="margin-top:12px;width:100%;justify-content:center;">ご相談・お見積り</a>
+    </div>
+  </div>
 
   <main>
-    <!-- HERO STAGE -->
-    <header class="hero-stage" id="top">
-      <div class="hero-backdrop">
-        <canvas id="heroAtmosphere"></canvas>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-canvas-wrap">
+        <canvas id="heroCanvas"></canvas>
       </div>
-      <div class="hero-vignette"></div>
+      <div class="hero-glow"></div>
 
-      <div class="container hero-container">
-        <div class="hero-kicker">TOKYO · NIHOMBASHI · GLOBAL IT SOLUTIONS</div>
+      <div class="hero-content">
+        <div class="badge-tag">
+          <span class="live-beacon"></span>
+          <span class="badge-text">MINDX INTERACTIVE SUITE v2.4 · 日本橋蛎殻町発</span>
+          <span class="badge-code">ROUTE 04</span>
+        </div>
 
-        <h1 class="hero-headline">
-          <span class="block-jp">AIで、ビジネスと教育の未来を創る。</span>
-          <span class="block-en">Empowering Business &amp; Education through AI Innovation</span>
+        <h1 class="hero-title">
+          <span class="title-jp">AIで、ビジネスと教育の未来を創る</span>
+          <span class="title-en">Empowering Business &amp; Education through AI Innovation</span>
         </h1>
 
-        <div class="hero-description-row">
-          <p class="hero-lead-text">
-            AIを活用することで、現状の課題だけでなく、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供します。膨大なデータを分析し、新たな価値を創造するデータ駆動型イノベーションにより、お客様の業務最適化と持続的成長を実現します。
-          </p>
+        <p class="hero-lede">
+          AIを活用することで、現状の課題だけでなく、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供します。膨大なデータを分析し、新たな価値を創造するデータ駆動型イノベーションで、お客様の業務最適化と持続的成長を実現します。
+        </p>
 
-          <div class="hero-cta-box">
-            <a href="#specimens" class="btn-specimen-jump">
-              <span>実機アルゴリズムを操作する</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
-            </a>
-            <div class="hero-meta-strip">
-              <span>EST. 2025.01</span>
-              <span>4 INTERACTIVE ARTIFACTS</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- INTERACTIVE SPECIMEN GALLERY (4大公開事例・実機対話型プラットフォーム) -->
-    <section class="specimen-gallery-section" id="specimens">
-      <div class="container">
-        <div class="section-label-bar">
-          <div class="sec-title-major">
-            <small>Interactive Specimen Chamber</small>
-            手元で検証する、MindXの実機アーキテクチャ。
-          </div>
-          <p class="sec-lead-right">
-            静止したスライドや動画ではありません。MindXが独自開発した4つのコアシステムの中核アルゴリズムを、ブラウザ上でリアルタイムに動かして体感いただけます。
-          </p>
+        <div class="hero-cta-group">
+          <a href="#interactive-cases" class="btn-hero-primary">
+            <span class="btn-icon">⚡</span>
+            <span>4大事例の実機デモを操作する</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+          </a>
+          <a href="#services" class="btn-hero-secondary">
+            <span>3大コア事業を見る</span>
+          </a>
+          <a href="#contact" class="btn-hero-ghost">
+            <span>お問い合わせ</span>
+          </a>
         </div>
 
-        <!-- 4 Specimen Switcher Ribbon -->
-        <div class="specimen-selector-ribbon" role="tablist">
-          <button class="specimen-tab-btn active" data-specimen="golf" role="tab" aria-selected="true" id="tab-golf">
-            <span class="stb-index">01 / SPECIMEN</span>
-            <span class="stb-title">ゴルフスタジオ無人運営</span>
-            <span class="stb-subtitle">3D 運動学解析 &amp; IoT 遠隔制御</span>
-          </button>
-
-          <button class="specimen-tab-btn" data-specimen="school" role="tab" aria-selected="false" id="tab-school">
-            <span class="stb-index">02 / SPECIMEN</span>
-            <span class="stb-title">中学受験 AI コンシェルジュ</span>
-            <span class="stb-subtitle">東京等時線マップ &amp; 合格推計</span>
-          </button>
-
-          <button class="specimen-tab-btn" data-specimen="exam" role="tab" aria-selected="false" id="tab-exam">
-            <span class="stb-index">03 / SPECIMEN</span>
-            <span class="stb-title">240種 AI 問題バンク</span>
-            <span class="stb-subtitle">知識星系グラフ &amp; IRT 適応出題</span>
-          </button>
-
-          <button class="specimen-tab-btn" data-specimen="hospitality" role="tab" aria-selected="false" id="tab-hospitality">
-            <span class="stb-index">04 / SPECIMEN</span>
-            <span class="stb-title">宿泊業マルチモーダル AI</span>
-            <span class="stb-subtitle">24/7 接客 Agent &amp; PMS 中枢</span>
-          </button>
-        </div>
-
-        <!-- Master Specimen Chamber -->
-        <div class="master-stage-frame">
-          <!-- SPECIMEN 01: GOLF KINEMATICS -->
-          <div class="specimen-view active" id="view-golf">
-            <div class="specimen-header">
-              <div>
-                <div class="sh-domain">CASE 01 · IoT &amp; COMPUTER VISION</div>
-                <h3 class="sh-title">ゴルフスタジオ無人運営システム</h3>
-                <p class="sh-desc">多言語予約機能、自動解錠システム、決済機能、AIスイング改善を実装したインドアゴルフ予約システムを開発しました。</p>
-              </div>
-              <div class="sh-pills">
-                <span class="sh-pill">Kinematic 3D Wireframe</span>
-                <span class="sh-pill">IoT Remote Access</span>
-                <span class="sh-pill">Automated Billing</span>
-              </div>
-            </div>
-
-            <div class="specimen-workspace-grid">
-              <!-- Left Visual Canvas -->
-              <div class="canvas-chamber">
-                <div class="chamber-bar">
-                  <span class="chamber-status-beacon">
-                    <span class="beacon-dot"></span> 3D Kinematics Pose &amp; Motion Ribbon
-                  </span>
-                  <span>※ マウスドラッグで視点を360°回転可能</span>
-                </div>
-                <div class="canvas-viewport">
-                  <canvas id="golfCanvas"></canvas>
-                </div>
-                <div class="tactile-bar">
-                  <div class="hairline-slider-wrap">
-                    <button class="btn-tactile" id="golfPlayToggle">▶ 再生</button>
-                    <input type="range" id="golfScrubber" min="0" max="180" value="135" class="hairline-slider">
-                    <span class="hairline-readout mono" id="golfTimeReadout">1.35s / 1.80s</span>
-                  </div>
-                  <div class="tactile-row">
-                    <div class="btn-group">
-                      <button class="btn-tactile" data-snap="0">構え</button>
-                      <button class="btn-tactile" data-snap="90">トップ</button>
-                      <button class="btn-tactile active" data-snap="135">インパクト</button>
-                      <button class="btn-tactile" data-snap="180">フィニッシュ</button>
-                    </div>
-                    <button class="btn-tactile" id="golfResetView">視点リセット</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Telemetry & IoT -->
-              <div class="specimen-telemetry-col">
-                <div class="telemetry-card">
-                  <span class="tc-eyebrow">運動学リアルタイムテレメトリ</span>
-                  <div class="tc-metrics-trio">
-                    <div class="tcm-item">
-                      <span class="tcm-val" id="gHeadSpeed">48.2</span>
-                      <span class="tcm-lbl">ヘッド速度 (m/s)</span>
-                    </div>
-                    <div class="tcm-item">
-                      <span class="tcm-val" id="gBallSpeed">68.7</span>
-                      <span class="tcm-lbl">ボール初速 (m/s)</span>
-                    </div>
-                    <div class="tcm-item">
-                      <span class="tcm-val" id="gSmash">1.43</span>
-                      <span class="tcm-lbl">ミート率 (Smash)</span>
-                    </div>
-                  </div>
-                  <p class="sh-desc" style="font-size:13px;line-height:1.7;">
-                    骨盤の回旋が上半身に先行し、理想的な運動連鎖（Kinetic Chain）を形成。インパクト時のフェース角は +0.6° と高精度にスクエアを維持しています。
-                  </p>
-                </div>
-
-                <div class="telemetry-card">
-                  <span class="tc-eyebrow">IoT 施設無人化コントローラー</span>
-                  <button class="action-trigger-btn" id="btnGolfUnlock">
-                    <span>エントランス スマートロック一時解錠</span>
-                    <span class="mono" id="lockStatus">LOCKED 🔒</span>
-                  </button>
-                  <div class="tc-interactive-block">
-                    <button class="action-trigger-btn" id="btnGolfScene">
-                      <span>打席環境プリセット切替</span>
-                      <span class="mono" id="sceneStatus">競技モード (20℃)</span>
-                    </button>
-                  </div>
-                  <div class="tc-log-stream" id="golfLogStream">
-                    ▶ [ONLINE] 日本橋打席03 稼働中 · レイテンシ 88ms
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Live Telemetry Banner -->
+        <div class="telemetry-bar">
+          <div class="telemetry-item">
+            <span class="t-label">IoT GOLF LAB</span>
+            <span class="t-val" id="telemetryGolf">12打席稼働 · 解錠 118ms</span>
           </div>
-
-          <!-- SPECIMEN 02: TOKYO PRESTIGIOUS SCHOOL SIMULATOR -->
-          <div class="specimen-view" id="view-school">
-            <div class="specimen-header">
-              <div>
-                <div class="sh-domain">CASE 02 · GeoAI &amp; MATCHING ENGINE</div>
-                <h3 class="sh-title">中学受験 AI コンシェルジュ</h3>
-                <p class="sh-desc">家を中心にある学校を地図で可視化し、AIが学校の偏差値・特徴、試験傾向、お子様との相性診断、学校イベントの情報を提供することで、最適な学校選びをサポートするツールです。</p>
-              </div>
-              <div class="sh-pills">
-                <span class="sh-pill">Tokyo Isochrone Network</span>
-                <span class="sh-pill">Multi-Axis Radar Analysis</span>
-                <span class="sh-pill">Adaptive Matching</span>
-              </div>
-            </div>
-
-            <div class="specimen-workspace-grid">
-              <!-- Left Visual Canvas -->
-              <div class="canvas-chamber">
-                <div class="chamber-bar">
-                  <span class="chamber-status-beacon">
-                    <span class="beacon-dot"></span> 東京都 交通等時線（Isochrone）輻射マップ
-                  </span>
-                  <span>※ 出発駅と通学許容時間に応じて通学圏をリアルタイム演算</span>
-                </div>
-                <div class="canvas-viewport">
-                  <canvas id="schoolMapCanvas"></canvas>
-                </div>
-                <div class="tactile-bar">
-                  <div class="tactile-row">
-                    <span class="mono" style="font-size:12px;color:var(--ink-muted);">自宅最寄り駅:</span>
-                    <div class="btn-group" id="stGroup">
-                      <button class="btn-tactile active" data-st="nihombashi">日本橋</button>
-                      <button class="btn-tactile" data-st="shinjuku">新宿</button>
-                      <button class="btn-tactile" data-st="shinagawa">品川</button>
-                      <button class="btn-tactile" data-st="ikebukuro">池袋</button>
-                      <button class="btn-tactile" data-st="shibuya">渋谷</button>
-                    </div>
-                  </div>
-                  <div class="hairline-slider-wrap">
-                    <span class="mono" style="font-size:12px;color:var(--ink-muted);min-width:100px;">通学上限時間:</span>
-                    <input type="range" id="schoolCommuteSlider" min="20" max="75" value="45" step="5" class="hairline-slider">
-                    <span class="hairline-readout mono" id="schoolCommuteReadout">45分以内</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Telemetry & Schools -->
-              <div class="specimen-telemetry-col">
-                <div class="telemetry-card">
-                  <span class="tc-eyebrow">出題傾向 &amp; 4教科配点相性レーダー</span>
-                  <div style="display:flex;justify-content:center;margin:10px 0;">
-                    <canvas id="schoolRadarCanvas" width="200" height="200"></canvas>
-                  </div>
-                  <div class="hairline-slider-wrap" style="margin-top:10px;">
-                    <span class="mono" style="font-size:11px;color:var(--ink-dim);">模擬偏差値:</span>
-                    <input type="range" id="devSlider" min="52" max="74" value="65" class="hairline-slider">
-                    <span class="hairline-readout mono" id="devReadout">偏差値 65</span>
-                  </div>
-                </div>
-
-                <div class="telemetry-card">
-                  <span class="tc-eyebrow">AI 推奨・志望校ポートフォリオ</span>
-                  <div id="schoolList" style="display:flex;flex-direction:column;gap:8px;"></div>
-                  <div class="tc-log-stream" id="schoolLogStream" style="margin-top:14px;">
-                    ▶ 日本橋駅から開成中学まで18分 · 算数強化で合格率 68%
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="telemetry-item">
+            <span class="t-label">GEO EDTECH</span>
+            <span class="t-val" id="telemetryGeo">東京23区 64校等時線</span>
           </div>
-
-          <!-- SPECIMEN 03: 2.4M EXAM QUESTION BANK -->
-          <div class="specimen-view" id="view-exam">
-            <div class="specimen-header">
-              <div>
-                <div class="sh-domain">CASE 03 · EdTech &amp; ADAPTIVE LEARNING</div>
-                <h3 class="sh-title">教育機関向け 240万問 AI 問題バンク</h3>
-                <p class="sh-desc">AI学習支援機能を備えた、240種類の資格試験の過去問題集サイトを開発しました。学習状況をAIが分析し、最適な学習計画を提案します。</p>
-              </div>
-              <div class="sh-pills">
-                <span class="sh-pill">Knowledge Galaxy Topology</span>
-                <span class="sh-pill">Item Response Theory (IRT)</span>
-                <span class="sh-pill">Variant Generation</span>
-              </div>
-            </div>
-
-            <div class="specimen-workspace-grid">
-              <!-- Left Visual Canvas -->
-              <div class="canvas-chamber">
-                <div class="chamber-bar">
-                  <span class="chamber-status-beacon">
-                    <span class="beacon-dot"></span> 240科目 知識トポロジー星系 (Knowledge Galaxy)
-                  </span>
-                  <span>※ 星系をドラッグ移動・ノードを選択して出題</span>
-                </div>
-                <div class="canvas-viewport">
-                  <canvas id="examGraphCanvas"></canvas>
-                </div>
-                <div class="tactile-bar">
-                  <div class="tactile-row">
-                    <span class="mono" style="font-size:12px;color:var(--ink-muted);">探索領域:</span>
-                    <div class="btn-group" id="examSubjGroup">
-                      <button class="btn-tactile active" data-sub="cs">情報・暗号理論</button>
-                      <button class="btn-tactile" data-sub="math">解析・線形代数</button>
-                      <button class="btn-tactile" data-sub="physics">力学・波動</button>
-                      <button class="btn-tactile" data-sub="finance">ポートフォリオ理論</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Telemetry & IRT Question -->
-              <div class="specimen-telemetry-col">
-                <div class="telemetry-card">
-                  <span class="tc-eyebrow">IRT 項目応答理論パラメータ</span>
-                  <div class="tc-metrics-trio">
-                    <div class="tcm-item">
-                      <span class="tcm-val" id="irtParamA">1.62</span>
-                      <span class="tcm-lbl">識別度 (a)</span>
-                    </div>
-                    <div class="tcm-item">
-                      <span class="tcm-val" id="irtParamB">+1.38</span>
-                      <span class="tcm-lbl">困難度 (b)</span>
-                    </div>
-                    <div class="tcm-item">
-                      <span class="tcm-val">0.05</span>
-                      <span class="tcm-lbl">当て推量 (c)</span>
-                    </div>
-                  </div>
-                  <button class="action-trigger-btn" id="btnGenVariant">
-                    <span>新規類題をAI自動生成</span>
-                    <span class="mono">GENERATE ✦</span>
-                  </button>
-                </div>
-
-                <div class="exam-item-card" id="examQuestionBox">
-                  <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);">
-                    <span id="eqCode">CODE: MX-CS-9942</span>
-                    <span id="eqPassRate">正答率予測: 42.1%</span>
-                  </div>
-                  <div class="eic-body" id="eqBody">
-                    RSA公開鍵暗号系において、素数 $p=11$, $q=13$, 公開指数 $e=7$ のとき、秘密鍵 $d$ の値として適切なものを選択せよ。
-                  </div>
-                  <div class="eic-options-grid" id="eqOptions">
-                    <button class="eic-opt-btn" data-c="0"><span class="mono">A.</span> 19</button>
-                    <button class="eic-opt-btn" data-c="1"><span class="mono">B.</span> 43 (正解)</button>
-                    <button class="eic-opt-btn" data-c="0"><span class="mono">C.</span> 23</button>
-                    <button class="eic-opt-btn" data-c="0"><span class="mono">D.</span> 51</button>
-                  </div>
-                  <div id="eqFeedback" class="tc-log-stream" style="display:none;"></div>
-                </div>
-              </div>
-            </div>
+          <div class="telemetry-item">
+            <span class="t-label">2.4M BANK</span>
+            <span class="t-val" id="telemetryBank">IRT適応出題 QPS 1,840</span>
           </div>
-
-          <!-- SPECIMEN 04: HOSPITALITY MULTIMODAL AGENT -->
-          <div class="specimen-view" id="view-hospitality">
-            <div class="specimen-header">
-              <div>
-                <div class="sh-domain">CASE 04 · 24/7 HOSPITALITY AGENT</div>
-                <h3 class="sh-title">宿泊業向けマルチモーダルAI接客システム</h3>
-                <p class="sh-desc">ゲストにより快適で安心な滞在を提供するための 24時間AIサポート製品を開発しました。滞在中のゲストのあらゆる疑問や困りごとにリアルタイムで対応します。</p>
-              </div>
-              <div class="sh-pills">
-                <span class="sh-pill">Multilingual NLU</span>
-                <span class="sh-pill">PMS Core Integration</span>
-                <span class="sh-pill">Realtime Voice Synthesis</span>
-              </div>
-            </div>
-
-            <div class="specimen-workspace-grid">
-              <!-- Left Visual Canvas -->
-              <div class="canvas-chamber">
-                <div class="chamber-bar">
-                  <span class="chamber-status-beacon">
-                    <span class="beacon-dot"></span> リアルタイム多言語音声合成ストリーム
-                  </span>
-                  <span class="mono">LATENCY: 112ms</span>
-                </div>
-                <div class="canvas-viewport" style="height:260px;">
-                  <canvas id="audioWaveCanvas"></canvas>
-                </div>
-                <div style="padding:20px;background:rgba(8,11,16,0.8);border-top:1px solid var(--line);">
-                  <div class="hospitality-dialog-box" id="hospChatStream">
-                    <div class="dialog-bubble bot">
-                      いらっしゃいませ。MindX Luxury Hotel 日本橋のデジタルコンシェルジュでございます。客室のスマートキー発行、手荷物預かり、周辺の江戸前割烹のご案内など、何でもお手伝いいたします。
-                    </div>
-                  </div>
-                  <div class="tactile-row" style="margin-top:16px;">
-                    <button class="btn-tactile" data-prompt="0">深夜チェックイン・解錠PIN</button>
-                    <button class="btn-tactile" data-prompt="1">日本橋の精進懐石ディナー</button>
-                    <button class="btn-tactile" data-prompt="2">早朝羽田空港アクセス</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Telemetry & Agent Pipeline -->
-              <div class="specimen-telemetry-col">
-                <div class="telemetry-card">
-                  <span class="tc-eyebrow">Agent 推論チェーン &amp; PMS 実行パイプライン</span>
-                  <div class="pipeline-step-item">
-                    <div class="psi-head"><span>STAGE 01 / NLU</span><span>200 OK · 28ms</span></div>
-                    <div class="psi-body" id="pipeNLU">{ "intent": "CHECKIN_KEYLESS", "sentiment": 0.96 }</div>
-                  </div>
-                  <div class="pipeline-step-item">
-                    <div class="psi-head"><span>STAGE 02 / PMS API</span><span>200 OK · 45ms</span></div>
-                    <div class="psi-body" id="pipePMS">pms.query_reservation("BK-904") -> Room 602 Confirmed</div>
-                  </div>
-                  <div class="pipeline-step-item">
-                    <div class="psi-head"><span>STAGE 03 / ACTION</span><span>DISPATCHED</span></div>
-                    <div class="psi-body" id="pipeAction">[ACTION] PIN #9482 発行完了 ＆ 空調プレ稼働</div>
-                  </div>
-                  <div class="tc-log-stream" style="margin-top:12px;">
-                    ▶ 全プロセス所要時間: 135ms · 顧客満足度スコア 99.4%
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="telemetry-item">
+            <span class="t-label">AGENT PMS</span>
+            <span class="t-val" id="telemetryAgent">感情認識 99.4% · 24/7</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 01 CORE SERVICES (事業内容 - 官方原文全量) -->
-    <section class="editorial-section" id="services">
+    <!-- CORE SERVICES (3大コア事業 - 官方原文全量) -->
+    <section class="section services-section" id="services">
       <div class="container">
-        <div class="section-label-bar">
-          <div class="sec-title-major">
-            <small>01 — Core Services</small>
-            事業内容
-          </div>
-          <p class="sec-lead-right">
-            独自の技術力を基盤に、産業と社会に新たな価値を創出する革新的なAI Agent・システムの研究開発を推進します。
-          </p>
+        <div class="section-header">
+          <div class="sec-eyebrow">01 — CORE SERVICES / 事業内容</div>
+          <h2 class="sec-title">産業と社会を変革する、<br>MindXの3大事業基盤</h2>
+          <p class="sec-desc">独自の技術力を基盤に、単なる受託開発を超えて、クライアントのビジネスモデルそのものをAIネイティブへ進化させます。</p>
         </div>
 
-        <div class="editorial-rows">
+        <div class="services-grid">
           <!-- 01 自社開発 -->
-          <div class="editorial-row">
-            <span class="er-num">/ 01</span>
-            <h3 class="er-main-title">自社開発<small>Proprietary AI R&amp;D</small></h3>
-            <p class="er-body">
+          <div class="service-card">
+            <div class="card-num">01</div>
+            <div class="card-tag">PROPRIETARY R&amp;D</div>
+            <h3 class="service-title">自社開発</h3>
+            <p class="service-body">
               独自の技術力を基盤に、産業と社会に新たな価値を創出する革新的なAI Agent・システムの研究開発を推進します。
             </p>
+            <ul class="service-features">
+              <li>自律型 AI Agent アーキテクチャ設計・実装</li>
+              <li>マルチモーダル基盤モデルの産業特化ファインチューニング</li>
+              <li>エッジデバイス・IoT連動型推論パイプライン構築</li>
+            </ul>
+            <div class="card-footer-metric">
+              <span class="cm-label">研究開発投資比率</span>
+              <span class="cm-value">35%+</span>
+            </div>
           </div>
 
           <!-- 02 コンサルティング -->
-          <div class="editorial-row">
-            <span class="er-num">/ 02</span>
-            <h3 class="er-main-title">コンサルティング<small>Consulting &amp; Engineering</small></h3>
-            <p class="er-body">
+          <div class="service-card">
+            <div class="card-num">02</div>
+            <div class="card-tag">CONSULTING &amp; ENGINEERING</div>
+            <h3 class="service-title">コンサルティング</h3>
+            <p class="service-body">
               コンピュータソフトウェア及びハードウェアの企画、研究、開発、販売、保守、リリース及びコンサルティングを行います。
             </p>
+            <ul class="service-features">
+              <li>全社 AI 導入・DX ロードマップ策定コンサルティング</li>
+              <li>エンタープライズ Web / モバイルフルスタック受託開発</li>
+              <li>データ分析基盤・セキュリティガバナンス設計</li>
+            </ul>
+            <div class="card-footer-metric">
+              <span class="cm-label">プロジェクト完遂率</span>
+              <span class="cm-value">100%</span>
+            </div>
           </div>
 
           <!-- 03 ロボット事業 -->
-          <div class="editorial-row">
-            <span class="er-num">/ 03</span>
-            <h3 class="er-main-title">ロボット事業<small>Robotics &amp; Automation</small></h3>
-            <p class="er-body">
+          <div class="service-card">
+            <div class="card-num">03</div>
+            <div class="card-tag">ROBOTICS &amp; AUTOMATION</div>
+            <h3 class="service-title">ロボット事業</h3>
+            <p class="service-body">
               各種ロボットおよび関連機器の企画、開発、設計、販売、導入支援ならびに輸出入業務を通じて、お客様の業務効率化および社会課題の解決に貢献します。
             </p>
+            <ul class="service-features">
+              <li>モビリティロボット・階段搬送自律走行ソリューション</li>
+              <li>ハードウェア制御・ファームウェアとクラウド連携</li>
+              <li>海外先端ロボティクス製品の国内正規導入・認証支援</li>
+            </ul>
+            <div class="card-footer-metric">
+              <span class="cm-label">提携ハードウェア</span>
+              <span class="cm-value">Global Standards</span>
+            </div>
           </div>
         </div>
 
-        <!-- Track Numbers -->
-        <div class="track-numbers-row">
-          <div class="tn-item">
-            <div class="tn-val">12<span>件</span></div>
-            <div class="tn-lbl">成功プロジェクト</div>
-            <div class="tn-sub">Successful Projects</div>
+        <!-- Metric Counter Grid -->
+        <div class="metrics-row">
+          <div class="metric-block">
+            <div class="mb-val"><span class="counter" data-target="12">0</span><span class="mb-unit">件</span></div>
+            <div class="mb-label">成功プロジェクト</div>
+            <div class="mb-sub">Successful Projects</div>
           </div>
-          <div class="tn-item">
-            <div class="tn-val">2<span>回</span></div>
-            <div class="tn-lbl">分析レポート策定</div>
-            <div class="tn-sub">In-depth AI Reports</div>
+          <div class="metric-block">
+            <div class="mb-val"><span class="counter" data-target="2">0</span><span class="mb-unit">回</span></div>
+            <div class="mb-label">分析レポート策定</div>
+            <div class="mb-sub">In-depth AI Reports</div>
           </div>
-          <div class="tn-item">
-            <div class="tn-val">5<span>回</span></div>
-            <div class="tn-lbl">受賞・選出実績</div>
-            <div class="tn-sub">Awards &amp; Recognitions</div>
+          <div class="metric-block">
+            <div class="mb-val"><span class="counter" data-target="5">0</span><span class="mb-unit">回</span></div>
+            <div class="mb-label">受賞・選出実績</div>
+            <div class="mb-sub">Awards &amp; Recognitions</div>
           </div>
-          <div class="tn-item">
-            <div class="tn-val">90<span>%</span></div>
-            <div class="tn-lbl">顧客満足度</div>
-            <div class="tn-sub">Client Satisfaction Rate</div>
+          <div class="metric-block">
+            <div class="mb-val"><span class="counter" data-target="90">0</span><span class="mb-unit">%</span></div>
+            <div class="mb-label">顧客満足度</div>
+            <div class="mb-sub">Client Satisfaction Rate</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 02 PHILOSOPHY & CEO MESSAGE (理念・代表ご挨拶 - 官方原文全量) -->
-    <section class="philosophy-editorial" id="philosophy">
-      <div class="container">
-        <div class="section-label-bar">
-          <div class="sec-title-major">
-            <small>02 — Philosophy &amp; Leadership</small>
-            人間とAIの協調により、<br>社会とビジネスの可能性を最大化する。
+    <!-- INTERACTIVE SHOWCASE CONSOLE (4大公開事例・実機対話型プラットフォーム) -->
+    <section class="section showcase-section" id="interactive-cases">
+      <div class="container-wide">
+        <div class="section-header center">
+          <div class="sec-eyebrow">02 — INTERACTIVE WORKBENCH / 4大公開事例</div>
+          <h2 class="sec-title">机上の説明ではなく、<br>手元で動かすMindXの実機アーキテクチャ</h2>
+          <p class="sec-desc">
+            動画やスライドの切り替えではありません。MindXが開発した4つの実案件システムの中核アルゴリズムを、ブラウザ上でリアルタイムに操作・検証いただけます。
+          </p>
+        </div>
+
+        <!-- Case Switcher Tabs -->
+        <div class="case-tabs-container">
+          <div class="case-tabs" role="tablist" aria-label="公開事例シミュレータ選択">
+            <button class="case-tab active" data-case="golf" role="tab" aria-selected="true" id="tab-golf">
+              <span class="tab-index">01</span>
+              <div class="tab-text">
+                <span class="tab-title">ゴルフスタジオ無人運営</span>
+                <span class="tab-sub">IoT遠隔解錠 &amp; 3D運動学AI</span>
+              </div>
+              <span class="tab-badge live">INTERACTIVE</span>
+            </button>
+
+            <button class="case-tab" data-case="school" role="tab" aria-selected="false" id="tab-school">
+              <span class="tab-index">02</span>
+              <div class="tab-text">
+                <span class="tab-title">中学受験 AI コンシェルジュ</span>
+                <span class="tab-sub">東京等時線マップ &amp; 合格推計</span>
+              </div>
+              <span class="tab-badge">SIMULATOR</span>
+            </button>
+
+            <button class="case-tab" data-case="exam" role="tab" aria-selected="false" id="tab-exam">
+              <span class="tab-index">03</span>
+              <div class="tab-text">
+                <span class="tab-title">240種 AI 過去問バンク</span>
+                <span class="tab-sub">知識星系グラフ &amp; IRT適応出題</span>
+              </div>
+              <span class="tab-badge">KNOWLEDGE</span>
+            </button>
+
+            <button class="case-tab" data-case="hospitality" role="tab" aria-selected="false" id="tab-hospitality">
+              <span class="tab-index">04</span>
+              <div class="tab-text">
+                <span class="tab-title">宿泊業マルチモーダル AI</span>
+                <span class="tab-sub">24/7 接客Agent &amp; PMS中枢</span>
+              </div>
+              <span class="tab-badge">AGENT OS</span>
+            </button>
           </div>
         </div>
 
-        <div class="philo-grid-layout">
-          <div class="philo-author-col">
-            <div class="author-monogram">MX</div>
-            <span class="author-title">代表取締役</span>
-            <div class="author-name serif">越智 伸司</div>
-            <div class="author-meta">
-              MindX株式会社 代表取締役<br>
-              2025年1月設立 · 東京都中央区日本橋蛎殻町
+        <!-- Interactive Workbench Main Cockpit -->
+        <div class="cockpit-panel" id="cockpitPanel">
+          <!-- CASE 01: GOLF STUDIO UNMANNED -->
+          <div class="case-view active" id="view-golf">
+            <div class="view-header">
+              <div class="vh-left">
+                <span class="vh-cat">CASE 01 · IoT &amp; AI COMPUTER VISION</span>
+                <h3 class="vh-title">ゴルフスタジオ無人運営システム</h3>
+                <p class="vh-desc">多言語予約機能、自動解錠システム、決済機能、AIスイング改善を実装したインドアゴルフ予約システムを開発しました。</p>
+              </div>
+              <div class="vh-tags">
+                <span class="vtag">IoT Remote Access</span>
+                <span class="vtag">Kinematic 3D Pose</span>
+                <span class="vtag">Stripe Auto-Billing</span>
+                <span class="vtag">Edge Inference</span>
+              </div>
+            </div>
+
+            <div class="view-grid">
+              <!-- Left: 3D Kinematics Canvas -->
+              <div class="console-box canvas-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp"></span>
+                    <span>3D 骨格運動学ベクトル解析仪 (Kinematics Motion Vector Lab)</span>
+                  </div>
+                  <div class="box-actions">
+                    <span class="hint-text">※ 画面をドラッグして3D視点を自由に回転可能</span>
+                    <button class="tool-btn" id="golfResetCam" title="カメラ視点を正面にリセット">視点リセット</button>
+                  </div>
+                </div>
+
+                <div class="canvas-container">
+                  <canvas id="golfCanvas"></canvas>
+                  <!-- 3D Overlay Telemetry -->
+                  <div class="golf-overlay-hud">
+                    <div class="hud-item"><span class="hud-lbl">PHASE:</span> <span id="golfPhaseName" class="hud-val highlight">IMPACT (1.35s)</span></div>
+                    <div class="hud-item"><span class="hud-lbl">BALL SPEED:</span> <span id="hudBallSpeed" class="hud-val">68.7 m/s</span></div>
+                    <div class="hud-item"><span class="hud-lbl">SMASH FACTOR:</span> <span id="hudSmash" class="hud-val">1.43</span></div>
+                  </div>
+                </div>
+
+                <!-- Timeline Scrubber Controls -->
+                <div class="timeline-controls">
+                  <div class="tl-row-buttons">
+                    <button class="btn-ctrl" id="golfPlayBtn">
+                      <span id="golfPlayIcon">▶ 連続再生</span>
+                    </button>
+                    <div class="speed-selector">
+                      <span class="sl-label">再生速度:</span>
+                      <button class="speed-btn active" data-speed="1.0">1.0x</button>
+                      <button class="speed-btn" data-speed="0.5">0.5x</button>
+                      <button class="speed-btn" data-speed="0.25">0.25x 慢放</button>
+                    </div>
+                    <div class="phase-markers">
+                      <button class="phase-btn" data-time="0.0">構え</button>
+                      <button class="phase-btn" data-time="0.45">始動</button>
+                      <button class="phase-btn" data-time="0.9">トップ</button>
+                      <button class="phase-btn" data-time="1.2">タメ</button>
+                      <button class="phase-btn highlight" data-time="1.35">インパクト</button>
+                      <button class="phase-btn" data-time="1.8">完成</button>
+                    </div>
+                  </div>
+
+                  <div class="tl-scrubber-wrap">
+                    <input type="range" id="golfTimeSlider" min="0" max="180" value="135" class="range-slider">
+                    <div class="tl-time-readout">タイムコード: <span id="golfTimeVal">1.35s</span> / 1.80s</div>
+                  </div>
+
+                  <div class="tl-layer-toggles">
+                    <label class="toggle-chip"><input type="checkbox" id="chkSkeleton" checked> <span>関節骨格ワイヤー</span></label>
+                    <label class="toggle-chip"><input type="checkbox" id="chkKinetic" checked> <span>運動連鎖ベクトル</span></label>
+                    <label class="toggle-chip"><input type="checkbox" id="chkTrail" checked> <span>ヘッド軌道残影</span></label>
+                    <label class="toggle-chip"><input type="checkbox" id="chkPressure" checked> <span>足圧重心分布 (COP)</span></label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: IoT Remote Twin & AI Coaching -->
+              <div class="console-box right-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp green"></span>
+                    <span>店舗無人化 IoT 制御 &amp; AIコーチング中枢</span>
+                  </div>
+                  <span class="box-badge">NODE: NIHOMBASHI-BAY-03</span>
+                </div>
+
+                <!-- IoT Bay Remote Controls -->
+                <div class="iot-control-block">
+                  <div class="subhead">IoT 打席・スマートロック実機コントロール</div>
+                  <div class="iot-grid">
+                    <div class="iot-card" id="lockCard">
+                      <div class="iot-icon-row">
+                        <span class="iot-ico" id="lockIcon">🔒</span>
+                        <span class="iot-state" id="lockStateText">施錠中 (LOCKED)</span>
+                      </div>
+                      <div class="iot-name">エントランススマートロック</div>
+                      <button class="btn-action" id="btnToggleLock">一時解錠テスト</button>
+                    </div>
+
+                    <div class="iot-card" id="powerCard">
+                      <div class="iot-icon-row">
+                        <span class="iot-ico" id="powerIcon">⚡</span>
+                        <span class="iot-state" id="powerStateText">通電待機中 (ONLINE)</span>
+                      </div>
+                      <div class="iot-name">打席センサー・プロジェクター</div>
+                      <button class="btn-action" id="btnTogglePower">電源リブート</button>
+                    </div>
+
+                    <div class="iot-card">
+                      <div class="iot-icon-row">
+                        <span class="iot-ico">❄️</span>
+                        <span class="iot-state" id="sceneStateText">22.5℃ · 省エネモード</span>
+                      </div>
+                      <div class="iot-name">空調・環境照度プリセット</div>
+                      <button class="btn-action" id="btnCycleScene">モード切替</button>
+                    </div>
+                  </div>
+                  <div class="iot-log-banner" id="iotLogBanner">
+                    ▶ システム稼働中: 会員 #MX-8821 スマートフォン認証完了 (遅延 94ms)
+                  </div>
+                </div>
+
+                <!-- AI Swing Telemetry Grid -->
+                <div class="telemetry-table-block">
+                  <div class="subhead">リアルタイム運動学計測テレメトリ</div>
+                  <div class="tel-grid-4">
+                    <div class="tel-cell">
+                      <span class="tc-label">クラブヘッド速度</span>
+                      <span class="tc-val" id="valHeadSpeed">48.2 <small>m/s</small></span>
+                    </div>
+                    <div class="tel-cell">
+                      <span class="tc-label">アタック角 (入射)</span>
+                      <span class="tc-val" id="valAttackAngle">-3.2 <small>deg</small></span>
+                    </div>
+                    <div class="tel-cell">
+                      <span class="tc-label">フェイス向き角</span>
+                      <span class="tc-val" id="valFaceAngle">+0.6 <small>deg</small></span>
+                    </div>
+                    <div class="tel-cell">
+                      <span class="tc-label">推定バックスピン</span>
+                      <span class="tc-val" id="valBackspin">2,380 <small>rpm</small></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AI Coaching Diagnostic Output -->
+                <div class="coaching-feedback-block">
+                  <div class="subhead">AI 自動診断フィードバック</div>
+                  <div class="feedback-card">
+                    <div class="score-badge">
+                      <span class="sb-num">89</span>
+                      <span class="sb-label">スイング完成度</span>
+                    </div>
+                    <div class="fb-content">
+                      <p class="fb-main"><strong>骨盤先行回旋 (Kinetic Pelvis Lead):</strong> 理想的な12°の捻転差を維持してインパクトを迎えています。</p>
+                      <p class="fb-sub">アーリーエクステンション検出なし（抑制率 98.4%）。左膝の踏み込み反力を効率的にボール初速へ伝達できています。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="philo-body-col">
-            <blockquote class="philo-big-quote">
-              「新しい世界と逢いましょう！<br>無限の可能性をAIの力で — Global IT Solutions Creating the Future with AI」
-            </blockquote>
+          <!-- CASE 02: PRESTIGIOUS SCHOOL SIMULATOR -->
+          <div class="case-view" id="view-school">
+            <div class="view-header">
+              <div class="vh-left">
+                <span class="vh-cat">CASE 02 · GeoAI &amp; ADAPTIVE MATCHING</span>
+                <h3 class="vh-title">中学受験 AI コンシェルジュ</h3>
+                <p class="vh-desc">家を中心にある学校を地図で可視化し、AIが学校の偏差値・特徴、試験傾向、お子様との相性診断、学校イベントの情報を提供することで、最適な学校選びをサポートするツールです。</p>
+              </div>
+              <div class="vh-tags">
+                <span class="vtag">Tokyo Isochrone Network</span>
+                <span class="vtag">Bayesian Admission Odds</span>
+                <span class="vtag">Radar Compatibility</span>
+                <span class="vtag">Past Exam Profiling</span>
+              </div>
+            </div>
 
-            <p class="philo-lead-p">
-              MindX株式会社は、日本を拠点にグローバルな視点を持つITソリューション企業です。私たちは最先端のIT技術を駆使し、未来志向の課題解決と未来創造するグローバルITソリューションを追求しています。2025年1月には日本でMindX株式会社を設立しました。この強固なグローバルネットワークを活かし、お客様のビジネス変革を加速するAIを中核とした製品開発と情報サービスを提供しています。
-            </p>
+            <div class="view-grid">
+              <!-- Left: Tokyo Isochrone Geo Map -->
+              <div class="console-box canvas-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp"></span>
+                    <span>東京都名門中学校 交通等時線（Isochrone）輻射マップ</span>
+                  </div>
+                  <div class="box-actions">
+                    <span class="hint-text">※ マップ上の学校アイコンにマウスを重ねて詳細表示</span>
+                  </div>
+                </div>
 
-            <p class="philo-lead-p">
-              私たちの強みは、膨大なデータを分析し、新たな価値を創造するデータ駆動型イノベーションにあります。AIによる高度な分析能力で、現状の課題はもちろんのこと、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供。これにより、お客様の業務の最適化と効率化の極致を実現します。
-            </p>
+                <div class="canvas-container">
+                  <canvas id="schoolMapCanvas"></canvas>
+                  <div class="map-legend">
+                    <span class="leg-item"><i class="dot target"></i> 志望・適正圏内</span>
+                    <span class="leg-item"><i class="dot reach"></i> 挑戦圏</span>
+                    <span class="leg-item"><i class="dot out"></i> 所要時間外</span>
+                  </div>
+                </div>
 
-            <p class="philo-lead-p" style="color:#fff;font-weight:400;">
-              MindXは、AIが人間の仕事を奪うのではなく、人間がより創造的で戦略的な業務に集中できるようサポートする人間とAIの協調を重視しています。私たちは、AIと人間が共に働くことで、ビジネスの可能性を最大限に引き出し、お客様の持続的な成長に貢献してまいります。
-            </p>
+                <!-- Commute & Station Interactive Controls -->
+                <div class="map-controls-panel">
+                  <div class="ctrl-group">
+                    <label class="ctrl-lbl">自宅最寄り出発駅:</label>
+                    <div class="btn-station-group" id="stationBtnGroup">
+                      <button class="btn-st active" data-st="nihombashi">日本橋 (本社近隣)</button>
+                      <button class="btn-st" data-st="shinjuku">新宿</button>
+                      <button class="btn-st" data-st="shinagawa">品川</button>
+                      <button class="btn-st" data-st="ikebukuro">池袋</button>
+                      <button class="btn-st" data-st="shibuya">渋谷</button>
+                    </div>
+                  </div>
 
-            <!-- 経営理念 (官方原文) -->
-            <div class="philo-credo-plate">
-              <span class="pcp-eyebrow">経営理念 / CORPORATE PHILOSOPHY</span>
-              <p class="pcp-text">
+                  <div class="ctrl-group">
+                    <div class="slider-header">
+                      <label class="ctrl-lbl">許容通学時間上限:</label>
+                      <span class="slider-val" id="commuteTimeVal">45分以内</span>
+                    </div>
+                    <input type="range" id="commuteSlider" min="20" max="75" value="45" step="5" class="range-slider">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: AI School Matching & Radar -->
+              <div class="console-box right-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp green"></span>
+                    <span>AI 合格推計 &amp; 4教科配点相性レーダー</span>
+                  </div>
+                  <span class="box-badge">AI MATCH ENGINE v3.1</span>
+                </div>
+
+                <!-- Input Adjusters -->
+                <div class="matching-inputs">
+                  <div class="slider-header">
+                    <label class="ctrl-lbl">現在の模擬試験偏差値 (SAPIX/四谷準拠):</label>
+                    <span class="slider-val" id="deviationVal">65</span>
+                  </div>
+                  <input type="range" id="deviationSlider" min="50" max="75" value="65" class="range-slider">
+
+                  <div class="slider-header" style="margin-top:12px;">
+                    <label class="ctrl-lbl">出題傾向の相性選考:</label>
+                    <span class="slider-val" id="examTypeVal">思考・記述重視型</span>
+                  </div>
+                  <div class="exam-type-toggles" id="examTypeGroup">
+                    <button class="btn-et active" data-type="thinking">思考・記述重視型</button>
+                    <button class="btn-et" data-type="speed">処理速度・知識型</button>
+                    <button class="btn-et" data-type="balanced">総合バランス型</button>
+                  </div>
+                </div>
+
+                <!-- Radar Canvas & Recommendation List -->
+                <div class="matching-results-wrap">
+                  <div class="radar-box">
+                    <canvas id="schoolRadarCanvas" width="220" height="220"></canvas>
+                    <div class="radar-subtext">4教科適合度レーダー</div>
+                  </div>
+
+                  <div class="recom-list-box">
+                    <div class="subhead">AI 選定・併願校ポートフォリオ</div>
+                    <div class="school-card-list" id="schoolCardList">
+                      <!-- Dynamically rendered -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ai-advice-banner" id="schoolAdviceText">
+                  💡 <strong>AI コンシェルジュ推奨:</strong> 日本橋駅から開成中学まで千代田線経由で約18分。算数の立体図形対策を+15%強化することで合格確率が63%へ向上します。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CASE 03: 2.4M EXAM QUESTION BANK -->
+          <div class="case-view" id="view-exam">
+            <div class="view-header">
+              <div class="vh-left">
+                <span class="vh-cat">CASE 03 · EdTech &amp; ADAPTIVE LEARNING</span>
+                <h3 class="vh-title">教育機関向け 240万問 AI 問題バンク</h3>
+                <p class="vh-desc">AI学習支援機能を備えた、240種類の資格試験の過去問題集サイトを開発しました。学習状況をAIが分析し、最適な学習計画を提案します。</p>
+              </div>
+              <div class="vh-tags">
+                <span class="vtag">Force-Directed Graph</span>
+                <span class="vtag">Item Response Theory (IRT)</span>
+                <span class="vtag">Auto Variant Generation</span>
+                <span class="vtag">Distractor Analysis</span>
+              </div>
+            </div>
+
+            <div class="view-grid">
+              <!-- Left: Knowledge Topology Galaxy -->
+              <div class="console-box canvas-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp"></span>
+                    <span>240科目 知識グラフ星系トポロジー (Knowledge Galaxy)</span>
+                  </div>
+                  <div class="box-actions">
+                    <span class="hint-text">※ グラフをドラッグ移動・ノードをクリックして出題</span>
+                  </div>
+                </div>
+
+                <div class="canvas-container">
+                  <canvas id="examGraphCanvas"></canvas>
+                  <div class="node-hud" id="nodeHud">
+                    <span class="nh-label">選択中の知識ユニット:</span>
+                    <span class="nh-val" id="selectedNodeName">情報工学 · 公開鍵暗号系とRSAアルゴリズム</span>
+                  </div>
+                </div>
+
+                <!-- Knowledge Navigation Controls -->
+                <div class="graph-quick-buttons">
+                  <span class="gqb-label">主要科目クイック探索:</span>
+                  <button class="btn-gq active" data-subject="cs">情報・アルゴリズム</button>
+                  <button class="btn-gq" data-subject="math">解析・線形代数</button>
+                  <button class="btn-gq" data-subject="physics">力学・波動理論</button>
+                  <button class="btn-gq" data-subject="finance">財務・証券アナリスト</button>
+                  <button class="btn-gq" data-subject="law">行政法規・知財</button>
+                </div>
+              </div>
+
+              <!-- Right: Adaptive Question Generator & IRT Analysis -->
+              <div class="console-box right-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp green"></span>
+                    <span>IRT 項目応答理論・適応型出題コンソール</span>
+                  </div>
+                  <button class="btn-action" id="btnGenNewQuestion">✨ 新規類題をAI自動生成</button>
+                </div>
+
+                <!-- IRT Parameter Sliders -->
+                <div class="irt-params-panel">
+                  <div class="slider-header">
+                    <label class="ctrl-lbl">受検者推定能力値 (θパラメータ / 難易度要求):</label>
+                    <span class="slider-val" id="irtThetaVal">+1.45 (難関レベル)</span>
+                  </div>
+                  <input type="range" id="irtSlider" min="-20" max="30" value="15" class="range-slider">
+
+                  <div class="irt-metrics-row">
+                    <div class="im-cell">
+                      <span class="imc-lbl">項目識別度 (a):</span>
+                      <span class="imc-val" id="paramA">1.62 (極めて高精度)</span>
+                    </div>
+                    <div class="im-cell">
+                      <span class="imc-lbl">項目困難度 (b):</span>
+                      <span class="imc-val" id="paramB">+1.38</span>
+                    </div>
+                    <div class="im-cell">
+                      <span class="imc-lbl">当て推量度 (c):</span>
+                      <span class="imc-val" id="paramC">0.05</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Question Card -->
+                <div class="question-preview-card" id="questionCard">
+                  <div class="qp-badge-row">
+                    <span class="qp-code" id="qCode">CODE: MX-CS-9942</span>
+                    <span class="qp-topic" id="qTopic">情報セキュリティ・暗号理論</span>
+                    <span class="qp-pass-rate">全国正答率予測: <strong id="qPassRate">41.8%</strong></span>
+                  </div>
+                  <div class="qp-body" id="qBodyText">
+                    RSA公開鍵暗号系において、素数 $p=11$, $q=13$、公開鍵の指数 $e=7$ としたとき、秘密鍵 $d$ の値として最も適切なものを次の中から選べ。
+                  </div>
+                  <div class="qp-options" id="qOptionsList">
+                    <button class="opt-btn" data-correct="false"><span class="opt-key">A</span> 19</button>
+                    <button class="opt-btn" data-correct="true"><span class="opt-key">B</span> 43</button>
+                    <button class="opt-btn" data-correct="false"><span class="opt-key">C</span> 23</button>
+                    <button class="opt-btn" data-correct="false"><span class="opt-key">D</span> 51</button>
+                  </div>
+                  <div class="qp-result-banner" id="qResultBanner" hidden></div>
+                </div>
+
+                <!-- Distractor & Misconception Heatmap -->
+                <div class="distractor-block">
+                  <div class="subhead">選択肢別 誤答誘引度 (Distractor Analysis)</div>
+                  <div class="distractor-bars">
+                    <div class="d-bar-row">
+                      <span class="d-opt">A (19)</span>
+                      <div class="d-track"><div class="d-fill" style="width: 14%;"></div></div>
+                      <span class="d-pct">14% (φ(n)の計算ミス)</span>
+                    </div>
+                    <div class="d-bar-row highlight">
+                      <span class="d-opt">B (43) 正解</span>
+                      <div class="d-track"><div class="d-fill green" style="width: 42%;"></div></div>
+                      <span class="d-pct">42% (模範解答)</span>
+                    </div>
+                    <div class="d-bar-row">
+                      <span class="d-opt">C (23)</span>
+                      <div class="d-track"><div class="d-fill" style="width: 26%;"></div></div>
+                      <span class="d-pct">26% (拡張ユークリッド計算誤謬)</span>
+                    </div>
+                    <div class="d-bar-row">
+                      <span class="d-opt">D (51)</span>
+                      <div class="d-track"><div class="d-fill" style="width: 18%;"></div></div>
+                      <span class="d-pct">18% (法演算の周期勘違い)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CASE 04: HOSPITALITY MULTIMODAL AGENT -->
+          <div class="case-view" id="view-hospitality">
+            <div class="view-header">
+              <div class="vh-left">
+                <span class="vh-cat">CASE 04 · 24/7 HOSPITALITY AGENT &amp; PMS CORE</span>
+                <h3 class="vh-title">宿泊業向けマルチモーダルAI接客システム</h3>
+                <p class="vh-desc">ゲストにより快適で安心な滞在を提供するための 24時間AIサポート製品を開発しました。滞在中のゲストのあらゆる疑問や困りごとにリアルタイムで対応します。</p>
+              </div>
+              <div class="vh-tags">
+                <span class="vtag">Multilingual NLU</span>
+                <span class="vtag">PMS Core Orchestration</span>
+                <span class="vtag">Realtime Audio Wave</span>
+                <span class="vtag">Action Dispatcher</span>
+              </div>
+            </div>
+
+            <div class="view-grid">
+              <!-- Left: Concierge Terminal -->
+              <div class="console-box canvas-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp"></span>
+                    <span>ホテル対面型 AI コンシェルジュ ターミナル</span>
+                  </div>
+                  <div class="lang-selector" id="conciergeLang">
+                    <button class="btn-lang active" data-lang="ja">日本語</button>
+                    <button class="btn-lang" data-lang="en">English</button>
+                    <button class="btn-lang" data-lang="zh">繁體中文</button>
+                  </div>
+                </div>
+
+                <!-- Interactive Audio Waveform Simulation -->
+                <div class="audio-stage">
+                  <canvas id="audioWaveCanvas"></canvas>
+                  <div class="audio-state-badge">
+                    <span class="mic-dot"></span>
+                    <span id="audioStateText">音声認識待機中 (Realtime Voice Synthesizer Ready)</span>
+                  </div>
+                </div>
+
+                <!-- Chat Dialog Area -->
+                <div class="concierge-chat-stream" id="chatStream">
+                  <div class="msg-bot">
+                    <div class="bot-avatar">MX</div>
+                    <div class="bot-bubble">
+                      いらっしゃいませ。MindX Luxury Hotel 日本橋のデジタルコンシェルジュでございます。客室のスマートキー発行、手荷物預かり、周辺の江戸前割烹のご案内など、何でもお手伝いいたします。
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Preset Prompt Triggers -->
+                <div class="prompt-chips-tray">
+                  <span class="pct-lbl">実機検証シナリオ:</span>
+                  <button class="chip-prompt" data-p="0">深夜チェックインと客室キー発行</button>
+                  <button class="chip-prompt" data-p="1">日本橋周辺の精進・ヴィーガン懐石</button>
+                  <button class="chip-prompt" data-p="2">早朝羽田空港への最短アクセス</button>
+                </div>
+
+                <!-- User Input Field -->
+                <form class="concierge-input-form" id="conciergeForm">
+                  <input type="text" id="chatInput" placeholder="ご質問やリクエストをご入力ください (例: 荷物預かりの場所は？)" autocomplete="off">
+                  <button type="submit" class="btn-send">
+                    <span>送信</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                  </button>
+                </form>
+              </div>
+
+              <!-- Right: Agent Thinking Chain & PMS Engine Pipeline -->
+              <div class="console-box right-box">
+                <div class="box-bar">
+                  <div class="box-title">
+                    <span class="status-lamp green"></span>
+                    <span>AI Agent 推論思考チェーン &amp; PMS 実行パイプライン</span>
+                  </div>
+                  <span class="box-badge">ORCHESTRATOR v4.0</span>
+                </div>
+
+                <div class="pipeline-flow" id="pipelineFlow">
+                  <!-- Step 1: NLU -->
+                  <div class="pipe-step active" id="pipeStep1">
+                    <div class="ps-header">
+                      <span class="ps-num">01</span>
+                      <span class="ps-name">自然言語意図抽出 &amp; 感情分析 (NLU Intent)</span>
+                      <span class="ps-status ok">200 OK · 28ms</span>
+                    </div>
+                    <div class="ps-body">
+                      <code>{ "intent": "CHECKIN_KEYLESS_DISPATCH", "sentiment": 0.94, "urgency": "NORMAL", "lang": "ja" }</code>
+                    </div>
+                  </div>
+
+                  <!-- Step 2: PMS DB Query -->
+                  <div class="pipe-step active" id="pipeStep2">
+                    <div class="ps-header">
+                      <span class="ps-num">02</span>
+                      <span class="ps-name">ホテル基幹 PMS 照会 (PMS Core API)</span>
+                      <span class="ps-status ok">200 OK · 54ms</span>
+                    </div>
+                    <div class="ps-body">
+                      <code>pms.query_reservation({ room_type: "Executive Suite", pin_auth: "ACTIVE", smart_lock: "BLUETOOTH_READY" })</code>
+                    </div>
+                  </div>
+
+                  <!-- Step 3: Knowledge & External Maps -->
+                  <div class="pipe-step active" id="pipeStep3">
+                    <div class="ps-header">
+                      <span class="ps-num">03</span>
+                      <span class="ps-name">周辺知識ベース &amp; 交通API照合 (RAG Retrieval)</span>
+                      <span class="ps-status ok">200 OK · 41ms</span>
+                    </div>
+                    <div class="ps-body">
+                      <code>maps.fetch_route({ from: "日本橋蛎殻町", to: "羽田空港T3", fastest: "浅草線エアポート快特" })</code>
+                    </div>
+                  </div>
+
+                  <!-- Step 4: Dispatch & Execution -->
+                  <div class="pipe-step active" id="pipeStep4">
+                    <div class="ps-header">
+                      <span class="ps-num">04</span>
+                      <span class="ps-name">アクションディスパッチ &amp; 音声合成生成</span>
+                      <span class="ps-status ok">COMPLETE · 12ms</span>
+                    </div>
+                    <div class="ps-body">
+                      <code>[ACTION] 暗証番号 #9482 発行完了 → 客室 602 空調プレ稼働 (23.5℃) 完了</code>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="orchestrator-stats">
+                  <div class="os-stat">
+                    <span class="os-label">総レイテンシ</span>
+                    <span class="os-val">135ms</span>
+                  </div>
+                  <div class="os-stat">
+                    <span class="os-label">PMS API 整合性</span>
+                    <span class="os-val">99.99%</span>
+                  </div>
+                  <div class="os-stat">
+                    <span class="os-label">多言語音素精度</span>
+                    <span class="os-val">MOS 4.85</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY & CEO MESSAGE (代表取締役ご挨拶 & 経営理念 - 官方原文全量) -->
+    <section class="section philosophy-section" id="philosophy">
+      <div class="container">
+        <div class="section-header">
+          <div class="sec-eyebrow">03 — PHILOSOPHY &amp; MESSAGE / 私たちについて</div>
+          <h2 class="sec-title">人間とAIの協調で、<br>持続的な成長を共に創る</h2>
+          <p class="sec-desc">MindXは、AIが人間の仕事を奪うのではなく、人間がより創造的で戦略的な業務に集中できるようサポートする協調関係を信じています。</p>
+        </div>
+
+        <div class="ceo-message-layout">
+          <div class="ceo-portrait-card">
+            <div class="portrait-avatar">
+              <div class="avatar-symbol">MX</div>
+            </div>
+            <div class="ceo-info">
+              <span class="ceo-title">代表取締役</span>
+              <span class="ceo-name">越智 伸司</span>
+              <span class="ceo-company">MindX株式会社</span>
+            </div>
+            <div class="ceo-badges">
+              <span class="cbadge">2025年1月設立</span>
+              <span class="cbadge">日本橋蛎殻町本社</span>
+              <span class="cbadge">資本金 2,000万円</span>
+            </div>
+          </div>
+
+          <div class="ceo-letter-body">
+            <div class="letter-badge">代表メッセージ / MESSAGE FROM CEO</div>
+            <h3 class="letter-heading">新しい世界と逢いましょう！<br><span class="letter-heading-sub">無限の可能性をAIの力で — Global IT Solutions Creating the Future with AI</span></h3>
+
+            <div class="letter-paragraphs">
+              <p>
+                MindX株式会社は、日本を拠点にグローバルな視点を持つITソリューション企業です。私たちは最先端のIT技術を駆使し、未来志向の課題解決と未来創造するグローバルITソリューションを追求しています。2025年1月には日本でMindX株式会社を設立しました。この強固なグローバルネットワークを活かし、お客様のビジネス変革を加速するAIを中核とした製品開発と情報サービスを提供しています。
+              </p>
+              <p>
+                私たちの強みは、膨大なデータを分析し、新たな価値を創造するデータ駆動型イノベーションにあります。AIによる高度な分析能力で、現状の課題はもちろんのこと、将来発生しうる潜在的な課題まで見据え、革新的なソリューションを提供。これにより、お客様の業務の最適化と効率化の極致を実現します。
+              </p>
+              <p class="highlight-p">
+                MindXは、AIが人間の仕事を奪うのではなく、人間がより創造的で戦略的な業務に集中できるようサポートする人間とAIの協調を重視しています。私たちは、AIと人間が共に働くことで、ビジネスの可能性を最大限に引き出し、お客様の持続的な成長に貢献してまいります。
+              </p>
+            </div>
+
+            <!-- Corporate Philosophy Box (官方原文) -->
+            <div class="philosophy-box">
+              <div class="philo-header">
+                <span class="philo-pill">経営理念 / PHILOSOPHY</span>
+              </div>
+              <p class="philo-text">
                 MindX株式会社は、最先端のAI技術を駆使し、単なるビジネス効率化を超えて、社会とビジネスの課題解決に貢献します。私たちは、お客様と共に成長するパートナーとして、AI技術の力を通じて新たな価値を創造し、より良い未来を築くことを目指します。AIの根幹であるデータ分析能力とそこから生まれる「知恵」を最大限に活用する「データ駆動型イノベーション」により、人々の可能性を引き出し、より豊かな社会を実現します。私たちはデータと知恵の力で世界を変革し、人間とAIの協調により、社会とビジネスの可能性を最大化してまいります。
               </p>
             </div>
@@ -540,61 +884,91 @@
       </div>
     </section>
 
-    <!-- 03 DOMAINS & FIELDS (4大業務領域 - 官方原文全量) -->
-    <section class="domains-section" id="domains">
+    <!-- FIELDS & DOMAINS (4大業務領域 - 官方原文全量) -->
+    <section class="section fields-section" id="fields">
       <div class="container">
-        <div class="section-label-bar">
-          <div class="sec-title-major">
-            <small>03 — Operating Fields</small>
-            業務領域
-          </div>
-          <p class="sec-lead-right">
-            医療、教育、小売、金融。深い現場理解と先端AIの実装力で、業界の境界を越えて変革をもたらします。
-          </p>
+        <div class="section-header">
+          <div class="sec-eyebrow">04 — FIELDS OF PRACTICE / 業務領域</div>
+          <h2 class="sec-title">業界の壁を越え、<br>現場の核心に切り込むAI実装</h2>
+          <p class="sec-desc">医療、教育、小売、金融。深いドメイン知識と先端AIエンジニアリングの融合により、高精度な業務改革をもたらします。</p>
         </div>
 
-        <div class="domains-clean-grid">
-          <div class="domain-column">
-            <span class="dc-en">01 / HEALTHCARE</span>
-            <h4 class="dc-jp">医療</h4>
-            <p class="dc-desc">患者ポータル、予約スケジュール、電子医療記録 (EMR) 用のアプリケーションを使用して医療プロセスを合理化します。</p>
+        <div class="fields-grid">
+          <!-- 医療 HEALTHCARE -->
+          <div class="field-card">
+            <div class="field-top">
+              <span class="field-en">HEALTHCARE</span>
+              <span class="field-icon">🩺</span>
+            </div>
+            <h3 class="field-title">医療</h3>
+            <p class="field-text">
+              患者ポータル、予約スケジュール、電子医療記録 (EMR) 用のアプリケーションを使用して医療プロセスを合理化します。
+            </p>
+            <div class="field-tags">
+              <span>EMR連携</span><span>予約最適化</span><span>プライバシー保護</span>
+            </div>
           </div>
 
-          <div class="domain-column">
-            <span class="dc-en">02 / EDUCATION</span>
-            <h4 class="dc-jp">教育</h4>
-            <p class="dc-desc">教育テクノロジーのアプリケーションを通じて魅力的でインタラクティブな学習体験を生み出すことに情熱を持っています。</p>
+          <!-- 教育 EDUCATION -->
+          <div class="field-card">
+            <div class="field-top">
+              <span class="field-en">EDUCATION</span>
+              <span class="field-icon">🎓</span>
+            </div>
+            <h3 class="field-title">教育</h3>
+            <p class="field-text">
+              教育テクノロジーのアプリケーションを通じて魅力的でインタラクティブな学習体験を生み出すことに情熱を持っています。
+            </p>
+            <div class="field-tags">
+              <span>適応型学習 (IRT)</span><span>EdTech</span><span>学習分析</span>
+            </div>
           </div>
 
-          <div class="domain-column">
-            <span class="dc-en">03 / RETAIL</span>
-            <h4 class="dc-jp">小売</h4>
-            <p class="dc-desc">専門知識を活用して、支払ゲートウェイ、製品管理システム、ショッピング機能などの機能を備えたシームレスなオンラインストアを構築します。</p>
+          <!-- 小売 RETAIL -->
+          <div class="field-card">
+            <div class="field-top">
+              <span class="field-en">RETAIL</span>
+              <span class="field-icon">🛍️</span>
+            </div>
+            <h3 class="field-title">小売</h3>
+            <p class="field-text">
+              専門知識を活用して、支払ゲートウェイ、製品管理システム、ショッピング機能などの機能を備えたシームレスなオンラインストアを構築します。
+            </p>
+            <div class="field-tags">
+              <span>Stripe連携</span><span>需要予測AI</span><span>スマート店舗</span>
+            </div>
           </div>
 
-          <div class="domain-column">
-            <span class="dc-en">04 / FINTECH</span>
-            <h4 class="dc-jp">金融</h4>
-            <p class="dc-desc">AI技術を駆使してクオンツ投資リサーチを支援するアプリを開発し、データ処理から始まり、投資アイデアを探求し、利用可能な戦略に転換するのをサポートします。</p>
+          <!-- 金融 FINTECH -->
+          <div class="field-card">
+            <div class="field-top">
+              <span class="field-en">FINTECH</span>
+              <span class="field-icon">📈</span>
+            </div>
+            <h3 class="field-title">金融</h3>
+            <p class="field-text">
+              AI技術を駆使してクオンツ投資リサーチを支援するアプリを開発し、データ処理から始まり、投資アイデアを探求し、利用可能な戦略に転換するのをサポートします。
+            </p>
+            <div class="field-tags">
+              <span>クオンツ分析</span><span>リスク推計</span><span>リアルタイム推論</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 04 CORPORATE & CONTACT (会社概要 & お問い合わせ - 官方全量) -->
-    <section class="corporate-section" id="corporate">
+    <!-- COMPANY PROFILE (会社概要 - 官方全量) -->
+    <section class="section company-section" id="company">
       <div class="container">
-        <div class="section-label-bar">
-          <div class="sec-title-major">
-            <small>04 — Corporate &amp; Inquiries</small>
-            会社概要 · お問い合わせ
-          </div>
+        <div class="section-header">
+          <div class="sec-eyebrow">05 — COMPANY PROFILE / 会社概要</div>
+          <h2 class="sec-title">企業情報</h2>
+          <p class="sec-desc">東京・日本橋蛎殻町を拠点に、世界水準のAI・ITソリューションを展開しています。</p>
         </div>
 
-        <div class="corp-grid-layout">
-          <!-- Table -->
-          <div>
-            <table class="minimal-data-table">
+        <div class="company-grid">
+          <div class="company-table-card">
+            <table class="profile-table">
               <tbody>
                 <tr>
                   <th>商号</th>
@@ -613,7 +987,7 @@
                   <td>越智 伸司</td>
                 </tr>
                 <tr>
-                  <th>所在地</th>
+                  <th>本社所在地</th>
                   <td>〒103-0014 東京都中央区日本橋蛎殻町１丁目３６−3 東洋ビル６Ｆ</td>
                 </tr>
                 <tr>
@@ -627,26 +1001,127 @@
                     Tel: <a href="tel:+81368216158">+81-3-6821-6158</a>
                   </td>
                 </tr>
+                <tr>
+                  <th>主要事業</th>
+                  <td>
+                    1. 生成AI / LLM 導入支援 &amp; プロダクト研究開発<br>
+                    2. コンサルティング・受託システム開発 / アプリ開発<br>
+                    3. ロボティクス・ハードウェア連携ソリューション
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
 
-          <!-- Direct Contact Card -->
-          <div class="contact-direct-card">
-            <div>
-              <span class="tc-eyebrow">START A PROJECT</span>
-              <h3 class="cdc-title">未来の案件を、<br>ここ日本橋から。</h3>
-              <p class="cdc-lead">
-                AI自社製品の導入、受託開発、PoC検証、ロボティクス連携など、課題の大小を問わずお気軽にご相談ください。エンジニアチームが迅速にご回答いたします。
-              </p>
+          <div class="location-card">
+            <div class="location-header">
+              <span class="lh-badge">HEADQUARTERS</span>
+              <h4>日本橋蛎殻町 本社オフィス</h4>
+              <p>水天宮前駅・人形町駅至近のイノベーション拠点</p>
             </div>
-
-            <div>
-              <a href="mailto:info@mindx.co.jp" class="btn-contact-action">
-                <span>info@mindx.co.jp へメールで相談する</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="location-access">
+              <div class="access-item">
+                <span class="ai-line">東京メトロ半蔵門線</span>
+                <span class="ai-st">「水天宮前駅」徒歩3分</span>
+              </div>
+              <div class="access-item">
+                <span class="ai-line">東京メトロ日比谷線・都営浅草線</span>
+                <span class="ai-st">「人形町駅」徒歩5分</span>
+              </div>
+              <div class="access-item">
+                <span class="ai-line">東京メトロ東西線</span>
+                <span class="ai-st">「茅場町駅」徒歩7分</span>
+              </div>
+            </div>
+            <div class="location-actions">
+              <a href="https://maps.google.com/?q=東京都中央区日本橋蛎殻町１丁目３６−3" target="_blank" rel="noopener" class="btn-map">
+                <span>Google Maps で地図を開く</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
               </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM (お問い合わせ) -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div class="contact-info">
+            <div class="sec-eyebrow">06 — GET IN TOUCH / お問い合わせ</div>
+            <h2 class="sec-title">AIイノベーションの<br>第一歩を共に。</h2>
+            <p class="contact-lead">
+              自社開発AIプロダクトの導入相談、受託システム開発、PoC検証、ロボティクス導入など、お気軽にお問い合わせください。専任エンジニアが24時間以内にご回答いたします。
+            </p>
+
+            <div class="direct-contacts">
+              <div class="dc-row">
+                <span class="dc-icon">✉️</span>
+                <div>
+                  <div class="dc-lbl">Email</div>
+                  <a href="mailto:info@mindx.co.jp" class="dc-val">info@mindx.co.jp</a>
+                </div>
+              </div>
+              <div class="dc-row">
+                <span class="dc-icon">📞</span>
+                <div>
+                  <div class="dc-lbl">Phone</div>
+                  <a href="tel:+81368216158" class="dc-val">+81-3-6821-6158</a>
+                </div>
+              </div>
+              <div class="dc-row">
+                <span class="dc-icon">🏢</span>
+                <div>
+                  <div class="dc-lbl">Office</div>
+                  <div class="dc-val">東京都中央区日本橋蛎殻町1-36-3 東洋ビル6F</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-wrap">
+            <form class="inquiry-form" id="inquiryForm">
+              <div class="form-group">
+                <label class="form-lbl">お問い合わせ種別 <span class="req">必須</span></label>
+                <div class="type-chips" id="inquiryTypeGroup">
+                  <button type="button" class="btn-tc active" data-type="ai">生成AI / Agent導入</button>
+                  <button type="button" class="btn-tc" data-type="system">システム受託開発</button>
+                  <button type="button" class="btn-tc" data-type="robot">ロボティクス</button>
+                  <button type="button" class="btn-tc" data-type="other">その他・採用</button>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label for="contactName" class="form-lbl">お名前 <span class="req">必須</span></label>
+                  <input type="text" id="contactName" required placeholder="例: 越智 太郎">
+                </div>
+                <div class="form-group">
+                  <label for="contactCompany" class="form-lbl">貴社名 / 組織名</label>
+                  <input type="text" id="contactCompany" placeholder="例: MindXパートナー株式会社">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactEmail" class="form-lbl">メールアドレス <span class="req">必須</span></label>
+                <input type="email" id="contactEmail" required placeholder="name@company.co.jp">
+              </div>
+
+              <div class="form-group">
+                <label for="contactMsg" class="form-lbl">ご相談内容 <span class="req">必須</span></label>
+                <textarea id="contactMsg" rows="4" required placeholder="プロジェクトの概要、希望時期、ご予算感などをご自由にご記入ください。"></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit" id="btnSubmitForm">
+                <span>送信する (24時間以内にご連絡)</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+              <div class="form-feedback" id="formFeedback" hidden>
+                ✅ お問い合わせを受け付けました。担当者より折り返しご連絡いたします。
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -655,11 +1130,39 @@
 
   <!-- Site Footer -->
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© 2025 MindX Inc. All Rights Reserved. · 東京都中央区日本橋蛎殻町1-36-3 東洋ビル6F</div>
-      <div style="display:flex;gap:24px;">
-        <a href="../../">MindX Arena トップ ↗</a>
-        <a href="#top">PAGE TOP ↑</a>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-chip">
+            <img src="./logo.svg" alt="MindX" class="brand-logo">
+          </div>
+          <p class="fb-tagline">AIで、ビジネスと教育の未来を創る。<br>東京都中央区日本橋蛎殻町１丁目３６−3 東洋ビル６Ｆ</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <span class="fnc-head">ナビゲーション</span>
+          <a href="#services">事業内容</a>
+          <a href="#interactive-cases">対話型プロダクト</a>
+          <a href="#philosophy">経営理念</a>
+          <a href="#fields">業務領域</a>
+          <a href="#company">会社概要</a>
+        </div>
+
+        <div class="footer-nav-col">
+          <span class="fnc-head">MINDX ARENA 路線</span>
+          <a href="../../r/shader-flight/">Route 01 — Shader Flight (3D飛行)</a>
+          <a href="../../r/shader-flight-r2/">Route 02 — Shader Flight R2 (星雲)</a>
+          <a href="../../r/shader-gpu/">Route 03 — Shader GPU (復古ターミナル)</a>
+          <a href="./" class="active">Route 04 — Product Suite (実機対話型) ★</a>
+          <a href="https://mobility.distributor.co.jp/" target="_blank" rel="noopener">Mobility &amp; Robotics 独立站 ↗</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copy">© 2025 MindX Inc. All Rights Reserved.</div>
+        <div class="arena-back">
+          <a href="../../">← MindX Arena 門面トップへ戻る</a>
+        </div>
       </div>
     </div>
   </footer>
