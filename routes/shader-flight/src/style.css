@@ -120,6 +120,13 @@ h2.st .n{color:var(--acc);font-size:.45em;vertical-align:super;letter-spacing:.1
 .cgrid .tag{font-size:11px;letter-spacing:.25em;color:var(--acc)}
 .cgrid p{margin-top:12px;color:#ddd6c4;line-height:2.1}
 .cgrid a{color:var(--acc)}
+.store{display:block;margin-top:34px;border:1px solid var(--acc);border-radius:18px;
+  padding:30px 32px;background:rgba(200,255,61,.06);color:var(--ink);text-decoration:none}
+.store:hover{background:rgba(200,255,61,.12)}
+.store .tag{font-size:11px;letter-spacing:.25em;color:var(--acc)}
+.store h3{font-size:clamp(26px,3.4vw,44px);margin:10px 0 12px}
+.store p{color:#d8d2c2;line-height:2;max-width:70ch;font-size:14.5px}
+.store .go{display:inline-block;margin-top:16px;color:var(--acc);font-size:14px}
 .facts{margin-top:26px;color:#c6c0ad;font-size:13.5px;line-height:2.2;
   text-shadow:0 2px 10px #000}
 footer{position:relative;z-index:2;padding:26px 7vw 40px;color:var(--mut);font-size:12px;

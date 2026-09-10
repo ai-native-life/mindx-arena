@@ -14,7 +14,8 @@
 - 验收：桌面端 hero / services / cases / cases-轮播变色 / contact 五张截图已看，修过曝/断词/列塌 3 bug，控制台零报错。
 - 发布：`https://mindx.distributor.co.jp/` LIVE（Cloudflare Pages 项目 `mindx-arena`，本批为 wrangler direct-upload；Git 自动发布待装 Cloudflare GitHub App 后切换）。
 - Logo：`Downloads/MindX_Logo_HD_Asset_Package_v1.0` の vector SVG を各面に vendor（`logo.svg`：門面 header＋全3路線の nav＋全頁 favicon）。黒ロゴのため暗背景では白チップ表示、gpu 路線のベージュ header は直置き。
-- 独立站卡：門面追加 Mobility & Robotics 外链卡（`target=_blank`，arena 不持有镜像、不做单页）。
+- 独立站入口：三路线联系区直前统一加 Mobility & Robotics 店招 banner（介绍文案取自独立站原文，外跳 `_blank`）。门面不设卡（最终只留一个网站，门面只是过渡）。
+- 3D Logo（shader-flight）：vector SVG 挤出成立体，材质锁死品牌黑 `#000000`＋X 红 `#fa1c18`，能见度只靠 studio 灯光（主光＋酸绿轮廓光＋clearcoat 高光）；三站 footer 统一加 logo 落款。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
 ## Backlog

@@ -3,6 +3,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
 
 const errBox = document.getElementById('err');
 window.addEventListener('error', (e) => {
@@ -24,6 +25,18 @@ scene.fog = new THREE.FogExp2(0x030304, 0.016);
 
 const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 200);
 camera.position.set(0, -0.5, 22);
+
+/* ---- studio lights for the 3D logo (shade only, never recolor) ---- */
+scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+keyLight.position.set(5, 8, 7);
+scene.add(keyLight);
+const rimLight = new THREE.DirectionalLight(0xc8ff3d, 1.8);
+rimLight.position.set(-6, -2, -5);
+scene.add(rimLight);
+const fillLight = new THREE.PointLight(0x88aaff, 50, 60);
+fillLight.position.set(-4, 2, 6);
+scene.add(fillLight);
 
 /* ---- particle field ---- */
 const COUNT = 900;
@@ -124,6 +137,38 @@ for (let i = 0; i < 3; i++) {
   sats.push(s);
   core.add(s);
 }
+core.position.z = -3.5;
+
+/* ---- 3D logo: brand colors locked (#000000 / #fa1c18), visibility from light only ---- */
+const logoGroup = new THREE.Group();
+logoGroup.scale.setScalar(0.001);
+logoGroup.position.set(3.5, 1.2, -5);
+scene.add(logoGroup);
+const blackMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, roughness: 0.3, metalness: 0.65, clearcoat: 1, clearcoatRoughness: 0.25, side: THREE.DoubleSide });
+const redMat = new THREE.MeshStandardMaterial({ color: 0xfa1c18, roughness: 0.4, metalness: 0.1, emissive: 0xfa1c18, emissiveIntensity: 0.5, side: THREE.DoubleSide });
+new SVGLoader().load('./logo.svg',
+  (data) => {
+    const inner = new THREE.Group();
+    for (const path of data.paths) {
+      const fill = (path.userData.style.fill || '').toLowerCase();
+      const mat = fill.indexOf('fa1c18') !== -1 ? redMat : blackMat;
+      for (const shape of SVGLoader.createShapes(path)) {
+        const g = new THREE.ExtrudeGeometry(shape, { depth: 36, bevelEnabled: true, bevelThickness: 3, bevelSize: 3, bevelSegments: 2 });
+        inner.add(new THREE.Mesh(g, mat));
+      }
+    }
+    const box = new THREE.Box3().setFromObject(inner);
+    const c = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    inner.position.set(-c.x, -c.y, -c.z);
+    const outer = new THREE.Group();
+    outer.add(inner);
+    const sc = 15 / Math.max(size.x, size.y);
+    outer.scale.set(sc, -sc, sc);
+    logoGroup.add(outer);
+  },
+  undefined,
+  () => { /* logo unavailable: fresnel core remains the hero */ });
 
 /* ---- post: bloom ---- */
 const composer = new EffectComposer(renderer);
@@ -202,7 +247,7 @@ function animate() {
   core.rotation.x += dt * 0.12 * spin;
   const s = tgt.scale;
   const cs = core.scale.x + (s - core.scale.x) * 0.05;
-  core.scale.setScalar(cs);
+  core.scale.setScalar(cs * 0.55);
   ring1.rotation.z -= dt * 0.4 * spin;
   ring2.rotation.z += dt * 0.25 * spin;
   sats.forEach((sat, i) => {
@@ -210,6 +255,12 @@ function animate() {
     sat.position.set(Math.cos(a) * 5.2, Math.sin(a * 1.3) * 1.6, Math.sin(a) * 5.2);
     sat.rotation.x += dt; sat.rotation.y += dt * 1.3;
   });
+
+  logoGroup.rotation.y = Math.sin(tG * 0.12) * 0.35 + smx * 0.4;
+  logoGroup.rotation.x = Math.sin(tG * 0.18) * 0.1 + smy * 0.25;
+  const ls = Math.max(tgt.scale * (1 - p * 0.4), 0.001);
+  logoGroup.scale.setScalar(logoGroup.scale.x + (ls - logoGroup.scale.x) * 0.05);
+  logoGroup.position.y = 1.2 + p * 1.5;
 
   pUni.uTime.value = tG;
   composer.render();
