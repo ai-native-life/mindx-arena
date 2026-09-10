@@ -36,10 +36,12 @@ related_but_not_this:
 ## Layout
 
 ```text
-portal/          门面站静态源码（构建时原样拷贝到 dist/）
-routes/<slug>/  一路一目录：
+directory/       入口一览（过渡期目录，/directory/；最终收敛后退役）
+routes/<slug>/  一路一目录（route.json 登记编号与名称）：
                    - 静态路线：目录内即成品（index.html + 资产），构建时拷贝
                    - Vite 路线：含 package.json，构建时 install + build，产物进 dist
+switcher/        全站入口切换器（/_arena/，各页自动注入）
+arena.json       defaultRoute：/ 直接呈现哪一路（可调）
 docs/ROUND2.md   每批入选、优化与验收记录
 dist/            构建产物（gitignored），Cloudflare Pages 发布源
 ```
@@ -51,6 +53,8 @@ provider: Cloudflare Pages（Git 直连 main，push 自动发布）
 build command: npm run build
 output directory: dist
 custom domain: mindx.distributor.co.jp（需 distributor.co.jp zone 的 DNS 授权）
+default route: / 由 arena.json defaultRoute 经 _redirects 200 改写直接呈现（URL 保持 /）
+switcher: 各页右下 ◉ 入口 切换全站路线，数据来自 /routes.json
 ```
 
 ## Boundary

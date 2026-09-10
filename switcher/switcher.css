@@ -1,0 +1,20 @@
+/* mindx-arena route switcher widget: minimal, theme-neutral, dismissible */
+#arena-sw{position:fixed;right:18px;bottom:18px;z-index:600;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif}
+#arena-sw-btn{background:rgba(8,8,10,.92);color:#f2ede1;border:1px solid #3a3a40;border-radius:999px;
+  padding:10px 20px;font-size:13px;letter-spacing:.12em;cursor:pointer}
+#arena-sw-btn:hover{border-color:#c8ff3d;color:#c8ff3d}
+#arena-sw-panel{position:absolute;right:0;bottom:52px;width:290px;max-width:82vw;
+  background:rgba(8,8,10,.96);border:1px solid #3a3a40;border-radius:14px;overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.6)}
+#arena-sw-panel[hidden]{display:none}
+.asw-head{font-size:10px;letter-spacing:.28em;color:#8f8a7a;padding:12px 16px 8px}
+.asw-item{display:flex;align-items:center;gap:10px;padding:11px 16px;color:#f2ede1;text-decoration:none}
+.asw-item:hover{background:rgba(200,255,61,.08)}
+.asw-item.on{background:rgba(200,255,61,.12)}
+.asw-no{font-size:11px;color:#8f8a7a;min-width:20px}
+.asw-nm{font-size:14px;flex:1}
+.asw-nm small{display:block;font-size:11px;color:#8f8a7a;margin-top:2px}
+.asw-bg{font-size:10px;color:#8f8a7a;letter-spacing:.08em}
+.asw-bg.live{color:#c8ff3d}
+.asw-def{font-size:10px;color:#c8ff3d}
+.asw-item.all{border-top:1px solid #2a2a30}

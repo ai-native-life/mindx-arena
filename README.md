@@ -1,6 +1,6 @@
 # mindx-arena
 
-MindX 公司官网的多路线发布面（ROUND2）。`/` 是选路门面，每条 owner 入选的路线是 `/r/<slug>/` 下的完整网站，持续优化、独立回滚。
+MindX 公司官网的多路线发布面（ROUND2）。`/` 直接呈现默认路线（见 `arena.json`），右下 ◉ 入口 可切换全站路线；`/directory/` 是过渡期一览目录。
 
 - 公开域：`https://mindx.distributor.co.jp/`（Cloudflare Pages，main 自动发布）
 - 当前 live：`r-shader-flight`（Three.js 滚动飞行，after shader.se）
@@ -21,4 +21,4 @@ cd routes/r-shader-flight && npm install && npm run dev   # http://localhost:519
 
 ## 加一路
 
-`routes/<new-slug>/` 里放成品静态（含 `index.html`）或 Vite 工程（含 `package.json`），构建脚本自动收录并发布到 `/r/<new-slug>/`。门面卡片在 `portal/index.html` 手工加一张。
+`routes/<new-slug>/` 里放成品静态（含 `index.html`）或 Vite 工程（含 `package.json`），并加一份 `route.json`（编号/名称/副标题），构建脚本自动收录并发布到 `/r/<new-slug>/`，切换器自动出现。目录卡片在 `directory/index.html` 手工加一张。默认路线在 `arena.json` 里换一行即可。

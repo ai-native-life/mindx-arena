@@ -150,7 +150,7 @@ core.position.z = -3.5;
 /* ---- 3D logo: brand colors locked (#000000 / #fa1c18), visibility from light only ---- */
 const logoGroup = new THREE.Group();
 logoGroup.scale.setScalar(0.001);
-logoGroup.position.set(6.5, 0.4, -5);
+logoGroup.position.set(8.5, -0.6, -5);
 scene.add(logoGroup);
 const blackMat = new THREE.MeshPhysicalMaterial({ color: 0x000000, roughness: 0.3, metalness: 0.65, clearcoat: 1, clearcoatRoughness: 0.25, side: THREE.DoubleSide });
 const redMat = new THREE.MeshStandardMaterial({ color: 0xfa1c18, roughness: 0.4, metalness: 0.1, emissive: 0xfa1c18, emissiveIntensity: 0.5, side: THREE.DoubleSide });
@@ -171,7 +171,7 @@ new SVGLoader().load('./logo.svg',
     inner.position.set(-c.x, -c.y, -c.z);
     const outer = new THREE.Group();
     outer.add(inner);
-    const sc = 11 / Math.max(size.x, size.y);
+    const sc = 9.5 / Math.max(size.x, size.y);
     outer.scale.set(sc, -sc, sc);
     logoGroup.add(outer);
   },
@@ -268,7 +268,7 @@ function animate() {
   logoGroup.rotation.x = Math.sin(tG * 0.18) * 0.1 + smy * 0.25;
   const ls = Math.max(tgt.scale * (1 - p * 0.4), 0.001);
   logoGroup.scale.setScalar(logoGroup.scale.x + (ls - logoGroup.scale.x) * 0.05);
-  logoGroup.position.y = 0.4 + p * 1.5;
+  logoGroup.position.y = -0.6 + p * 1.8;
   mouseSpot.target.position.set(smx * 10, 1.2 + smy * 6, -5);
 
   pUni.uTime.value = tG;
