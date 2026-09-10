@@ -16,6 +16,9 @@
 - Logo：`Downloads/MindX_Logo_HD_Asset_Package_v1.0` の vector SVG を各面に vendor（`logo.svg`：門面 header＋全3路線の nav＋全頁 favicon）。黒ロゴのため暗背景では白チップ表示、gpu 路線のベージュ header は直置き。
 - 独立站入口：三路线联系区直前统一加 Mobility & Robotics 店招 banner（介绍文案取自独立站原文，外跳 `_blank`）。门面不设卡（最终只留一个网站，门面只是过渡）。
 - 3D Logo（shader-flight）：vector SVG 挤出成立体，材质锁死品牌黑 `#000000`＋X 红 `#fa1c18`，能见度只靠 studio 灯光（主光＋酸绿轮廓光＋clearcoat 高光）；借鉴 `web-lab/mindx-logo-interactive-202609/06` 展厅： procedural PMREM 环境反射＋鼠标跟随聚光灯（光标即影棚灯）；三站 footer 统一加 logo 落款。
+- 店招文案定稿：独立站表述统一为ロボット事業の直営店「Mobility & Robotics」（日文页内零中文混用；ROUND2 文档本身是中文，保留“独立站”说法）。
+- Logo 用量原则：3D Logo 只做两处——玩耍室（logo-lab）＋旗舰 Hero 背景（已收敛缩小东移）；三站联系区末统一加白底品牌带大 Logo 落款，nav 徽章只做功能性存在。
+- r-logo-lab：源自 web-lab logo 展厅 06，three r128 等 4 个 CDN 库已 vendor 本地化，零外部依赖；定位 PLAYGROUND（非官方面）。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
 ## R2 Batch 2（2026-09-11）
