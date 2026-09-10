@@ -4,6 +4,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const errBox = document.getElementById('err');
 window.addEventListener('error', (e) => {
@@ -27,8 +28,10 @@ const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 20
 camera.position.set(0, -0.5, 22);
 
 /* ---- studio lights for the 3D logo (shade only, never recolor) ---- */
-scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
 keyLight.position.set(5, 8, 7);
 scene.add(keyLight);
 const rimLight = new THREE.DirectionalLight(0xc8ff3d, 1.8);
@@ -37,6 +40,11 @@ scene.add(rimLight);
 const fillLight = new THREE.PointLight(0x88aaff, 50, 60);
 fillLight.position.set(-4, 2, 6);
 scene.add(fillLight);
+/* mouse-follow spotlight: cursor becomes the studio lamp */
+const mouseSpot = new THREE.SpotLight(0xffffff, 150, 80, 0.45, 0.55, 1.8);
+mouseSpot.position.set(0, 7, 11);
+scene.add(mouseSpot);
+scene.add(mouseSpot.target);
 
 /* ---- particle field ---- */
 const COUNT = 900;
@@ -261,6 +269,7 @@ function animate() {
   const ls = Math.max(tgt.scale * (1 - p * 0.4), 0.001);
   logoGroup.scale.setScalar(logoGroup.scale.x + (ls - logoGroup.scale.x) * 0.05);
   logoGroup.position.y = 1.2 + p * 1.5;
+  mouseSpot.target.position.set(smx * 10, 1.2 + smy * 6, -5);
 
   pUni.uTime.value = tG;
   composer.render();
