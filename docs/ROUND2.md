@@ -18,6 +18,14 @@
 - 3D Logo（shader-flight）：vector SVG 挤出成立体，材质锁死品牌黑 `#000000`＋X 红 `#fa1c18`，能见度只靠 studio 灯光（主光＋酸绿轮廓光＋clearcoat 高光）；三站 footer 统一加 logo 落款。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
+## R2 Batch 2（2026-09-11，双旗舰新增）
+
+- 入选 ROUTE 04：`r/fuji-wave/`（东方未来主义 3D 空间向，Three.js + GLSL 北斋卷浪曲面着色器 + 3D 挤出 MindX 品牌 Logo + 富士山 3D 网格 + 滚动运镜穿梭）。
+- 入选 ROUTE 05：`r/linear-precision/`（极简精密极客向，对标 Linear / Vercel，曜石黑底色、80px 精密网格、同心发光天体轨道仪、大留白与现代明朝/西文排版）。
+- 内容：mindx.co.jp 公开原文 100% 完整保留（愿景、ご挨拶、3大コア事業、4大業務領域、4大公開事例、会社概要），0 删减。
+- 验收：Playwright 实机截取 `portal/assets/thumb-fuji-wave.png` 与 `portal/assets/thumb-linear-precision.png`（1262x568），控制台 0 报错验证通过。
+- 门面更新：`portal/index.html` 接入 ROUTE 04 与 ROUTE 05，Next Routes 顺延至 ROUTE 06+。
+
 ## Backlog
 
 - owner 下一批选路 → 按“加一路”公约接入。
