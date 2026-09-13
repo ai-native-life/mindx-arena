@@ -51,6 +51,9 @@ body.ready h1.hero .ch{transform:none}
 .heroSub{margin-top:18px;font-size:clamp(15px,2vw,22px);text-shadow:0 2px 16px #000}
 .lede{max-width:62ch;color:#d9d3c2;margin-top:18px;line-height:2.1;font-size:15px;
   text-shadow:0 2px 14px #000}
+.trios{display:flex;gap:20px;align-items:stretch;margin-top:22px;font-size:15px;letter-spacing:.08em;text-shadow:0 2px 12px #000}
+.trios b{display:block;font-size:10px;letter-spacing:.28em;color:var(--acc);font-weight:400;margin-top:5px}
+.trios i{width:1px;background:var(--line)}
 .scrollcue{margin-top:30px;color:var(--acc);font-size:12px;letter-spacing:.3em;
   animation:bob 2s ease-in-out infinite;text-shadow:0 2px 12px #000}
 @keyframes bob{50%{transform:translateY(8px)}}
@@ -136,7 +139,7 @@ footer{position:relative;z-index:2;padding:26px 7vw 40px;color:var(--mut);font-s
 .rv.in{opacity:1;transform:none}
 .skew{will-change:transform}
 @media(max-height:780px){section{padding:80px 7vw 44px}h1.hero{font-size:clamp(32px,5.4vw,68px)}
-.heroSub{margin-top:12px}.lede{margin-top:12px}.scrollcue{margin-top:20px}}
+.heroSub{margin-top:12px}.lede{margin-top:12px}.scrollcue{margin-top:20px}.trios{margin-top:14px;gap:14px}}
 @media(max-width:900px){
   .row{grid-template-columns:1fr;gap:8px}
   .cols2,.cgrid{grid-template-columns:1fr}

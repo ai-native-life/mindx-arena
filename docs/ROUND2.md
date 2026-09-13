@@ -24,7 +24,8 @@
 - 目录页改按博尔赫斯式重写：后台词（LIVE/ROUTE 编号/tags/COMING）下掉，换成本編三話＋余白；玩耍三页收进 r-logo Hub 单入口，切换器隐藏子项。
 - 文案事实：全站删掉美式 (MindX Inc.)；店招统一为ロボット事業直営店「Mobility & Robotics」（日文零中文混用）。
 - R2 标题断行：其逐字动画 JS 会吃掉 br，改成分行保留写法；GPU 标题行距 .82→1.04 治重叠；GPU 导航改黑；三站页脚后台话全清。
-- 移动端基线：目录/hub 卡片防溢出、旗舰 900px 断点收紧、三玩耍页窄屏 fov 自适应；390px 三屏截图确认。
+- Hero 一刀：标题下加三事业总览（自社開発/コンサルティング/ロボット事業＋英文小字），3 秒讲清公司干什么；3D Logo 再退半步（缩小东移，不再碰标题）。
+- SEO 基线：全 8 页 description＋OG＋twitter 卡、robots.txt＋sitemap.xml、默认路 canonical；R2/GPU 发现已有正确 meta（补漏＋删英文残留各一）。
 - 待补：移动端基线截图、回到顶部控件（长页）、SEO meta/OG、sitemap/robots。
 
 ## R2 Batch 2（2026-09-11）
